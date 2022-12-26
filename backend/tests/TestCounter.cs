@@ -24,7 +24,7 @@ namespace tests
             counter.Count = 2;
             var request = TestFactory.CreateHttpRequest();
             var response = (HttpResponseMessage) Company.Function.GetResumeCounter.Run(request, counter, out counter, logger);
-            Assert.Equal(3-, counter.Count);
+            Assert.Equal(3, counter.Count);
         }
 
     }
