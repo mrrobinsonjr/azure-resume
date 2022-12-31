@@ -1,0 +1,6 @@
+C:\Users\micha\source\repos\azure-resume\backend\tests\bin\Debug\netcoreapp3.1\CoverletSourceRootsMapping
+C:\Users\micha\source\repos\azure-resume\backend\tests\obj\Debug\netcoreapp3.1\tests.csproj.AssemblyReference.cache
+C:\Users\micha\source\repos\azure-resume\backend\tests\obj\Debug\netcoreapp3.1\tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\micha\source\repos\azure-resume\backend\tests\obj\Debug\netcoreapp3.1\tests.AssemblyInfoInputs.cache
+C:\Users\micha\source\repos\azure-resume\backend\tests\obj\Debug\netcoreapp3.1\tests.AssemblyInfo.cs
+C:\Users\micha\source\repos\azure-resume\backend\tests\obj\Debug\netcoreapp3.1\tests.csproj.CoreCompileInputs.cache
