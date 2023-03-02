@@ -1,7 +1,6 @@
 name: deploy_backend
 
 on:
-  workflow_dispatch:
   push:
       branches: [ manin ]
       paths:
