@@ -2,35 +2,36 @@ name: deploy_frontend
 # Deploys when push is made from frontend folder
 
 on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'frontend/**'
   workflow_dispatch:
-    push:
-        branches: 
-        - main
-        paths:
-        - 'frontend/**'
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: azure/login@v1
-      with:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Upload to blob storage
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-            az storage blob upload-batch --overwrite true --account-name azureresumechallenge2 --auth-mode key -d '$web' -s frontend/
-    - name: Purge CDN endpoint
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "azure-resume-challenge" --name "azure-resume-challenge" --resource-group "azureresumechallenge2"
+      - name: Upload to Blob Storage
+        run: |
+          az storage blob upload-batch --account-name azureresumechallenge2 --auth-mode key --destination-path '$web' --source frontend/ --recursive
+        working-directory: ${{ github.workspace }}
+        
+      - name: Purge CDN Endpoint
+        run: |
+          az cdn endpoint purge --name "azure-resume-challenge" --profile-name "azure-resume-challenge" --resource-group "azureresumechallenge2" --content-paths "/*"
+        working-directory: ${{ github.workspace }}
 
-  # Azure logout
-    - name: logout
-      run: |
-            az logout
-      if: always()
+      - name: Logout from Azure CLI
+        run: |
+          az logout
+        if: always()
