@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Company.Function
 {
-    public static class GetResumeCounter
+    public static class azure-resume-challenge
     {
         private const string DatabaseName = "AzureResume";
         private const string CollectionName = "Counter";
