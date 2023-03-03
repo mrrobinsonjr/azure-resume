@@ -1,49 +1,44 @@
 name: deploy_backend
-# Deploys when push is made from frontend folder
+#
 
 on:
   push:
-  workflow_dispatch:
-      branches: [ main ]
-      paths:
+    branches:
+      - main
+    paths:
       - 'backend/**'
+  workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_NAME:  GetResumeCounter # set this to your application's name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend'    # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1'              # set this to the dotnet version to use
+  AZURE_FUNCTIONAPP_NAME: GetResumeCounter
+  DOTNET_VERSION: '3.1'
 
 jobs:
   build-and-deploy:
     runs-on: windows-latest
     steps:
-    - name: 'Checkout GitHub action'
-      uses: actions/checkout@v2
-
-    - name: 'Login via Azure CLLI'
-      uses: azure/login@v1
-      with:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
-
-    - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: pwsh
-      run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api'
-        dotnet build --configuration Release --output ./output
-        popd
-    - name: "Run Unit test"
-      shell: pwsh
-      run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
-        dotnet test
-    - name: 'Run Azure Functions action'
-      uses: Azure/functions-action@v1
-      with:
-        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api/output'
-       
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      
+      - name: Resolve Project Dependencies
+        run: dotnet build backend/api -c Release --output ./output
+      
+      - name: Run Unit Tests
+        run: dotnet test backend/tests
+      
+      - name: Deploy to Azure
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          package: ./output
