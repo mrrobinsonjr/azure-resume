@@ -14,27 +14,25 @@ namespace Company.Function
 {
     public static class GetResumeCounter
     {
+        private const string DatabaseName = "AzureResume";
+        private const string CollectionName = "Counter";
+        private const string Id = "1";
+        private const string PartitionKey = "1";
+
         [FunctionName("GetResumeCounter")]
-        public static HttpResponseMessage Run(
+        public static async Task<IActionResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [CosmosDB(databaseName:"AzureResume", collectionName: "Counter", ConnectionStringSetting = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter,
-            [CosmosDB(databaseName:"AzureResume", collectionName: "Counter", ConnectionStringSetting = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] out Counter updatedCounter,
+            [CosmosDB(DatabaseName, CollectionName, ConnectionStringSetting = "AzureResumeConnectionString", Id = Id, PartitionKey = PartitionKey)] Counter counter,
+            [CosmosDB(DatabaseName, CollectionName, ConnectionStringSetting = "AzureResumeConnectionString", Id = Id, PartitionKey = PartitionKey)] IAsyncCollector<Counter> updatedCounterCollector,
             ILogger log)
         {
-            //here is where the counter gets updated.
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-           updatedCounter = counter;
-           updatedCounter.Count += 1;
+            counter.Count++;
 
-           var jsonToRetun = JsonConvert.SerializeObject(counter);
+            await updatedCounterCollector.AddAsync(counter);
 
-           return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
-           {
-                Content = new StringContent(jsonToRetun, Encoding.UTF8, "application/json")
-           };
-
-        
+            return new OkObjectResult(counter);
         }
     }
 }
