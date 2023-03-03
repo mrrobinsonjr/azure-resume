@@ -19,7 +19,7 @@ namespace Company.Function
         private const string Id = "1";
         private const string PartitionKey = "1";
 
-        [FunctionName("GetResumeCounter")]
+        [FunctionName("azure-resume-challenge")]
         public static async Task<IActionResult> RunAsync(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             [CosmosDB(DatabaseName, CollectionName, ConnectionStringSetting = "AzureResumeConnectionString", Id = Id, PartitionKey = PartitionKey)] Counter counter,
