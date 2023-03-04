@@ -1,0 +1,37 @@
+name: deploy_frontend
+# Deploys when push is made from frontend folder
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to Blob Storage
+        run: |
+          az storage blob upload-batch --account-name azureresumechallenge2 --auth-mode key --destination-path '$web' --source frontend/ --recursive
+        working-directory: ${{ github.workspace }}
+        
+      - name: Purge CDN Endpoint
+        run: |
+          az cdn endpoint purge --name "azure-resume-challenge" --profile-name "azure-resume-challenge" --resource-group "azureresumechallenge2" --content-paths "/*"
+        working-directory: ${{ github.workspace }}
+
+      - name: Logout from Azure CLI
+        run: |
+          az logout
+        if: always()

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend\\api",
+    "\\backend\\tests"
   ],
-  "SelectedNode": "\\C:\\Users\\micha\\Source\\Repos\\azure-resume",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
