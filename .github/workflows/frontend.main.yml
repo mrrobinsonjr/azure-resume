@@ -13,25 +13,37 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Login to Azure using the Azure CLI
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # Upload the frontend files to Azure Blob Storage
       - name: Upload to Blob Storage
-        run: |
-          az storage blob upload-batch --account-name azureresumechallenge2 --auth-mode key --destination-path '$web' --source frontend/ --recursive
-        working-directory: ${{ github.workspace }}
-        
-      - name: Purge CDN Endpoint
-        run: |
-          az cdn endpoint purge --name "azure-resume-challenge" --profile-name "azure-resume-challenge" --resource-group "azureresumechallenge2" --content-paths "/*"
-        working-directory: ${{ github.workspace }}
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.67
+          inlineScript: |
+            az storage blob upload-batch --account-name mrrazureresumest --auth-mode key --destination-path '$web' --source frontend/ --recursive
 
+      # Purge the Azure CDN endpoint to refresh the content
+      - name: Purge CDN Endpoint
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.67
+          inlineScript: |
+            az cdn endpoint purge --name "mrr-azureresume-cdne" --profile-name "mrr-azureresume-cdnp" --resource-group "mrr-azureresume-rg" --content-paths "/*"
+
+      # Logout from Azure CLI
       - name: Logout from Azure CLI
-        run: |
-          az logout
         if: always()
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.0.67
+          inlineScript: |
+            az logout
