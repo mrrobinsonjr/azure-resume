@@ -8,6 +8,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_NAME: mrrGetResumeCounter
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend'
   DOTNET_VERSION: '6.0'
 
 jobs:
