@@ -32,7 +32,7 @@ jobs:
         run: dotnet build backend/api -c Release --output ./output
       
       - name: Run Unit Tests
-        run: dotnet test backend/tests
+        run: dotnet test backend/test
       
       - name: Deploy to Azure
         uses: Azure/webapps-deploy@v2
