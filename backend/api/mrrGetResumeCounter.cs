@@ -47,4 +47,5 @@ namespace Company.Function
         // Count property representing the current visit count
         public int Count { get; set; }
     }
+    //Here is the end of the code
 }
