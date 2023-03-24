@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 // URL for the production backend API
-const functionApiURL = "https://azure-resume-challenge.azurewebsites.net/api/GetResumeCounter?code=dUGHtOoYjbPSD6DRWviG4EIEFx581mGK_Pp8cojI5xiZAzFurJHZVQ==";
+const functionApiURL = "https://mrrgetresumecounter-func.azurewebsites.net/api/mrrGetResumeCounter?code=6-F0uG__LaKLQ14BAHykLC--hMgfNFrQ-nFiaMvfGpLXAzFu71Yo-g==";
 
 // URL for the local backend API (for testing)
 const localfunctionApi = 'http://localhost:8080/api/mrrGetResumeCounter';
@@ -15,7 +15,7 @@ const getVisitCount = () => {
     let count = 30;
     
     // Fetch the visit count from the API
-    fetch(localfunctionApi) // Makes an HTTP request to the specified URL
+    fetch(functionApiURL) // Makes an HTTP request to the specified URL
     .then(response => { // Handles the response object
         return response.json() // Parses the response as JSON
     })
