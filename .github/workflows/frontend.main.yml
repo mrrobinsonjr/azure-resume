@@ -25,25 +25,22 @@ jobs:
 
       # Upload the frontend files to Azure Blob Storage
       - name: Upload to Blob Storage
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
-          azcliversion: 2.0.67
+          azcliversion: 2.31.0
           inlineScript: |
             az storage blob upload-batch --account-name mrrazureresumest --auth-mode key --destination '$web' --source frontend/ --recursive
 
       # Purge the Azure CDN endpoint to refresh the content
       - name: Purge CDN Endpoint
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
-          azcliversion: 2.0.67
+          azcliversion: 2.31.0
           inlineScript: |
             az cdn endpoint purge --name "mrr-azureresume-cdne" --profile-name "mrr-azureresume-cdnp" --resource-group "mrr-azureresume-rg" --content-paths "/*"
 
       # Logout from Azure CLI
       - name: Logout from Azure CLI
+        run: |
+          az logout
         if: always()
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.0.67
-          inlineScript: |
-            az logout
