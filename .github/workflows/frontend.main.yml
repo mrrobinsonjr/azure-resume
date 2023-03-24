@@ -29,7 +29,7 @@ jobs:
         with:
           azcliversion: 2.0.67
           inlineScript: |
-            az storage blob upload-batch --account-name mrrazureresumest --auth-mode key --destination-path '$web' --source frontend/ --recursive
+            az storage blob upload-batch --account-name mrrazureresumest --auth-mode key --destination '$web' --source frontend/ --recursive
 
       # Purge the Azure CDN endpoint to refresh the content
       - name: Purge CDN Endpoint
