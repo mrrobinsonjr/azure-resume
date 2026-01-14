@@ -5,7 +5,7 @@
 
 ## Live URLs
 - Website: https://resume.blackstatic.cloud
-- API (visitor counter): https://mrrgetresumecounter-func.azurewebsites.net/api/mrrGetResumeCounter?code=6-F0uG__LaKLQ14BAHykLC--hMgfNFrQ-nFiaMvfGpLXAzFu71Yo-g==
+- API (visitor counter): https://mrrgetresumecounter-func.azurewebsites.net/api/mrrGetResumeCounter<key>>
 
 ## Frontend
 - Location: /frontend
