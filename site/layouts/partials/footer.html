@@ -1,0 +1,18 @@
+{{/* Default values */}}
+{{ $author := or site.Params.Author.name (or site.Author.name "John Doe") }}
+{{ $copyright := printf "© %d %s" now.Year $author }}
+
+{{/* Custom data from configuration file */}}
+{{ with site.Data.footer }}
+  {{ if .copyright }}{{ $copyright = .copyright }}{{ end }}
+{{ end }}
+
+{{ partial "footer/socials.html" }}
+
+
+<div class="pb-5 text-center text-lg font-light">
+  <div title="hugo-porto v{{ trim (partial "footer/version.html") "\n\r " }}">
+    {{ $copyright }}
+  </div>
+</div>
+{{ partial "counter.html" . }}

@@ -2,7 +2,7 @@
 <html
   lang="en-us"
   dir="ltr">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8" />
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
@@ -214,15 +214,18 @@
 
       <main>
         
-  <div class="container max-w-screen-xl mx-auto px-4">
-    <h1 class="text-center font-medium text-gray-700 text-3xl md:text-4xl mb-5 font-poppins">Role at Company</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      
-      
-      
-    </div>
-  
-  </div>
+<main class="container">
+  <header style="margin-bottom: 1.5rem;">
+    <h1>Role at Company</h1>
+    
+    <p>Role details placeholder.</p>
+
+  </header>
+
+  <section>
+    
+  </section>
+</main>
 
       </main>
       <footer>
@@ -280,7 +283,21 @@
     © 2026 John Doe
   </div>
 </div>
+<div id="visitor-counter" style="opacity:.75;font-size:.95rem;">
+  Views: <span id="count">—</span>
+</div>
 
+<script>
+(async () => {
+  try {
+    const r = await fetch("/api/counter", { cache: "no-store" });
+    const j = await r.json();
+    document.getElementById("count").textContent = (j && (j.count ?? j.value)) ?? "—";
+  } catch (e) {
+    document.getElementById("count").textContent = "—";
+  }
+})();
+</script>
       </footer>
     </div>
   </body>

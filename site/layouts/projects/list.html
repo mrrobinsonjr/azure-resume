@@ -1,0 +1,39 @@
+{{ define "main" }}
+<main class="container">
+  <header style="margin-bottom: 1.5rem;">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+    {{ .Content }}
+  </header>
+
+  <section>
+    {{ range .Pages.ByDate.Reverse }}
+      <article style="padding:1rem 0;border-bottom:1px solid rgba(0,0,0,.08);">
+        <h2 style="margin:0 0 .25rem 0;">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+
+        <div style="opacity:.85;margin-bottom:.5rem;">
+          {{ with .Params.status }}<strong>{{ . }}</strong>{{ end }}
+          {{ with .Params.type }} • {{ . }}{{ end }}
+        </div>
+
+        {{ with .Params.summary }}
+          <p style="margin:.25rem 0 .5rem 0;">{{ . }}</p>
+        {{ else }}
+          {{ with .Summary }}<p style="margin:.25rem 0 .5rem 0;">{{ . }}</p>{{ end }}
+        {{ end }}
+
+        {{ with .Params.tech }}
+          <div style="opacity:.85;font-size:.95rem;">
+            <span>Tech:</span>
+            {{ range $i, $t := . }}
+              {{ if $i }}, {{ end }}{{ $t }}
+            {{ end }}
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+  </section>
+</main>
+{{ end }}

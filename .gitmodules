@@ -1,3 +1,6 @@
 [submodule "site/themes/porto"]
 	path = site/themes/porto
 	url = https://github.com/hugo-porto/theme
+[submodule "site/themes/hugo-porto"]
+	path = site/themes/hugo-porto
+	url = https://github.com/hugo-porto/theme
