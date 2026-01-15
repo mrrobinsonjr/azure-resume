@@ -66,20 +66,23 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Get storage account key
+        id: get_key
+        run: |
+          set -e
+          STORAGE_KEY=$(az storage account keys list --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT }}" --query "[0].value" -o tsv)
+          echo "STORAGE_KEY=$STORAGE_KEY" >> $GITHUB_ENV
+
       - name: Upload site to Azure Storage (static website)
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.31.0
-          inlineScript: |
-            az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} --destination '$web' --source site/public --auth-mode login
+        run: |
+          set -e
+          az storage blob upload-batch --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT }}" --account-key "$STORAGE_KEY" --destination '$web' --source site/public
 
       - name: (Optional) Purge CDN Endpoint
         if: env.AZURE_CDN_ENDPOINT && env.AZURE_CDN_PROFILE && env.AZURE_RESOURCE_GROUP
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.31.0
-          inlineScript: |
-            az cdn endpoint purge --name "${{ secrets.AZURE_CDN_ENDPOINT }}" --profile-name "${{ secrets.AZURE_CDN_PROFILE }}" --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" --content-paths "/*"
+        run: |
+          set -e
+          az cdn endpoint purge --name "${{ secrets.AZURE_CDN_ENDPOINT }}" --profile-name "${{ secrets.AZURE_CDN_PROFILE }}" --resource-group "${{ secrets.AZURE_RESOURCE_GROUP }}" --content-paths "/*"
 
       - name: Logout from Azure
         run: az logout
