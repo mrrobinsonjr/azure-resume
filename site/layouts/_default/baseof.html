@@ -1,0 +1,19 @@
+{{ define "baseof.html" }}
+<!doctype html>
+<html lang="en">
+<head>
+  {{/* Prefer theme head partial to pull CSS, meta, scripts */}}
+  {{ partial "head.html" . }}
+</head>
+<body class="antialiased text-gray-800 bg-white">
+  {{/* Theme navbar */}}
+  {{ partial "navbar.html" . }}
+
+  <main class="container mx-auto px-4 py-8">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>
+{{ end }}

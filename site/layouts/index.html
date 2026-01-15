@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <section class="hero py-12">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-extrabold mb-4">{{ .Site.Params.hero_title | default "Welcome" }}</h2>
+      <p class="text-lg text-gray-600">{{ .Site.Params.hero_subtitle | default "This is a Hugo site." }}</p>
+    </div>
+  </section>
+
+  <section class="prose mx-auto py-6">
+    {{ .Content }}
+  </section>
+
+  <section class="mt-12">
+    <h3 class="text-2xl font-semibold mb-4">Recent</h3>
+    <ul class="space-y-2">
+      {{ range first 10 .Site.RegularPages }}
+        <li>
+          <a href="{{ .RelPermalink }}" class="text-blue-600 hover:underline">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}
+
+{{ template "baseof.html" . }}
