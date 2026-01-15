@@ -1,0 +1,42 @@
+# Hugo config for IT Security Engineer portfolio (Porto theme)
+baseURL = "http://example.com/"
+languageCode = "en-us"
+title = "Your Name — IT Security Engineer"
+theme = "hugo-porto"
+description = "Cloud security engineer portfolio focusing on security, automation and infrastructure as code."
+
+[author]
+	name = "Your Name"
+	email = "you@example.com"
+	github = "your-github"
+	linkedin = "your-linkedin"
+
+[params]
+	# Hero / homepage
+	hero_title = "Security-focused Cloud Engineer"
+	hero_subtitle = "Designing secure cloud platforms, automating controls, and building detection engineering."
+	description = "Cloud security, IaC, CI automation, and detection engineering."
+
+	# Readability / minimal styling preference
+	prefer_clean_layout = true
+
+	# Key skills shown on the homepage
+	skills = ["Cloud Security", "Infrastructure as Code", "Detection Engineering", "Identity & Access Management", "Terraform", "Python", "Kubernetes"]
+
+	# Featured projects (title, short description, local link)
+	featured_projects = [
+		{ title = "Cloud Resume Challenge", description = "End-to-end IaC + CI for an observable resume site.", link = "/projects/cloud-resume-challenge/" },
+		{ title = "Automated Detection Pipeline", description = "Serverless collectors + analytics for scalable detections.", link = "/projects/" }
+	]
+
+	# Security-focused featured section
+	featured_security = { title = "Security & Architecture", description = "Threat modeling, secure design patterns, architecture reviews and operational controls.", link = "/security/" }
+
+	# Footer note
+	footer_note = "Cloud portfolio focused on security, infrastructure-as-code and CI practices."
+
+[social]
+	github = "your-github"
+	linkedin = "your-linkedin"
+	twitter = "your-twitter"
+

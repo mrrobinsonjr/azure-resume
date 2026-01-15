@@ -1,0 +1,22 @@
+{{ define "main" }}
+  <header class="mb-6">
+    <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+  </header>
+
+  {{ if .Pages }}
+    <div class="grid gap-6">
+      {{ range .Pages }}
+        <article class="border rounded-lg p-4">
+          <a href="{{ .RelPermalink }}" class="text-xl font-semibold text-blue-600">{{ .Title }}</a>
+          {{ with .Summary }}
+            <p class="text-gray-600 mt-2">{{ . }}</p>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p>No items.</p>
+  {{ end }}
+{{ end }}
+
+{{ template "baseof.html" . }}

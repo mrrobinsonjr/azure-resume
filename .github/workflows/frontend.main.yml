@@ -1,13 +1,10 @@
 name: deploy_frontend
-# Deploys when push is made from frontend folder
-
+# NOTE: Hugo site is now built and deployed from .github/workflows/site.deploy.yml
+# This workflow is retained for manual/manual-only frontend deployments and
+# MUST NOT run automatically on pushes to `main` to avoid overwriting Hugo output.
 on:
-  push:
-    branches: 
-      - main
-    paths:
-      - 'frontend/**'
   workflow_dispatch:
+    # Manual trigger only. This workflow will not run on push events.
 
 jobs:
   build-and-deploy:

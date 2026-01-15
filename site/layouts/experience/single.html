@@ -1,0 +1,37 @@
+{{ define "main" }}
+<main class="container">
+  <header style="margin-bottom:1.25rem;">
+    <h1 style="margin-bottom:.25rem;">{{ .Title }}</h1>
+
+    <div style="opacity:.85;">
+      {{ with .Params.role }}<strong>{{ . }}</strong>{{ end }}
+      {{ with .Params.company }} • {{ . }}{{ end }}
+      {{ with .Params.location }} • {{ . }}{{ end }}
+      {{ if or .Params.start .Params.end }}
+        • {{ .Params.start }} – {{ default "Present" .Params.end }}
+      {{ end }}
+    </div>
+
+    {{ with .Params.summary }}
+      <p style="margin-top:.75rem;">{{ . }}</p>
+    {{ end }}
+
+    {{ with .Params.impact_highlights }}
+      <ul style="margin-top:.75rem;">
+        {{ range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+    {{ end }}
+
+    {{ with .Params.tech }}
+      <div style="margin-top:.5rem;opacity:.85;">
+        <strong>Tech:</strong>
+        {{ range $i, $t := . }}{{ if $i }}, {{ end }}{{ $t }}{{ end }}
+      </div>
+    {{ end }}
+  </header>
+
+  <article>
+    {{ .Content }}
+  </article>
+</main>
+{{ end }}

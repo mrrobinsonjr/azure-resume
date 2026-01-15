@@ -1,0 +1,13 @@
+menu:
+  - link: "/"
+    text: "Home"
+  - link: "/experience/"
+    text: "Experience"
+  - link: "/projects/"
+    text: "Projects"
+  - link: "/security/"
+    text: "Security"
+  - link: "/resume/"
+    text: "Resume"
+title: "Azure Resume"
+logo: "img/default-logo.svg"
