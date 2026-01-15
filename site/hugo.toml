@@ -1,0 +1,4 @@
+# Minimal hugo config
+baseURL = "/"
+languageCode = "en-us"
+title = "Azure Resume"
