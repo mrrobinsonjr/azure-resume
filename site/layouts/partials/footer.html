@@ -1,18 +1,7 @@
-{{/* Default values */}}
-{{ $author := or site.Params.Author.name (or site.Author.name "John Doe") }}
-{{ $copyright := printf "© %d %s" now.Year $author }}
-
-{{/* Custom data from configuration file */}}
-{{ with site.Data.footer }}
-  {{ if .copyright }}{{ $copyright = .copyright }}{{ end }}
-{{ end }}
-
-{{ partial "footer/socials.html" }}
-
-
-<div class="pb-5 text-center text-lg font-light">
-  <div title="hugo-porto v{{ trim (partial "footer/version.html") "\n\r " }}">
-    {{ $copyright }}
-  </div>
-</div>
-{{ partial "counter.html" . }}
+{{/* Local override of theme footer to avoid deprecated .Site.Author usage */}}
+{{ $author := dict "name" "John Doe" }}
+{{ with .Site.Params.Author }}{{ $author = . }}{{ else }}{{ with .Site.Params.author }}{{ $author = . }}{{ end }}{{ end }}
+<footer class="py-8 text-center text-sm text-gray-600">
+  <div>{{ $author.name }} — Cloud portfolio focused on security, IaC and CI.</div>
+  {{ with .Site.Params.footer_note }}<div class="mt-2">{{ . }}</div>{{ end }}
+</footer>
