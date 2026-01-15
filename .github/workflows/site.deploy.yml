@@ -49,6 +49,17 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup Hugo (for deploy build)
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.154.5'
+          extended: true
+
+      - name: Build Hugo site (production)
+        id: build_deploy
+        run: |
+          hugo -s "$HUGO_SOURCE" --minify
+
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
