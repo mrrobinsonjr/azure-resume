@@ -3,7 +3,8 @@ name: deploy_frontend
 # This workflow is retained for manual/manual-only frontend deployments and
 # MUST NOT run automatically on pushes to `main` to avoid overwriting Hugo output.
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    # Manual trigger only. This workflow will not run on push events.
 
 jobs:
   build-and-deploy:
