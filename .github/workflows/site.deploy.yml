@@ -76,7 +76,7 @@ jobs:
       - name: Upload site to Azure Storage (static website)
         run: |
           set -e
-          az storage blob upload-batch --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT }}" --account-key "$STORAGE_KEY" --destination '$web' --source site/public
+          az storage blob upload-batch --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT }}" --account-key "$STORAGE_KEY" --destination '$web' --source site/public --overwrite
 
       - name: (Optional) Purge CDN Endpoint
         if: env.AZURE_CDN_ENDPOINT && env.AZURE_CDN_PROFILE && env.AZURE_RESOURCE_GROUP
