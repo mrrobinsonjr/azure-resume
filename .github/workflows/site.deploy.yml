@@ -40,6 +40,10 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      AZURE_CDN_ENDPOINT: ${{ secrets.AZURE_CDN_ENDPOINT }}
+      AZURE_CDN_PROFILE: ${{ secrets.AZURE_CDN_PROFILE }}
+      AZURE_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -70,7 +74,7 @@ jobs:
             az storage blob upload-batch --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} --destination '$web' --source site/public --auth-mode login
 
       - name: (Optional) Purge CDN Endpoint
-        if: ${{ secrets.AZURE_CDN_ENDPOINT && secrets.AZURE_CDN_PROFILE && secrets.AZURE_RESOURCE_GROUP }}
+        if: env.AZURE_CDN_ENDPOINT && env.AZURE_CDN_PROFILE && env.AZURE_RESOURCE_GROUP
         uses: azure/CLI@v1
         with:
           azcliversion: 2.31.0
