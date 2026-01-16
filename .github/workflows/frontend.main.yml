@@ -29,7 +29,12 @@ jobs:
           azcliversion: latest
           inlineScript: |
             set -e
-            az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
+            # Prefer a repository secret connection string if provided, otherwise use the storage account name with login auth
+            if [ -n "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" ]; then
+              az storage blob upload-batch --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --destination '$web' --source frontend/ --overwrite
+            else
+              az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
+            fi
 
       - name: Purge CDN Endpoint
         uses: azure/CLI@v1
