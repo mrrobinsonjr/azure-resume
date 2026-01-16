@@ -27,7 +27,7 @@ jobs:
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
-          azcliversion: 2.31.0
+          azcliversion: latest
           inlineScript: |
             set -e
             az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
@@ -35,7 +35,7 @@ jobs:
       - name: Purge CDN Endpoint
         uses: azure/CLI@v1
         with:
-          azcliversion: 2.31.0
+          azcliversion: latest
           inlineScript: |
             set -e
             az cdn endpoint purge --name "$AZURE_FRONTEND_CDN_ENDPOINT" --profile-name "$AZURE_FRONTEND_CDN_PROFILE" --resource-group "$AZURE_FRONTEND_CDN_RESOURCE_GROUP" --content-paths "/*"
