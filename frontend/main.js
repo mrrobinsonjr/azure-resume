@@ -10,24 +10,40 @@ const functionApiURL = "https://mrrgetresumecounter-func.azurewebsites.net/api/m
 const localfunctionApi = 'http://localhost:8080/api/mrrGetResumeCounter';
 
 // This function fetches the visit count from the backend API and displays it on the webpage
-const getVisitCount = () => {
+const getVisitCount = async () => {
     // Set a default count value
     let count = 30;
-    
-    // Fetch the visit count from the API
-    fetch(functionApiURL) // Makes an HTTP request to the specified URL
-    .then(response => { // Handles the response object
-        return response.json() // Parses the response as JSON
-    })
-    .then(response => { // Handles the parsed JSON data
-        console.log("Website called function API."); // Logs a message to the console
-        count = response.count; // Extracts the count value from the JSON data
-        document.getElementById("counter").innerText = count; // Displays the count value on the webpage
-    })
-    .catch(error => { // Handles any errors that occurred during the request
-        console.log(error); // Logs the error message to the console
-    });
 
-    // Return the visit count
+    // Helper to apply a response object that might use different casing
+    const applyCount = (obj) => {
+        if (!obj) return;
+        if (typeof obj.count === 'number') count = obj.count;
+        else if (typeof obj.Count === 'number') count = obj.Count;
+    };
+
+    try {
+        // Try production first
+        let resp = await fetch(functionApiURL);
+        if (!resp.ok) throw new Error(`prod fetch status ${resp.status}`);
+        const body = await resp.json();
+        console.log('Website called production function API.');
+        applyCount(body);
+    } catch (prodErr) {
+        console.warn('Production function fetch failed:', prodErr);
+        try {
+            // Fallback to local endpoint for testing
+            let resp2 = await fetch(localfunctionApi);
+            if (!resp2.ok) throw new Error(`local fetch status ${resp2.status}`);
+            const body2 = await resp2.json();
+            console.log('Website called local function API.');
+            applyCount(body2);
+        } catch (localErr) {
+            console.warn('Local function fetch failed:', localErr);
+        }
+    }
+
+    // Ensure the counter element is always updated (even with the default)
+    const el = document.getElementById('counter');
+    if (el) el.innerText = count;
     return count;
 }
