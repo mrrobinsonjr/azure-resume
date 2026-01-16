@@ -1,5 +1,6 @@
 ---
-title: "Role at Company"
+title: "Removed"
+draft: true
 ---
 
-Role details placeholder.
+This content has been removed.
