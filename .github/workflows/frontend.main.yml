@@ -11,10 +11,11 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      AZURE_FRONTEND_STORAGE_ACCOUNT: ${{ secrets.AZURE_FRONTEND_STORAGE_ACCOUNT }}
-      AZURE_FRONTEND_CDN_ENDPOINT: ${{ secrets.AZURE_FRONTEND_CDN_ENDPOINT }}
-      AZURE_FRONTEND_CDN_PROFILE: ${{ secrets.AZURE_FRONTEND_CDN_PROFILE }}
-      AZURE_FRONTEND_CDN_RESOURCE_GROUP: ${{ secrets.AZURE_FRONTEND_CDN_RESOURCE_GROUP }}
+      AZURE_FRONTEND_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+      AZURE_FRONTEND_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+      AZURE_FRONTEND_CDN_ENDPOINT: ${{ secrets.AZURE_CDN_ENDPOINT }}
+      AZURE_FRONTEND_CDN_PROFILE: ${{ secrets.AZURE_CDN_PROFILE }}
+      AZURE_FRONTEND_CDN_RESOURCE_GROUP: ${{ secrets.AZURE_RESOURCE_GROUP }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,6 +24,23 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Validate required secrets
+        run: |
+          set -e
+          missing=0
+          if [ -z "${AZURE_FRONTEND_STORAGE_CONNECTION_STRING:-}" ] && [ -z "${AZURE_FRONTEND_STORAGE_ACCOUNT:-}" ]; then
+            echo "ERROR: storage secret missing. Set AZURE_STORAGE_CONNECTION_STRING or AZURE_STORAGE_ACCOUNT repository secret." >&2
+            missing=1
+          fi
+          for v in AZURE_FRONTEND_CDN_ENDPOINT AZURE_FRONTEND_CDN_PROFILE AZURE_FRONTEND_CDN_RESOURCE_GROUP; do
+            if [ -z "${!v:-}" ]; then
+              echo "ERROR: required env var $v is empty. Please set the corresponding repository secret." >&2
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            exit 1
+          fi
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
@@ -30,8 +48,8 @@ jobs:
           inlineScript: |
             set -e
             # Prefer a repository secret connection string if provided, otherwise use the storage account name with login auth
-            if [ -n "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" ]; then
-              az storage blob upload-batch --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --destination '$web' --source frontend/ --overwrite
+            if [ -n "${AZURE_FRONTEND_STORAGE_CONNECTION_STRING:-}" ]; then
+              az storage blob upload-batch --connection-string "$AZURE_FRONTEND_STORAGE_CONNECTION_STRING" --destination '$web' --source frontend/ --overwrite
             else
               az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
             fi
