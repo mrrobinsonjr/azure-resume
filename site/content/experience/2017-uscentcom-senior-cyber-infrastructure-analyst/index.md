@@ -1,6 +1,6 @@
----
+﻿---
 title: "Senior Cyber Infrastructure Analyst"
-company: "SAIC — USCENTCOM"
+company: "SAIC â€” USCENTCOM"
 location: "MacDill AFB, Tampa, FL"
 start: "2017"
 end: "2020"
@@ -18,7 +18,6 @@ tech:
   - "Firewalls"
   - "IDS/IPS"
   - "Azure Government"
-  - "JRSS"
 ---
 
 Mission / Scope
@@ -48,3 +47,4 @@ Selected Deliverables
 
 - Cyber range design and automation artifacts.
 - Boundary architecture designs and leadership briefings.
+

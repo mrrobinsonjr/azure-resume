@@ -1,4 +1,4 @@
----
+﻿---
 title: "Cloud Architect"
 company: "USCENTCOM (supported)"
 location: "MacDill AFB, Tampa, FL"
@@ -13,7 +13,9 @@ summary: "Led secure cloud architecture and the initial transition to Azure Gove
 highlights:
   - "Architected and delivered the first Azure Gov IL5/IL6 deployments for the command."
   - "Built reusable Terraform/ARM modules and standardized provisioning to reduce drift and provisioning time."
-  - "Designed DevSecOps patterns using GitHub and Azure DevOps and facilitated secure workload migrations."
+
+outputs:
+  - "HTML"
 tech:
   - "Azure Government IL5/IL6"
   - "Terraform"
@@ -25,7 +27,7 @@ tech:
 
 Mission / Scope
 
-Lead Cloud Architect responsible for USCENTCOM’s initial adoption of Azure Government IL5/IL6 environments. Focused on secure cloud design, DevSecOps enablement, IaC frameworks, and data analytics architecture to meet RMF and SRG requirements.
+Lead Cloud Architect responsible for USCENTCOMâ€™s initial adoption of Azure Government IL5/IL6 environments. Focused on secure cloud design, DevSecOps enablement, IaC frameworks, and data analytics architecture to meet RMF and SRG requirements.
 
 What I Owned
 
@@ -36,7 +38,6 @@ What I Owned
 
 Impact Highlights
 
-- Delivered the command’s first IL5/IL6 cloud-native deployments, enabling higher-assurance mission workloads.
 - Reduced provisioning time and configuration drift through reusable IaC frameworks.
 - Accelerated secure deployment pipelines and established a DevSecOps culture across engineering teams.
 
@@ -51,3 +52,4 @@ Selected Deliverables
 
 - Terraform/ARM IaC modules and provisioning templates.
 - Architecture diagrams and engineering trade studies for IL5/IL6 boundary and segmentation.
+

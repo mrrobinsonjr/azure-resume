@@ -1,5 +1,5 @@
----
-title: "0651 — Data Network Specialist"
+﻿---
+title: "0651 â€” Data Network Specialist"
 company: "United States Marine Corps, 3rd Marine Division"
 location: "Kaneohe Bay, HI"
 start: "2000"
@@ -17,6 +17,7 @@ tech:
   - "Cisco networking"
   - "Windows"
   - "UNIX"
+
 ---
 
 Mission / Scope
@@ -36,3 +37,4 @@ Impact Highlights
 Tooling / Platforms
 
 - Cisco networking, Windows, UNIX, tactical communications
+

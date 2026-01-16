@@ -1,42 +1,45 @@
 name: deploy_frontend
-# NOTE: Hugo site is now built and deployed from .github/workflows/site.deploy.yml
-# This workflow is retained for manual/manual-only frontend deployments and
-# MUST NOT run automatically on pushes to `main` to avoid overwriting Hugo output.
 on:
-  workflow_dispatch:
-    # Manual trigger only. This workflow will not run on push events.
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+  workflow_dispatch: {}
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      AZURE_FRONTEND_STORAGE_ACCOUNT: ${{ secrets.AZURE_FRONTEND_STORAGE_ACCOUNT }}
+      AZURE_FRONTEND_CDN_ENDPOINT: ${{ secrets.AZURE_FRONTEND_CDN_ENDPOINT }}
+      AZURE_FRONTEND_CDN_PROFILE: ${{ secrets.AZURE_FRONTEND_CDN_PROFILE }}
+      AZURE_FRONTEND_CDN_RESOURCE_GROUP: ${{ secrets.AZURE_FRONTEND_CDN_RESOURCE_GROUP }}
     steps:
-      # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Login to Azure using the Azure CLI
       - name: Login via Azure CLI
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Upload the frontend files to Azure Blob Storage
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
           azcliversion: 2.31.0
           inlineScript: |
-            az storage blob upload-batch --account-name mrrazureresumest --auth-mode key --destination '$web' --source frontend/
+            set -e
+            az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
 
-      # Purge the Azure CDN endpoint to refresh the content
       - name: Purge CDN Endpoint
         uses: azure/CLI@v1
         with:
           azcliversion: 2.31.0
           inlineScript: |
-            az cdn endpoint purge --name "mrr-azureresume-cdne" --profile-name "mrr-azureresume-cdnp" --resource-group "mrr-azureresume-rg" --content-paths "/*"
+            set -e
+            az cdn endpoint purge --name "$AZURE_FRONTEND_CDN_ENDPOINT" --profile-name "$AZURE_FRONTEND_CDN_PROFILE" --resource-group "$AZURE_FRONTEND_CDN_RESOURCE_GROUP" --content-paths "/*"
 
-      # Logout from Azure CLI
       - name: Logout from Azure CLI
         run: |
           az logout

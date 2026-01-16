@@ -1,6 +1,6 @@
----
-title: "Senior Cloud Cyber Security Engineer — Lead"
-company: "SAIC — Cloud One Program"
+﻿---
+title: "Senior Cloud Cyber Security Engineer â€” Lead"
+company: "SAIC â€” Cloud One Program"
 location: "Remote (Alabama, US)"
 start: "2023"
 end: "Present"
@@ -16,6 +16,8 @@ highlights:
   - "Led vulnerability identification, triage, and remediation planning for virtualized, containerized, and cloud-native workloads."
   - "Produced SAP/SAR/POA&M artifacts and inheritance documentation to streamline A&A and reduce ATO friction."
   - "Integrated security automation into CI/CD pipelines (Jenkins, GitHub, Azure DevOps) and improved audit readiness."
+outputs:
+  - "HTML"
 tech:
   - "Azure"
   - "AWS"
@@ -29,7 +31,7 @@ tech:
 
 Mission / Scope
 
-Serve as the senior cybersecurity engineer for the Cloud One Common Computing Environment—a globally distributed hybrid DoD cloud hosting mission applications for USAF and Army customers. Responsibilities include leading vulnerability management, continuous monitoring, RMF implementation, and security integration across multiple cloud impact levels.
+Serve as the senior cybersecurity engineer for the Cloud One Common Computing Environmentâ€”a globally distributed hybrid DoD cloud hosting mission applications for USAF and Army customers. Responsibilities include leading vulnerability management, continuous monitoring, RMF implementation, and security integration across multiple cloud impact levels.
 
 What I Owned
 
@@ -57,3 +59,4 @@ Selected Deliverables
 - SAP, SAR, and POA&M documentation tailored to Cloud One platforms.
 - Control inheritance matrices and reusable control packages for cloud families.
 - CI/CD security automation scripts and remediation playbooks.
+

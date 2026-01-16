@@ -1,15 +1,14 @@
 # Hugo config for IT Security Engineer portfolio (Porto theme)
-baseURL = "http://example.com/"
+baseURL = "https://resume.blackstatic.cloud/"
 languageCode = "en-us"
-title = "Your Name — IT Security Engineer"
-theme = "hugo-porto"
+title = "Michael Robinson — Senior Cloud Security Engineer"
 description = "Cloud security engineer portfolio focusing on security, automation and infrastructure as code."
 
 [author]
-	name = "Your Name"
-	email = "you@example.com"
-	github = "your-github"
-	linkedin = "your-linkedin"
+	name = "Michael Robinson"
+	email = "michaelrobinsonjr@gmail.com"
+	github = "https://github.com/mrrobinsonjr"
+	linkedin = "https://www.linkedin.com/in/mrrobinsonjr/"
 
 [params]
 	# Hero / homepage
@@ -39,4 +38,9 @@ description = "Cloud security engineer portfolio focusing on security, automatio
 	github = "your-github"
 	linkedin = "your-linkedin"
 	twitter = "your-twitter"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  page = ["HTML"]
 

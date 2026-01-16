@@ -1,6 +1,6 @@
----
+﻿---
 title: "Network Operations SME, Senior"
-company: "CACI / L3 NSS — USAF Southwest Asia AOR"
+company: "CACI / L3 NSS â€” USAF Southwest Asia AOR"
 location: "Shaw AFB, Sumter, SC"
 start: "2011"
 end: "2017"
@@ -20,10 +20,10 @@ tech:
   - "ASA"
   - "UCS"
   - "MPLS/BGP/OSPF/EIGRP"
+
 ---
 
 Mission / Scope
-
 Provide lead network engineering and Tier 2/3 support for WAN, data center, and VoIP infrastructure across a large USAF AOR, ensuring resilience and operational continuity for mission users.
 
 What I Owned
@@ -46,3 +46,4 @@ Tooling / Platforms
 Selected Deliverables
 
 - Network design documents and routing topology configurations.
+
