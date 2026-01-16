@@ -24,6 +24,20 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Validate Azure deployment env
+        run: |
+          set -euo pipefail
+          missing=0
+          for v in AZURE_FRONTEND_STORAGE_ACCOUNT AZURE_FRONTEND_CDN_ENDPOINT AZURE_FRONTEND_CDN_PROFILE AZURE_FRONTEND_CDN_RESOURCE_GROUP; do
+            if [ -z "${!v:-}" ]; then
+              echo "ERROR: required env var $v is empty. Please set the corresponding repository secret." >&2
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            exit 1
+          fi
+
       - name: Upload to Blob Storage
         uses: azure/CLI@v1
         with:
