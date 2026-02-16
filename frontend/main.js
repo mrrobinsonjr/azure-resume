@@ -4,15 +4,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 })
 
 // URL for the production backend API
-const functionApiURL = "https://mrrgetresumecounter-func.azurewebsites.net/api/mrrGetResumeCounter?code=6-F0uG__LaKLQ14BAHykLC--hMgfNFrQ-nFiaMvfGpLXAzFu71Yo-g==";
+const functionApiURL = window.COUNTER_API_URL || "https://mrrgetresumecounter-func.azurewebsites.net/api/mrrGetResumeCounter";
 
 // URL for the local backend API (for testing)
 const localfunctionApi = 'http://localhost:8080/api/mrrGetResumeCounter';
 
 // This function fetches the visit count from the backend API and displays it on the webpage
 const getVisitCount = async () => {
-    // Set a default count value
-    let count = 30;
+    // Use null so failures are visible instead of showing a stale hardcoded number.
+    let count = null;
 
     // Helper to apply a response object that might use different casing
     const applyCount = (obj) => {
@@ -42,8 +42,8 @@ const getVisitCount = async () => {
         }
     }
 
-    // Ensure the counter element is always updated (even with the default)
+    // Ensure the counter element is always updated.
     const el = document.getElementById('counter');
-    if (el) el.innerText = count;
+    if (el) el.innerText = Number.isInteger(count) ? count : 'unavailable';
     return count;
 }

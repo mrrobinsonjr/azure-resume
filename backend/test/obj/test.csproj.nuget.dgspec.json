@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/mrrobinsonjr/azure-resume/backend/test/test.csproj": {}
+    "/home/robcity/Documents/Github/azure-resume/backend/test/test.csproj": {}
   },
   "projects": {
-    "/home/mrrobinsonjr/azure-resume/backend/api/api.csproj": {
+    "/home/robcity/Documents/Github/azure-resume/backend/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mrrobinsonjr/azure-resume/backend/api/api.csproj",
+        "projectUniqueName": "/home/robcity/Documents/Github/azure-resume/backend/api/api.csproj",
         "projectName": "api",
-        "projectPath": "/home/mrrobinsonjr/azure-resume/backend/api/api.csproj",
-        "packagesPath": "/home/mrrobinsonjr/.nuget/packages/",
-        "outputPath": "/home/mrrobinsonjr/azure-resume/backend/api/obj/",
+        "projectPath": "/home/robcity/Documents/Github/azure-resume/backend/api/api.csproj",
+        "packagesPath": "/home/robcity/.nuget/packages/",
+        "outputPath": "/home/robcity/Documents/Github/azure-resume/backend/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/mrrobinsonjr/.nuget/NuGet/NuGet.Config"
+          "/home/robcity/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -32,7 +32,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net6.0": {
@@ -53,30 +59,41 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.103/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/mrrobinsonjr/azure-resume/backend/test/test.csproj": {
+    "/home/robcity/Documents/Github/azure-resume/backend/test/test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mrrobinsonjr/azure-resume/backend/test/test.csproj",
+        "projectUniqueName": "/home/robcity/Documents/Github/azure-resume/backend/test/test.csproj",
         "projectName": "test",
-        "projectPath": "/home/mrrobinsonjr/azure-resume/backend/test/test.csproj",
-        "packagesPath": "/home/mrrobinsonjr/.nuget/packages/",
-        "outputPath": "/home/mrrobinsonjr/azure-resume/backend/test/obj/",
+        "projectPath": "/home/robcity/Documents/Github/azure-resume/backend/test/test.csproj",
+        "packagesPath": "/home/robcity/.nuget/packages/",
+        "outputPath": "/home/robcity/Documents/Github/azure-resume/backend/test/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/mrrobinsonjr/.nuget/NuGet/NuGet.Config"
+          "/home/robcity/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -88,8 +105,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/mrrobinsonjr/azure-resume/backend/api/api.csproj": {
-                "projectPath": "/home/mrrobinsonjr/azure-resume/backend/api/api.csproj"
+              "/home/robcity/Documents/Github/azure-resume/backend/api/api.csproj": {
+                "projectPath": "/home/robcity/Documents/Github/azure-resume/backend/api/api.csproj"
               }
             }
           }
@@ -98,7 +115,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net6.0": {
@@ -139,16 +162,27 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.113/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.103/RuntimeIdentifierGraph.json"
         }
       }
     }
