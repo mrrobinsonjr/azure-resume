@@ -41,24 +41,9 @@ jobs:
             set -e
             # Prefer a repository secret connection string if provided, otherwise use the storage account name with login auth
             if [ -n "${AZURE_FRONTEND_STORAGE_CONNECTION_STRING:-}" ]; then
-              az storage blob upload-batch --connection-string "$AZURE_FRONTEND_STORAGE_CONNECTION_STRING" --destination '$web' --source frontend/ --overwrite
+              az storage blob upload-batch --connection-string "$AZURE_FRONTEND_STORAGE_CONNECTION_STRING" --destination '$web' --source frontend/ --overwrite --content-cache-control "no-cache, no-store, must-revalidate"
             else
-              az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite
-            fi
-
-      - name: Update cache-control for HTML and main.js
-        uses: azure/CLI@v1
-        with:
-          azcliversion: latest
-          inlineScript: |
-            set -e
-            # Keep entry files fresh so frontend changes are visible without CDN purge.
-            if [ -n "${AZURE_FRONTEND_STORAGE_CONNECTION_STRING:-}" ]; then
-              az storage blob update-batch --connection-string "$AZURE_FRONTEND_STORAGE_CONNECTION_STRING" --destination '$web' --pattern "*.html" --content-cache-control "no-cache, no-store, must-revalidate"
-              az storage blob update --connection-string "$AZURE_FRONTEND_STORAGE_CONNECTION_STRING" --container-name '$web' --name "main.js" --content-cache-control "no-cache, must-revalidate"
-            else
-              az storage blob update-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --pattern "*.html" --content-cache-control "no-cache, no-store, must-revalidate"
-              az storage blob update --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --container-name '$web' --name "main.js" --content-cache-control "no-cache, must-revalidate"
+              az storage blob upload-batch --account-name "$AZURE_FRONTEND_STORAGE_ACCOUNT" --auth-mode login --destination '$web' --source frontend/ --overwrite --content-cache-control "no-cache, no-store, must-revalidate"
             fi
 
       - name: Logout from Azure CLI

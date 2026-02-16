@@ -2,7 +2,7 @@
 
 This folder contains workflows for the frontend and backend deployments.
 
-- `frontend.main.yml` — deploys the static `frontend/` folder to Azure Blob Storage and sets cache-control metadata for entry files when `frontend/**` changes are pushed to `main`.
+- `frontend.main.yml` — deploys the static `frontend/` folder to Azure Blob Storage without CDN purge when `frontend/**` changes are pushed to `main`.
 - `backend.main.yml` — builds and deploys the backend Azure Function App when `backend/**` changes are pushed to `main`.
 
 Requirements:
