@@ -19,7 +19,7 @@ namespace Company.Function
         // The main function that gets triggered by an HTTP request
         [FunctionName("MrrGetResumeCounter")]
         public static async Task<IActionResult> RunAsync(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             // Input binding for the counter document from Cosmos DB
             [CosmosDB(DatabaseName, CollectionName, ConnectionStringSetting = "AzureResumeConnectionString", Id = DocumentId, PartitionKey = PartitionKey)] Counter counter,
             // Output binding for updating the counter document in Cosmos DB
@@ -27,6 +27,16 @@ namespace Company.Function
             ILogger log) // Logger instance for logging messages
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
+
+            // Initialize the counter document if it does not exist yet.
+            if (counter == null)
+            {
+                counter = new Counter
+                {
+                    id = DocumentId,
+                    Count = 0
+                };
+            }
 
             // Increment the counter
             counter.Count++;
