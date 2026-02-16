@@ -4,19 +4,19 @@ on:
       - main
     paths:
       - 'backend/**'
+      - '.github/workflows/backend.main.yml'
   workflow_dispatch:
 
 env:
   AZURE_FUNCTIONAPP_NAME: mrrGetResumeCounter-func
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend'
   DOTNET_VERSION: '6.0'
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
       - name: Login via Azure CLI
         uses: azure/login@v1
@@ -24,19 +24,25 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      - name: Resolve Project Dependencies
-        run: dotnet build backend/api -c Release --output ./output
+      - name: Restore dependencies
+        run: dotnet restore backend/api/api.csproj
+
+      - name: Build function app
+        run: dotnet build backend/api/api.csproj -c Release --no-restore
       
       - name: Run Unit Tests
-        run: dotnet test backend/test
+        run: dotnet test backend/test/test.csproj -c Release
+
+      - name: Publish function app
+        run: dotnet publish backend/api/api.csproj -c Release --no-build -o ./publish
       
       - name: Deploy to Azure
-        uses: Azure/webapps-deploy@v2
+        uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
-          package: ./output
+          package: ./publish
