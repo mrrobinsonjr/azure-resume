@@ -17,11 +17,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: Login via Azure CLI
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Validate publish profile secret
+        env:
+          AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+        run: |
+          if [ -z "${AZURE_FUNCTIONAPP_PUBLISH_PROFILE:-}" ]; then
+            echo "ERROR: missing AZURE_FUNCTIONAPP_PUBLISH_PROFILE repository secret."
+            exit 1
+          fi
       
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
