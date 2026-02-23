@@ -1,7 +1,0 @@
-{{/* Local override of theme footer to avoid deprecated .Site.Author usage */}}
-{{ $author := dict "name" "John Doe" }}
-{{ with .Site.Params.Author }}{{ $author = . }}{{ else }}{{ with .Site.Params.author }}{{ $author = . }}{{ end }}{{ end }}
-<footer class="py-8 text-center text-sm text-gray-600">
-  <div>{{ $author.name }} — Cloud portfolio focused on security, IaC and CI.</div>
-  {{ with .Site.Params.footer_note }}<div class="mt-2">{{ . }}</div>{{ end }}
-</footer>
