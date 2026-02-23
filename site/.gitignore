@@ -1,6 +1,0 @@
-# Hugo output (do not commit)
-# Hugo output (do not commit)
-public/
-# Ignore generated resources only (keep other resources if needed)
-resources/_gen/
-.hugo_build.lock

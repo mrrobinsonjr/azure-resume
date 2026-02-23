@@ -1,0 +1,147 @@
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #dbe3ee;
+  --accent: #0b5cab;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.container {
+  width: min(920px, 92vw);
+  margin: 0 auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  padding: 0.5rem 0.75rem;
+}
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-grid {
+  padding: 1.5rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.contact p {
+  margin: 0;
+}
+
+.contact a,
+a {
+  color: var(--accent);
+}
+
+main {
+  padding: 1.5rem 0 2rem;
+}
+
+.visitor {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#visitor-count {
+  color: var(--accent);
+}
+
+section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.meta {
+  margin: 0.1rem 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+
+article + article {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.chip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip-list li {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+@media (min-width: 700px) {
+  .header-grid {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+  }
+
+  section {
+    padding: 1.1rem 1.2rem;
+  }
+}
