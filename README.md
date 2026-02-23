@@ -90,6 +90,13 @@ curl http://localhost:7071/api/counter
 curl -X POST http://localhost:7071/api/counter/increment
 ```
 
+## Deployment (Azure Static Web Apps)
+
+- GitHub Actions workflow: `.github/workflows/azure-static-web-apps.yml`
+- Frontend app location: `frontend`
+- Functions API location: `api`
+- Frontend uses `/api` in production, which is routed by Static Web Apps to the Functions backend.
+
 ## Notes
 
 - `local.settings.json` is intentionally excluded from git.
