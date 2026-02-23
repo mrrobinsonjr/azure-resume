@@ -13,7 +13,7 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 
 - API (`api/`)
   - Azure Functions (Python, HTTP-trigger)
-  - `function_app.py` defines `resume-counter` route
+  - `function_app.py` defines `GET /api/counter` and `POST /api/counter/increment`
   - `host.json` and `requirements.txt` provide Functions runtime config
 
 ## Project Structure
@@ -31,6 +31,7 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
     ├── .funcignore
     ├── function_app.py
     ├── host.json
+    ├── local.settings.json
     ├── local.settings.json.example
     └── requirements.txt
 ```
@@ -62,7 +63,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Create local settings file:
+3. Ensure local settings file exists:
 
 ```bash
 cp local.settings.json.example local.settings.json
@@ -74,8 +75,16 @@ cp local.settings.json.example local.settings.json
 func start
 ```
 
-Default local API route:
-- `http://localhost:7071/api/resume-counter`
+Local API routes:
+- `GET http://localhost:7071/api/counter`
+- `POST http://localhost:7071/api/counter/increment`
+
+Quick endpoint checks:
+
+```bash
+curl http://localhost:7071/api/counter
+curl -X POST http://localhost:7071/api/counter/increment
+```
 
 ## Notes
 

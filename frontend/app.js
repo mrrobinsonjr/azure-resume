@@ -4,7 +4,14 @@
     return;
   }
 
-  fetch("/api/counter")
+  var isLocalHost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+  var counterUrl = isLocalHost
+    ? "http://localhost:7071/api/counter"
+    : "/api/counter";
+
+  fetch(counterUrl)
     .then(function (response) {
       if (!response.ok) {
         throw new Error("status " + response.status);
