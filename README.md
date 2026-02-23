@@ -90,3 +90,5 @@ curl -X POST http://localhost:7071/api/counter/increment
 
 - `local.settings.json` is intentionally excluded from git.
 - Current API response is a placeholder count to validate wiring before storage integration.
+- GET http://localhost:7071/api/counter works in browser
+- POST http://localhost:7071/api/counter/increment must be called with curl/Postman (browser will 404)
