@@ -7,9 +7,9 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 ## Architecture
 
 - Frontend (`frontend/`)
-  - Static site assets (`index.html`, `styles.css`)
+  - Static site assets (`index.html`, `styles.css`, `app.js`)
   - Single-page, responsive, accessible resume with sections for Summary, Skills, Experience, Certifications, Education, and Projects
-  - Calls API endpoint for visitor count
+  - Uses `app.js` to fetch visitor count JSON from `/api/counter` and render it in `#visitor-count`
 
 - API (`api/`)
   - Azure Functions (Python, HTTP-trigger)
@@ -25,7 +25,8 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 ├── .gitignore
 ├── frontend/
 │   ├── index.html
-│   └── styles.css
+│   ├── styles.css
+│   └── app.js
 └── api/
     ├── .funcignore
     ├── function_app.py
