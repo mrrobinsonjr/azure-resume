@@ -3,18 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cloud Resume</title>
+  <meta name="description" content="Resume single-page site for the Azure Cloud Resume Challenge.">
+  <title>Alex Morgan | Cloud Engineer Resume</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Your Name</h1>
-    <p>Cloud Resume Challenge</p>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-grid">
+      <div>
+        <h1>Alex Morgan</h1>
+        <p class="subtitle">Cloud Engineer</p>
+      </div>
+      <div class="contact" aria-label="Contact information">
+        <p><a href="mailto:alex@example.com">alex@example.com</a></p>
+        <p><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+        <p><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+      </div>
+    </div>
   </header>
-  <main>
-    <section>
-      <h2>Visitor Count</h2>
-      <p id="visitor-count">Loading...</p>
+
+  <main id="main-content" class="container">
+    <p class="visitor" aria-live="polite">Visitor count: <span id="visitor-count">Loading...</span></p>
+
+    <section aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary</h2>
+      <p>
+        Cloud-focused engineer with experience building secure, observable web platforms and APIs.
+        Strong at shipping simple, reliable solutions with clear documentation and maintainable code.
+      </p>
+    </section>
+
+    <section aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <ul class="chip-list">
+        <li>Azure Functions</li>
+        <li>Python</li>
+        <li>HTML/CSS</li>
+        <li>REST APIs</li>
+        <li>CI/CD</li>
+        <li>Infrastructure as Code</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <article>
+        <h3>Senior Cloud Engineer</h3>
+        <p class="meta">Example Corp | 2023 - Present</p>
+        <ul>
+          <li>Built and maintained serverless APIs with Python and Azure Functions.</li>
+          <li>Reduced incident response time by improving logs, metrics, and dashboards.</li>
+          <li>Automated deployments with branch-based CI/CD workflows.</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Cloud Platform Engineer</h3>
+        <p class="meta">Contoso Systems | 2020 - 2023</p>
+        <ul>
+          <li>Migrated internal services to cloud-native architecture with minimal downtime.</li>
+          <li>Improved security posture through least-privilege access and secret rotation.</li>
+          <li>Collaborated with product teams to optimize performance and cost.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section aria-labelledby="certifications-heading">
+      <h2 id="certifications-heading">Certifications</h2>
+      <ul>
+        <li>Microsoft Certified: Azure Administrator Associate (AZ-104)</li>
+        <li>Microsoft Certified: Azure Developer Associate (AZ-204)</li>
+        <li>AWS Certified Cloud Practitioner</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <p><strong>B.S. Information Technology</strong> - State University</p>
+    </section>
+
+    <section aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <ul>
+        <li>
+          <strong>Cloud Resume Challenge</strong> - Static resume site with serverless API and visitor counter.
+        </li>
+        <li>
+          <strong>Log Pipeline</strong> - Automated ingestion and analysis for app telemetry events.
+        </li>
+      </ul>
     </section>
   </main>
 </body>

@@ -8,6 +8,7 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 
 - Frontend (`frontend/`)
   - Static site assets (`index.html`, `styles.css`)
+  - Single-page, responsive, accessible resume with sections for Summary, Skills, Experience, Certifications, Education, and Projects
   - Calls API endpoint for visitor count
 
 - API (`api/`)
