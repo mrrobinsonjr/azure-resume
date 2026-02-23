@@ -38,6 +38,10 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 
 ## Local Development
 
+- Start Functions: cd api && func start
+- Start frontend: python -m http.server 8080 --directory frontend
+- The code uses localhost:7071 only when running locally; production uses /api
+
 ### Prerequisites
 
 - Python 3.10+
