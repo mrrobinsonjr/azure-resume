@@ -100,6 +100,8 @@ curl -X POST http://localhost:7071/api/counter/increment
 ## Notes
 
 - `local.settings.json` is intentionally excluded from git.
-- Current API response is a placeholder count to validate wiring before storage integration.
+- API persists counter state in Azure Table Storage and returns JSON `{ "count": <int> }`.
+- Frontend reads `GET /api/counter` and increments once per tab session via `POST /api/counter/increment`.
+- CORS allows `http://localhost:8080` and `https://www.blackstatic.cloud`.
 - GET http://localhost:7071/api/counter works in browser
 - POST http://localhost:7071/api/counter/increment must be called with curl/Postman (browser will 404)
