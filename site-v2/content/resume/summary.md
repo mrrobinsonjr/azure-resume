@@ -1,0 +1,1 @@
+Cloud architect and cybersecurity engineer with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts.
