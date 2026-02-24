@@ -78,11 +78,15 @@ def _increment_counter_with_retry(client, max_retries: int = 5) -> int:
         current_count = int(entity.get(COUNT_FIELD, 0))
         next_count = current_count + 1
         # Azure Tables may surface ETag through attribute or different keys.
+        metadata = getattr(entity, "metadata", None) or entity.get("metadata") or {}
         etag = (
             getattr(entity, "etag", None)
             or entity.get("etag")
             or entity.get("odata.etag")
             or entity.get("@odata.etag")
+            or metadata.get("etag")
+            or metadata.get("odata.etag")
+            or metadata.get("@odata.etag")
         )
         if not etag:
             raise RuntimeError("Counter entity is missing etag")
