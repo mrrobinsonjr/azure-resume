@@ -42,6 +42,22 @@ Minimal starter scaffold for a Cloud Resume Challenge implementation using:
 - Start frontend: python -m http.server 8080 --directory frontend
 - The code uses localhost:7071 only when running locally; production uses /api
 
+### Resume Site v2 (React + Vite + Tailwind)
+
+```bash
+cd site-v2
+npm ci
+npm run dev
+```
+
+Build check:
+
+```bash
+cd site-v2
+npm ci
+npm run build
+```
+
 ### Prerequisites
 
 - Python 3.10+
@@ -96,6 +112,11 @@ curl -X POST http://localhost:7071/api/counter/increment
 - Frontend app location: `frontend`
 - Functions API location: `api`
 - Frontend uses `/api` in production, which is routed by Static Web Apps to the Functions backend.
+
+### Deploying site-v2
+
+- GitHub Actions workflow: `.github/workflows/swa-site-v2.yml`
+- Required repository secret: `AZURE_STATIC_WEB_APPS_API_TOKEN_SITE_V2`
 
 ## Notes
 
