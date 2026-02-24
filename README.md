@@ -50,6 +50,7 @@ npm ci
 npm run dev
 ```
 
+<<<<<<< HEAD
 Role content pipeline:
 
 ```bash
@@ -57,6 +58,8 @@ cd site-v2
 npm run build:content
 ```
 
+=======
+>>>>>>> f11ce05 (site-v2: scaffold react+vite+tailwind)
 Build check:
 
 ```bash

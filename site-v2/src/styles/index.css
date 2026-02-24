@@ -13,6 +13,7 @@
 body {
   margin: 0;
 }
+<<<<<<< HEAD
 
 .prose-scope h1,
 .prose-scope h2,
@@ -34,3 +35,5 @@ body {
 .prose-scope li {
   margin: 0.2rem 0;
 }
+=======
+>>>>>>> f11ce05 (site-v2: scaffold react+vite+tailwind)
