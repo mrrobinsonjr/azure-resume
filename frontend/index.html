@@ -95,26 +95,6 @@
       </ul>
     </section>
   </main>
-  <script>
-  (async () => {
-    const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-    const apiBase = isLocal ? "http://localhost:7071/api" : "/api";
-
-    const res = await fetch(`${apiBase}/counter`, { cache: "no-store" });
-
-    const el = document.getElementById("visitor-count");
-    if (!el) return;
-
-    try {
-      const res = await fetch(`${apiBase}/counter`, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      el.textContent = (typeof data.count === "number") ? data.count : "—";
-    } catch (e) {
-      console.error("Counter fetch failed:", e);
-      el.textContent = "—";
-    }
-  })();
-</script>
+  <script src="app.js" defer></script>
 </body>
 </html>
