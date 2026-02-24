@@ -1,20 +1,6 @@
 import { useState } from "react";
+import type { Role } from "../types/roles";
 import Chips from "./Chips";
-
-export type Role = {
-  id: string;
-  company: string;
-  title: string;
-  location: string;
-  start: string;
-  end: string;
-  clearance: string;
-  il_levels: string[];
-  tags: string[];
-  tech: string[];
-  highlights: string[];
-  bodyHtml: string;
-};
 
 type RoleCardProps = {
   role: Role;

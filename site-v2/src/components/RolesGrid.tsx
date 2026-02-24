@@ -1,4 +1,5 @@
-import RoleCard, { type Role } from "./RoleCard";
+import type { Role } from "../types/roles";
+import RoleCard from "./RoleCard";
 
 type RolesGridProps = {
   roles: Role[];
