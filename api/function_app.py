@@ -22,6 +22,8 @@ TABLE_NAME = "Counters"
 PARTITION_KEY = "resume"
 ROW_KEY = "visitors"
 COUNT_FIELD = "count"
+RATE_LIMIT_SECONDS = 15
+_ip_last_increment = {}
 
 
 def _cors_headers(req: func.HttpRequest) -> dict:
@@ -43,6 +45,13 @@ def _json_response(req: func.HttpRequest, payload: dict, status_code: int = 200)
         status_code=status_code,
         headers=_cors_headers(req),
     )
+
+
+def _client_ip(req: func.HttpRequest) -> str:
+    forwarded_for = req.headers.get("X-Forwarded-For")
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+    return req.headers.get("X-Client-IP") or req.headers.get("REMOTE_ADDR") or "unknown"
 
 
 def _table_client():
@@ -138,6 +147,18 @@ def counter_get(req: func.HttpRequest) -> func.HttpResponse:
 def counter_increment(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204, headers=_cors_headers(req))
+
+    origin = req.headers.get("Origin")
+    if not origin or origin not in ALLOWED_ORIGINS:
+        return _json_response(req, {"error": "Forbidden"}, status_code=403)
+
+    # Soft protection to reduce bot inflation; this is not strict security.
+    client_ip = _client_ip(req)
+    now = time.time()
+    last_increment = _ip_last_increment.get(client_ip)
+    if last_increment and (now - last_increment) < RATE_LIMIT_SECONDS:
+        return _json_response(req, {"error": "Too many requests"}, status_code=429)
+    _ip_last_increment[client_ip] = now
 
     try:
         client = _table_client()
