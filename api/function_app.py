@@ -77,21 +77,38 @@ def _increment_counter_with_retry(client, max_retries: int = 5) -> int:
         entity = _get_or_create_counter_entity(client)
         current_count = int(entity.get(COUNT_FIELD, 0))
         next_count = current_count + 1
-        etag = entity.get("etag") or entity.get("odata.etag")
+        # Azure Tables may surface ETag through attribute or different keys.
+        etag = (
+            getattr(entity, "etag", None)
+            or entity.get("etag")
+            or entity.get("odata.etag")
+            or entity.get("@odata.etag")
+        )
         if not etag:
             raise RuntimeError("Counter entity is missing etag")
 
         try:
-            client.update_entity(
-                mode=UpdateMode.MERGE,
-                entity={
-                    "PartitionKey": PARTITION_KEY,
-                    "RowKey": ROW_KEY,
-                    COUNT_FIELD: next_count,
-                },
-                etag=etag,
-                match_condition=MatchConditions.IfNotModified,
-            )
+            try:
+                client.update_entity(
+                    mode=UpdateMode.MERGE,
+                    entity={
+                        "PartitionKey": PARTITION_KEY,
+                        "RowKey": ROW_KEY,
+                        COUNT_FIELD: next_count,
+                    },
+                    etag=etag,
+                    match_condition=MatchConditions.IfNotModified,
+                )
+            except TypeError:
+                client.update_entity(
+                    mode=UpdateMode.MERGE,
+                    entity={
+                        "PartitionKey": PARTITION_KEY,
+                        "RowKey": ROW_KEY,
+                        COUNT_FIELD: next_count,
+                    },
+                    etag=etag,
+                )
             return next_count
         except ResourceModifiedError:
             time.sleep((0.01 * (attempt + 1)) + random.uniform(0, 0.01))
