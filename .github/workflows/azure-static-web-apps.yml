@@ -40,7 +40,7 @@ jobs:
         run: cd site-v2 && npm ci && npm run build
 
   close_pull_request:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && secrets.AZURE_STATIC_WEB_APPS_API_TOKEN != ''
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request
     steps:
