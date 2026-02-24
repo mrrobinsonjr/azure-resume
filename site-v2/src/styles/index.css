@@ -13,3 +13,24 @@
 body {
   margin: 0;
 }
+
+.prose-scope h1,
+.prose-scope h2,
+.prose-scope h3,
+.prose-scope h4 {
+  margin: 0.8rem 0 0.4rem;
+  color: #e2e8f0;
+}
+
+.prose-scope p {
+  margin: 0.4rem 0;
+}
+
+.prose-scope ul {
+  margin: 0.5rem 0;
+  padding-left: 1.1rem;
+}
+
+.prose-scope li {
+  margin: 0.2rem 0;
+}

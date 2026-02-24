@@ -50,6 +50,13 @@ npm ci
 npm run dev
 ```
 
+Role content pipeline:
+
+```bash
+cd site-v2
+npm run build:content
+```
+
 Build check:
 
 ```bash
