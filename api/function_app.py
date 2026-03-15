@@ -12,10 +12,16 @@ from azure.core.exceptions import (
 )
 from azure.data.tables import TableServiceClient, UpdateMode
 
+from lib.openai_client import azure_openai_configured, chat_completion
+from lib.prompt import build_chat_messages, build_mock_answer
+from lib.retrieval import retrieve_context
+
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 ALLOWED_ORIGINS = {
     "http://localhost:8080",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://www.blackstatic.cloud",
 }
 TABLE_NAME = "Counters"
@@ -45,6 +51,13 @@ def _json_response(req: func.HttpRequest, payload: dict, status_code: int = 200)
         status_code=status_code,
         headers=_cors_headers(req),
     )
+
+
+def _parse_json_body(req: func.HttpRequest) -> dict:
+    try:
+        return req.get_json()
+    except ValueError:
+        return {}
 
 
 def _client_ip(req: func.HttpRequest) -> str:
@@ -164,5 +177,47 @@ def counter_increment(req: func.HttpRequest) -> func.HttpResponse:
         client = _table_client()
         count = _increment_counter_with_retry(client)
         return _json_response(req, {"count": count})
+    except Exception as exc:
+        return _json_response(req, {"error": str(exc)}, status_code=500)
+
+
+@app.route(route="chat", methods=["POST", "OPTIONS"])
+def chat(req: func.HttpRequest) -> func.HttpResponse:
+    if req.method == "OPTIONS":
+        return func.HttpResponse(status_code=204, headers=_cors_headers(req))
+
+    body = _parse_json_body(req)
+    question = (body.get("question") or "").strip()
+    if not question:
+        return _json_response(req, {"error": "Question is required"}, status_code=400)
+
+    contexts = retrieve_context(question)
+    citations = [
+        {"id": item["id"], "title": item["title"], "section": item["section"]}
+        for item in contexts
+    ]
+
+    if not azure_openai_configured():
+        return _json_response(
+            req,
+            {
+                "answer": build_mock_answer(question, contexts),
+                "citations": citations,
+                "grounded": bool(contexts),
+                "mode": "mock",
+            },
+        )
+
+    try:
+        answer = chat_completion(build_chat_messages(question, contexts))
+        return _json_response(
+            req,
+            {
+                "answer": answer,
+                "citations": citations,
+                "grounded": bool(contexts),
+                "mode": "azure_openai",
+            },
+        )
     except Exception as exc:
         return _json_response(req, {"error": str(exc)}, status_code=500)
