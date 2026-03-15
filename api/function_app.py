@@ -71,6 +71,14 @@ def _chat_error(req: func.HttpRequest, message: str, status_code: int) -> func.H
     return _json_response(req, payload, status_code=status_code)
 
 
+def _with_debug(payload: dict, debug: dict | None) -> dict:
+    if not debug:
+        return payload
+    enriched = dict(payload)
+    enriched.update(debug)
+    return enriched
+
+
 def _dedupe_citations(items: list[dict]) -> list[dict]:
     seen = set()
     deduped = []
@@ -256,12 +264,15 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
         if retrieval["mode"] != "ready":
             return _json_response(
                 req,
-                {
-                    "answer": build_fallback_answer(retrieval["reason"], contexts),
-                    "citations": citations,
-                    "grounded": retrieval["grounded"],
-                    "mode": "fallback",
-                },
+                _with_debug(
+                    {
+                        "answer": build_fallback_answer(retrieval["reason"], contexts),
+                        "citations": citations,
+                        "grounded": retrieval["grounded"],
+                        "mode": "fallback",
+                    },
+                    retrieval.get("debug"),
+                ),
             )
 
         answer = chat_completion(build_chat_messages(question, contexts))

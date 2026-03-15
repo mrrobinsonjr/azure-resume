@@ -7,9 +7,10 @@ from pathlib import Path
 from lib.openai_client import embedding_for_text, embeddings_configured
 
 
-BASE_DIR = Path(__file__).resolve().parents[2]
-CHUNKS_PATH = BASE_DIR / "api" / "data" / "rag_chunks.json"
-EMBEDDINGS_PATH = BASE_DIR / "api" / "data" / "rag_embeddings.json"
+API_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = API_ROOT / "data"
+CHUNKS_PATH = DATA_DIR / "rag_chunks.json"
+EMBEDDINGS_PATH = DATA_DIR / "rag_embeddings.json"
 TOP_K = 5
 MIN_SCORE = 0.2
 
@@ -18,6 +19,15 @@ def _load_json(path: Path) -> dict | None:
     if not path.exists():
         return None
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def artifact_debug() -> dict:
+    return {
+        "debug_rag_chunks_path": str(CHUNKS_PATH),
+        "debug_rag_chunks_exists": CHUNKS_PATH.exists(),
+        "debug_rag_embeddings_path": str(EMBEDDINGS_PATH),
+        "debug_rag_embeddings_exists": EMBEDDINGS_PATH.exists(),
+    }
 
 
 def _load_chunks() -> list[dict]:
@@ -79,8 +89,9 @@ def retrieve_context(question: str) -> dict:
         return {
             "mode": "fallback",
             "grounded": False,
-            "reason": "RAG chunk artifact is missing",
+            "reason": f"RAG chunk artifact is missing at {CHUNKS_PATH}",
             "chunks": [],
+            "debug": artifact_debug(),
         }
 
     embeddings = _load_embeddings()
@@ -90,6 +101,7 @@ def retrieve_context(question: str) -> dict:
             "grounded": False,
             "reason": "RAG embeddings artifact is missing",
             "chunks": _keyword_preview(question, chunks, limit=3),
+            "debug": artifact_debug(),
         }
 
     if not embeddings_configured():
@@ -98,6 +110,7 @@ def retrieve_context(question: str) -> dict:
             "grounded": False,
             "reason": "Azure OpenAI embedding env vars are not configured",
             "chunks": _keyword_preview(question, chunks, limit=3),
+            "debug": artifact_debug(),
         }
 
     query_embedding = embedding_for_text(question)
@@ -118,6 +131,7 @@ def retrieve_context(question: str) -> dict:
             "grounded": False,
             "reason": "No sufficiently relevant grounded chunks were found",
             "chunks": _keyword_preview(question, chunks, limit=3),
+            "debug": artifact_debug(),
         }
 
     return {
@@ -125,4 +139,5 @@ def retrieve_context(question: str) -> dict:
         "grounded": True,
         "reason": "",
         "chunks": top_chunks,
+        "debug": artifact_debug(),
     }
