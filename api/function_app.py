@@ -13,17 +13,13 @@ from azure.core.exceptions import (
 from azure.data.tables import TableServiceClient, UpdateMode
 
 from lib.openai_client import chat_completion, chat_configured
+from lib.origin import allowed_origins, is_allowed_origin
 from lib.prompt import build_chat_messages, build_fallback_answer, build_mock_answer
+from lib.rate_limit import is_rate_limited
 from lib.retrieval import preview_context, retrieve_context
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-ALLOWED_ORIGINS = {
-    "http://localhost:8080",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://www.blackstatic.cloud",
-}
 TABLE_NAME = "Counters"
 PARTITION_KEY = "resume"
 ROW_KEY = "visitors"
@@ -39,7 +35,7 @@ def _cors_headers(req: func.HttpRequest) -> dict:
         "Vary": "Origin",
     }
     origin = req.headers.get("Origin")
-    if origin in ALLOWED_ORIGINS:
+    if is_allowed_origin(origin):
         headers["Access-Control-Allow-Origin"] = origin
     return headers
 
@@ -51,6 +47,32 @@ def _json_response(req: func.HttpRequest, payload: dict, status_code: int = 200)
         status_code=status_code,
         headers=_cors_headers(req),
     )
+
+
+def _chat_error(req: func.HttpRequest, message: str, status_code: int) -> func.HttpResponse:
+    return _json_response(
+        req,
+        {
+            "error": message,
+            "answer": "",
+            "citations": [],
+            "grounded": False,
+            "mode": "error",
+        },
+        status_code=status_code,
+    )
+
+
+def _dedupe_citations(items: list[dict]) -> list[dict]:
+    seen = set()
+    deduped = []
+    for item in items:
+        key = (item.get("title", ""), item.get("section", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    return deduped
 
 
 def _parse_json_body(req: func.HttpRequest) -> dict:
@@ -162,7 +184,7 @@ def counter_increment(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(status_code=204, headers=_cors_headers(req))
 
     origin = req.headers.get("Origin")
-    if not origin or origin not in ALLOWED_ORIGINS:
+    if not is_allowed_origin(origin):
         return _json_response(req, {"error": "Forbidden"}, status_code=403)
 
     # Soft protection to reduce bot inflation; this is not strict security.
@@ -186,17 +208,25 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204, headers=_cors_headers(req))
 
+    origin = req.headers.get("Origin")
+    if not is_allowed_origin(origin, allow_missing=True):
+        return _chat_error(req, "Forbidden", 403)
+
+    client_ip = _client_ip(req)
+    if is_rate_limited(client_ip):
+        return _chat_error(req, "Too many chat requests", 429)
+
     body = _parse_json_body(req)
     question = (body.get("question") or "").strip()
     if not question:
-        return _json_response(req, {"error": "Question is required"}, status_code=400)
+        return _chat_error(req, "Question is required", 400)
 
     if not chat_configured():
         contexts = preview_context(question)
-        citations = [
+        citations = _dedupe_citations([
             {"id": item["id"], "title": item["title"], "section": item["section"]}
             for item in contexts
-        ]
+        ])
         return _json_response(
             req,
             {
@@ -210,10 +240,10 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     try:
         retrieval = retrieve_context(question)
         contexts = retrieval["chunks"]
-        citations = [
+        citations = _dedupe_citations([
             {"id": item["id"], "title": item["title"], "section": item["section"]}
             for item in contexts
-        ]
+        ])
 
         if retrieval["mode"] != "ready":
             return _json_response(
@@ -237,4 +267,4 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
             },
         )
     except Exception as exc:
-        return _json_response(req, {"error": str(exc)}, status_code=500)
+        return _chat_error(req, str(exc), 500)

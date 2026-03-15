@@ -115,12 +115,16 @@ curl -X POST http://localhost:7071/api/counter/increment
 curl -X POST http://localhost:7071/api/chat \
   -H "Content-Type: application/json" \
   -d '{"question":"What Azure Government experience does Michael have?"}'
+./scripts/smoke-chat.sh
 ```
 
 ### Phase 3 Chat Env Vars
 
 For Azure OpenAI-backed chat, set these in your local Functions environment:
 
+- `ALLOWED_ORIGINS`
+- `CHAT_RATE_LIMIT_WINDOW_SECONDS`
+- `CHAT_RATE_LIMIT_MAX_REQUESTS`
 - `AZURE_OPENAI_ENDPOINT`
 - `AZURE_OPENAI_API_KEY`
 - `AZURE_OPENAI_CHAT_DEPLOYMENT`
@@ -130,6 +134,9 @@ For Azure OpenAI-backed chat, set these in your local Functions environment:
 Backward compatibility note:
 
 - `AZURE_OPENAI_DEPLOYMENT` is still accepted as the chat deployment name if `AZURE_OPENAI_CHAT_DEPLOYMENT` is not set.
+- `ALLOWED_ORIGINS` accepts a comma-separated list of exact origins for browser chat requests.
+- Missing `Origin` is allowed for local/manual testing, but browser requests must match the allowlist.
+- The chat rate limiter is in-memory only and defaults to `20` requests per `600` seconds per IP.
 
 Build-time RAG notes:
 
