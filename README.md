@@ -50,7 +50,6 @@ npm ci
 npm run dev
 ```
 
-<<<<<<< HEAD
 Role content pipeline:
 
 ```bash
@@ -58,8 +57,6 @@ cd site-v2
 npm run build:content
 ```
 
-=======
->>>>>>> f11ce05 (site-v2: scaffold react+vite+tailwind)
 Build check:
 
 ```bash
@@ -114,7 +111,21 @@ Quick endpoint checks:
 ```bash
 curl http://localhost:7071/api/counter
 curl -X POST http://localhost:7071/api/counter/increment
+curl -X POST http://localhost:7071/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What Azure Government experience does Michael have?"}'
 ```
+
+### Phase 3A Chat Env Vars
+
+For Azure OpenAI-backed chat, set these in your local Functions environment:
+
+- `AZURE_OPENAI_ENDPOINT`
+- `AZURE_OPENAI_API_KEY`
+- `AZURE_OPENAI_DEPLOYMENT`
+- `AZURE_OPENAI_API_VERSION`
+
+If these values are not set, `POST /api/chat` returns a deterministic grounded mock response so the `site-v2` UI still works locally.
 
 ## Deployment (Azure Static Web Apps)
 

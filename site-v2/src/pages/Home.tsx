@@ -4,6 +4,7 @@ import FilterPanel from "../components/FilterPanel";
 import RolesGrid from "../components/RolesGrid";
 import SearchBar from "../components/SearchBar";
 import SortSelect from "../components/SortSelect";
+import ChatPanel from "../components/chat/ChatPanel";
 import { useQueryState } from "../hooks/useQueryState";
 import { applyFilters, computeFacets } from "../lib/filter";
 import { buildRoleIndex, roleMatchesQuery } from "../lib/search";
@@ -45,6 +46,8 @@ function Home() {
           <h1 className="mt-2 text-4xl font-bold">Robin Robinson</h1>
           <p className="mt-2 text-slate-300">Cloud Architect · Cybersecurity Engineer · DevSecOps</p>
         </header>
+
+        <ChatPanel />
 
         <section className="mb-10 rounded-xl border border-slate-800 bg-slate-900/70 p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
