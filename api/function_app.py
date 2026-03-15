@@ -12,9 +12,9 @@ from azure.core.exceptions import (
 )
 from azure.data.tables import TableServiceClient, UpdateMode
 
-from lib.openai_client import azure_openai_configured, chat_completion
-from lib.prompt import build_chat_messages, build_mock_answer
-from lib.retrieval import retrieve_context
+from lib.openai_client import chat_completion, chat_configured
+from lib.prompt import build_chat_messages, build_fallback_answer, build_mock_answer
+from lib.retrieval import preview_context, retrieve_context
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
@@ -191,13 +191,12 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     if not question:
         return _json_response(req, {"error": "Question is required"}, status_code=400)
 
-    contexts = retrieve_context(question)
-    citations = [
-        {"id": item["id"], "title": item["title"], "section": item["section"]}
-        for item in contexts
-    ]
-
-    if not azure_openai_configured():
+    if not chat_configured():
+        contexts = preview_context(question)
+        citations = [
+            {"id": item["id"], "title": item["title"], "section": item["section"]}
+            for item in contexts
+        ]
         return _json_response(
             req,
             {
@@ -209,14 +208,32 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     try:
+        retrieval = retrieve_context(question)
+        contexts = retrieval["chunks"]
+        citations = [
+            {"id": item["id"], "title": item["title"], "section": item["section"]}
+            for item in contexts
+        ]
+
+        if retrieval["mode"] != "ready":
+            return _json_response(
+                req,
+                {
+                    "answer": build_fallback_answer(retrieval["reason"], contexts),
+                    "citations": citations,
+                    "grounded": retrieval["grounded"],
+                    "mode": "fallback",
+                },
+            )
+
         answer = chat_completion(build_chat_messages(question, contexts))
         return _json_response(
             req,
             {
                 "answer": answer,
                 "citations": citations,
-                "grounded": bool(contexts),
-                "mode": "azure_openai",
+                "grounded": retrieval["grounded"],
+                "mode": "azure_openai_rag",
             },
         )
     except Exception as exc:

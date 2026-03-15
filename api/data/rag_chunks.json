@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-03-15T03:41:57.477Z",
+  "count": 29,
+  "chunks": [
+    {
+      "id": "resume-summary-001",
+      "source_type": "resume_summary",
+      "role_id": null,
+      "title": "Resume Summary",
+      "company": "",
+      "section": "Summary",
+      "text": "Cloud architect and cybersecurity engineer with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts."
+    },
+    {
+      "id": "position1-saic-cloud-one-highlights-001",
+      "source_type": "role",
+      "role_id": "position1-saic-cloud-one",
+      "title": "Senior Cloud Cyber Security Engineer - Lead",
+      "company": "SAIC - Cloud One Program",
+      "section": "Highlights",
+      "text": "Senior Cloud Cyber Security Engineer - Lead at SAIC - Cloud One Program. Location: Remote (Alabama, US). Dates: 2023-01 to Present. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: RMF, ATO, DevSecOps. Technologies: Azure, AWS, OCI, Terraform, Jenkins, GitHub, Nessus. Highlights: Improved vulnerability response and automation across hybrid cloud workloads. Reduced ATO friction through reusable inheritance and control documentation. Strengthened audit readiness for mission-critical USAF and Army applications."
+    },
+    {
+      "id": "position1-saic-cloud-one-role-summary-002",
+      "source_type": "role",
+      "role_id": "position1-saic-cloud-one",
+      "title": "Senior Cloud Cyber Security Engineer - Lead",
+      "company": "SAIC - Cloud One Program",
+      "section": "Role Summary",
+      "text": "Served as senior cybersecurity engineer for the Cloud One Common Computing Environment, supporting globally distributed hybrid cloud environments hosting critical DoD workloads."
+    },
+    {
+      "id": "position1-saic-cloud-one-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position1-saic-cloud-one",
+      "title": "Senior Cloud Cyber Security Engineer - Lead",
+      "company": "SAIC - Cloud One Program",
+      "section": "Responsibilities",
+      "text": "Led vulnerability triage and remediation planning across virtualized, containerized, and cloud-native systems.\nProduced SAP, SAR, and POA&M artifacts supporting RMF and authorization workflows.\nImplemented and validated controls aligned to NIST 800-53, SRGs, STIGs, and DoD 8500/8510 guidance.\nIntegrated security checks into CI/CD pipelines and advised system owners through RMF lifecycle sustainment."
+    },
+    {
+      "id": "position1-saic-cloud-one-impact-004",
+      "source_type": "role",
+      "role_id": "position1-saic-cloud-one",
+      "title": "Senior Cloud Cyber Security Engineer - Lead",
+      "company": "SAIC - Cloud One Program",
+      "section": "Impact",
+      "text": "Established repeatable security inheritance patterns and improved compliance velocity while sustaining operational security across IL4/IL5/IL6 systems."
+    },
+    {
+      "id": "position2-saic-centcom-cloud-architect-highlights-001",
+      "source_type": "role",
+      "role_id": "position2-saic-centcom-cloud-architect",
+      "title": "Cloud Architect",
+      "company": "SAIC - USCENTCOM J6",
+      "section": "Highlights",
+      "text": "Cloud Architect at SAIC - USCENTCOM J6. Location: MacDill AFB, Tampa, FL. Dates: 2022-01 to 2023-12. Clearance: Secret. IL levels: IL5, IL6. Tags: Cloud Architecture, IaC, DevSecOps. Technologies: Azure Government, Terraform, ARM, Azure DevOps, GitHub, Synapse. Highlights: Delivered USCENTCOM's first cloud-native IL5/IL6 deployments. Created reusable IaC frameworks to reduce provisioning time and drift. Established secure DevSecOps pipeline patterns across teams."
+    },
+    {
+      "id": "position2-saic-centcom-cloud-architect-role-summary-002",
+      "source_type": "role",
+      "role_id": "position2-saic-centcom-cloud-architect",
+      "title": "Cloud Architect",
+      "company": "SAIC - USCENTCOM J6",
+      "section": "Role Summary",
+      "text": "Led architecture for CENTCOM cloud modernization and initial Azure Government IL5/IL6 adoption, balancing mission delivery with strict security and compliance requirements."
+    },
+    {
+      "id": "position2-saic-centcom-cloud-architect-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position2-saic-centcom-cloud-architect",
+      "title": "Cloud Architect",
+      "company": "SAIC - USCENTCOM J6",
+      "section": "Responsibilities",
+      "text": "Designed secure enterprise cloud landing zones aligned to SRG, RMF, and SCCA requirements.\nArchitected DevSecOps workflows and standardized infrastructure templates.\nDesigned lakehouse analytics patterns with Azure Synapse and medallion architecture.\nProduced technical trade studies and migration recommendations for mission owners."
+    },
+    {
+      "id": "position2-saic-centcom-cloud-architect-impact-004",
+      "source_type": "role",
+      "role_id": "position2-saic-centcom-cloud-architect",
+      "title": "Cloud Architect",
+      "company": "SAIC - USCENTCOM J6",
+      "section": "Impact",
+      "text": "Enabled CENTCOM's first scalable cloud architecture baseline with consistent governance, faster delivery, and improved mission analytics enablement."
+    },
+    {
+      "id": "position3-saic-centcom-innovations-highlights-001",
+      "source_type": "role",
+      "role_id": "position3-saic-centcom-innovations",
+      "title": "Innovations Engineer, Cloud and Modernization",
+      "company": "SAIC - USCENTCOM J6 Technology Innovation Branch",
+      "section": "Highlights",
+      "text": "Innovations Engineer, Cloud and Modernization at SAIC - USCENTCOM J6 Technology Innovation Branch. Location: MacDill AFB, Tampa, FL. Dates: 2020-01 to 2022-12. Clearance: Secret. IL levels: IL5, IL6. Tags: Modernization, Enterprise Architecture, Technical Analysis. Technologies: Azure Gov, Terraform, RMF, SRG, SCCA. Highlights: Influenced modernization decisions across HQ and theater operations. Accelerated secure cloud adoption through governance-aligned engineering. Improved interoperability planning for coalition and partner networks."
+    },
+    {
+      "id": "position3-saic-centcom-innovations-role-summary-002",
+      "source_type": "role",
+      "role_id": "position3-saic-centcom-innovations",
+      "title": "Innovations Engineer, Cloud and Modernization",
+      "company": "SAIC - USCENTCOM J6 Technology Innovation Branch",
+      "section": "Role Summary",
+      "text": "Advised CENTCOM J6 modernization initiatives by evaluating emerging technologies and mapping them to secure, interoperable adoption paths."
+    },
+    {
+      "id": "position3-saic-centcom-innovations-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position3-saic-centcom-innovations",
+      "title": "Innovations Engineer, Cloud and Modernization",
+      "company": "SAIC - USCENTCOM J6 Technology Innovation Branch",
+      "section": "Responsibilities",
+      "text": "Conducted technical evaluations of cyber, cloud, and network capabilities.\nAuthored briefs and analysis for senior leadership and mission planners.\nSupported IL5/IL6 migration efforts and ATO-related engineering activities.\nCoordinated architecture alignment across matrixed engineering teams."
+    },
+    {
+      "id": "position3-saic-centcom-innovations-impact-004",
+      "source_type": "role",
+      "role_id": "position3-saic-centcom-innovations",
+      "title": "Innovations Engineer, Cloud and Modernization",
+      "company": "SAIC - USCENTCOM J6 Technology Innovation Branch",
+      "section": "Impact",
+      "text": "Helped define a practical modernization roadmap that advanced cloud adoption while meeting security, interoperability, and mission constraints."
+    },
+    {
+      "id": "position4-saic-cyber-infrastructure-highlights-001",
+      "source_type": "role",
+      "role_id": "position4-saic-cyber-infrastructure",
+      "title": "Senior Cyber Infrastructure Analyst",
+      "company": "SAIC - USCENTCOM",
+      "section": "Highlights",
+      "text": "Senior Cyber Infrastructure Analyst at SAIC - USCENTCOM. Location: MacDill AFB, Tampa, FL. Dates: 2017-01 to 2020-12. Clearance: Secret. IL levels: IL2. Tags: Cyber Defense, Boundary Security, Network Engineering. Technologies: Firewalls, IDS/IPS, Azure Gov, Nexus, ASA, JRSS. Highlights: Strengthened defensive posture across HQ and theater environments. Built an IL2 cyber test range for rapid engineering validation. Improved uptime through Tier 2/3 troubleshooting and architecture tuning."
+    },
+    {
+      "id": "position4-saic-cyber-infrastructure-role-summary-002",
+      "source_type": "role",
+      "role_id": "position4-saic-cyber-infrastructure",
+      "title": "Senior Cyber Infrastructure Analyst",
+      "company": "SAIC - USCENTCOM",
+      "section": "Role Summary",
+      "text": "Designed and sustained cybersecurity boundary infrastructure for USCENTCOM headquarters and operational theater networks."
+    },
+    {
+      "id": "position4-saic-cyber-infrastructure-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position4-saic-cyber-infrastructure",
+      "title": "Senior Cyber Infrastructure Analyst",
+      "company": "SAIC - USCENTCOM",
+      "section": "Responsibilities",
+      "text": "Engineered and maintained firewalls, IDS/IPS, and filtering infrastructure.\nLed planning for CND tool migration to JRSS and modernization tracks.\nBuilt an automated cyber range in Azure Gov IL2 for experimentation.\nDelivered leadership briefings on risk posture and modernization impacts."
+    },
+    {
+      "id": "position4-saic-cyber-infrastructure-impact-004",
+      "source_type": "role",
+      "role_id": "position4-saic-cyber-infrastructure",
+      "title": "Senior Cyber Infrastructure Analyst",
+      "company": "SAIC - USCENTCOM",
+      "section": "Impact",
+      "text": "Improved resilience, compliance, and testing velocity for cyber defense capabilities supporting mission operations."
+    },
+    {
+      "id": "position5-caci-l3-network-sme-highlights-001",
+      "source_type": "role",
+      "role_id": "position5-caci-l3-network-sme",
+      "title": "Network Operations SME, Senior",
+      "company": "CACI / L3 NSS - USAF Southwest Asia AOR",
+      "section": "Highlights",
+      "text": "Network Operations SME, Senior at CACI / L3 NSS - USAF Southwest Asia AOR. Location: Shaw AFB, Sumter, SC. Dates: 2011-01 to 2017-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Network Operations, Routing, Data Center. Technologies: Cisco 7600, Catalyst 6500, Nexus, ASA, MPLS, BGP, OSPF. Highlights: Sustained high availability across 17 bases supporting 10,000+ users. Improved backbone performance and routing reliability. Strengthened AAA and firewall resilience across the enterprise."
+    },
+    {
+      "id": "position5-caci-l3-network-sme-role-summary-002",
+      "source_type": "role",
+      "role_id": "position5-caci-l3-network-sme",
+      "title": "Network Operations SME, Senior",
+      "company": "CACI / L3 NSS - USAF Southwest Asia AOR",
+      "section": "Role Summary",
+      "text": "Led Tier 2/3 network operations and engineering for USAF infrastructure serving multiple bases in Southwest Asia."
+    },
+    {
+      "id": "position5-caci-l3-network-sme-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position5-caci-l3-network-sme",
+      "title": "Network Operations SME, Senior",
+      "company": "CACI / L3 NSS - USAF Southwest Asia AOR",
+      "section": "Responsibilities",
+      "text": "Supported WAN, VoIP, routing, switching, and data center platforms.\nDesigned and maintained BGP/OSPF/EIGRP/MPLS topologies.\nManaged ACS, AD integrations, and enterprise firewall clusters.\nImplemented cybersecurity hardening on network and Windows infrastructure."
+    },
+    {
+      "id": "position5-caci-l3-network-sme-impact-004",
+      "source_type": "role",
+      "role_id": "position5-caci-l3-network-sme",
+      "title": "Network Operations SME, Senior",
+      "company": "CACI / L3 NSS - USAF Southwest Asia AOR",
+      "section": "Impact",
+      "text": "Maintained mission-critical availability and improved security posture across large-scale distributed network operations."
+    },
+    {
+      "id": "position6-l3-network-technician-highlights-001",
+      "source_type": "role",
+      "role_id": "position6-l3-network-technician",
+      "title": "Network Operations Technician",
+      "company": "L3 NSS - USAF Enterprise Network",
+      "section": "Highlights",
+      "text": "Network Operations Technician at L3 NSS - USAF Enterprise Network. Location: Shaw AFB, Sumter, SC. Dates: 2010-01 to 2011-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Operations, DNS, Systems Hardening. Technologies: Cisco IOS, DNS/BIND, Active Directory, Windows Server. Highlights: Reduced downtime with rapid routing and firewall issue resolution. Improved AD and DNS service reliability across supported bases. Enforced secure baseline configurations for enterprise systems."
+    },
+    {
+      "id": "position6-l3-network-technician-role-summary-002",
+      "source_type": "role",
+      "role_id": "position6-l3-network-technician",
+      "title": "Network Operations Technician",
+      "company": "L3 NSS - USAF Enterprise Network",
+      "section": "Role Summary",
+      "text": "Delivered Tier 0-2 operational support for core network, identity, and security services in USAF enterprise environments."
+    },
+    {
+      "id": "position6-l3-network-technician-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position6-l3-network-technician",
+      "title": "Network Operations Technician",
+      "company": "L3 NSS - USAF Enterprise Network",
+      "section": "Responsibilities",
+      "text": "Troubleshot WAN, DNS, routing, and firewall incidents.\nApplied DoD-approved router/switch configurations.\nSupported AD/GPO operations and Windows hardening standards.\nProvided remote support to comm squadrons across installations."
+    },
+    {
+      "id": "position6-l3-network-technician-impact-004",
+      "source_type": "role",
+      "role_id": "position6-l3-network-technician",
+      "title": "Network Operations Technician",
+      "company": "L3 NSS - USAF Enterprise Network",
+      "section": "Impact",
+      "text": "Improved service reliability and baseline security for critical network operations supporting NIPR and SIPR environments."
+    },
+    {
+      "id": "position7-usmc-data-network-highlights-001",
+      "source_type": "role",
+      "role_id": "position7-usmc-data-network",
+      "title": "0651 Data Network Specialist",
+      "company": "United States Marine Corps, 3rd Marine Division",
+      "section": "Highlights",
+      "text": "0651 Data Network Specialist at United States Marine Corps, 3rd Marine Division. Location: Kaneohe Bay, HI. Dates: 2000-01 to 2004-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Military Communications, Network Support, Operations. Technologies: Cisco Networking, Windows, UNIX, Tactical Communications. Highlights: Supported classified/unclassified operations for 3,000+ users. Improved readiness through reliable SIPR/NIPR network support. Strengthened INFOSEC and OPSEC compliance practices."
+    },
+    {
+      "id": "position7-usmc-data-network-role-summary-002",
+      "source_type": "role",
+      "role_id": "position7-usmc-data-network",
+      "title": "0651 Data Network Specialist",
+      "company": "United States Marine Corps, 3rd Marine Division",
+      "section": "Role Summary",
+      "text": "Provided network and systems support for mission-critical military communications across classified and unclassified environments."
+    },
+    {
+      "id": "position7-usmc-data-network-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position7-usmc-data-network",
+      "title": "0651 Data Network Specialist",
+      "company": "United States Marine Corps, 3rd Marine Division",
+      "section": "Responsibilities",
+      "text": "Delivered remote and on-site support for Windows and UNIX users.\nMaintained SIPR/NIPR communications and user services.\nManaged accounts, permissions, and workstation support.\nSupported field exercises and deployments with communications operations."
+    },
+    {
+      "id": "position7-usmc-data-network-impact-004",
+      "source_type": "role",
+      "role_id": "position7-usmc-data-network",
+      "title": "0651 Data Network Specialist",
+      "company": "United States Marine Corps, 3rd Marine Division",
+      "section": "Impact",
+      "text": "Contributed to stable communications posture and operational readiness in high-demand military environments."
+    }
+  ]
+}

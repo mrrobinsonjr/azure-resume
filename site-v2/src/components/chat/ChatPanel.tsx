@@ -13,7 +13,7 @@ type Message = {
   role: "assistant" | "user";
   content: string;
   citations?: Citation[];
-  mock?: boolean;
+  mode?: "mock" | "fallback" | "azure_openai_rag";
 };
 
 const STARTER_PROMPTS = [
@@ -69,7 +69,7 @@ function ChatPanel() {
         role: "assistant",
         content: payload.answer,
         citations: payload.citations,
-        mock: payload.mode === "mock",
+        mode: payload.mode,
       };
       setMessages((current) => [...current, assistantMessage]);
     } catch (error) {
@@ -93,7 +93,7 @@ function ChatPanel() {
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">Recruiter Chat</p>
         <h2 className="text-2xl font-semibold">Ask about role fit, cloud depth, or mission context</h2>
         <p className="text-sm text-slate-300">
-          Phase 3A foundation: chat is grounded to local resume content now, with fuller retrieval coming next.
+          Phase 3B foundation: chat retrieves real resume chunks with citations when the RAG artifacts and env vars are available.
         </p>
       </div>
 
@@ -120,7 +120,7 @@ function ChatPanel() {
             role={message.role}
             content={message.content}
             citations={message.citations}
-            mock={message.mock}
+            mode={message.mode}
           />
         ))}
       </div>
