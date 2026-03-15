@@ -11,19 +11,26 @@ DEFAULT_ALLOWED_ORIGINS = {
 }
 
 
+def normalize_origin(origin: str | None) -> str | None:
+    if origin is None:
+        return None
+    normalized = origin.strip().rstrip("/")
+    return normalized or None
+
+
 def allowed_origins() -> set[str]:
     configured = os.getenv("ALLOWED_ORIGINS", "")
     if not configured.strip():
-        return set(DEFAULT_ALLOWED_ORIGINS)
+        return {normalize_origin(origin) for origin in DEFAULT_ALLOWED_ORIGINS if normalize_origin(origin)}
     return {
-        origin.strip()
+        normalize_origin(origin)
         for origin in configured.split(",")
-        if origin.strip()
+        if normalize_origin(origin)
     }
 
 
 def is_allowed_origin(origin: str | None, *, allow_missing: bool = False) -> bool:
-    if not origin:
+    normalized = normalize_origin(origin)
+    if not normalized:
         return allow_missing
-    return origin in allowed_origins()
-
+    return normalized in allowed_origins()

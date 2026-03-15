@@ -13,7 +13,7 @@ from azure.core.exceptions import (
 from azure.data.tables import TableServiceClient, UpdateMode
 
 from lib.openai_client import chat_completion, chat_configured
-from lib.origin import allowed_origins, is_allowed_origin
+from lib.origin import allowed_origins, is_allowed_origin, normalize_origin
 from lib.prompt import build_chat_messages, build_fallback_answer, build_mock_answer
 from lib.rate_limit import is_rate_limited
 from lib.retrieval import preview_context, retrieve_context
@@ -34,9 +34,10 @@ def _cors_headers(req: func.HttpRequest) -> dict:
         "Access-Control-Allow-Headers": "Content-Type",
         "Vary": "Origin",
     }
-    origin = req.headers.get("Origin")
-    if is_allowed_origin(origin):
-        headers["Access-Control-Allow-Origin"] = origin
+    origin = req.headers.get("Origin") or req.headers.get("origin")
+    normalized_origin = normalize_origin(origin)
+    if is_allowed_origin(normalized_origin):
+        headers["Access-Control-Allow-Origin"] = normalized_origin
     return headers
 
 
@@ -50,17 +51,24 @@ def _json_response(req: func.HttpRequest, payload: dict, status_code: int = 200)
 
 
 def _chat_error(req: func.HttpRequest, message: str, status_code: int) -> func.HttpResponse:
-    return _json_response(
-        req,
-        {
-            "error": message,
-            "answer": "",
-            "citations": [],
-            "grounded": False,
-            "mode": "error",
-        },
-        status_code=status_code,
-    )
+    payload = {
+        "error": message,
+        "answer": "",
+        "citations": [],
+        "grounded": False,
+        "mode": "error",
+    }
+
+    if status_code == 403:
+        payload.update(
+            {
+                "debug_origin_received": normalize_origin(req.headers.get("Origin") or req.headers.get("origin")),
+                "debug_allowed_origins_raw": os.getenv("ALLOWED_ORIGINS", ""),
+                "debug_allowed_origins_parsed": sorted(allowed_origins()),
+            }
+        )
+
+    return _json_response(req, payload, status_code=status_code)
 
 
 def _dedupe_citations(items: list[dict]) -> list[dict]:
@@ -183,7 +191,7 @@ def counter_increment(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204, headers=_cors_headers(req))
 
-    origin = req.headers.get("Origin")
+    origin = req.headers.get("Origin") or req.headers.get("origin")
     if not is_allowed_origin(origin):
         return _json_response(req, {"error": "Forbidden"}, status_code=403)
 
@@ -208,7 +216,7 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204, headers=_cors_headers(req))
 
-    origin = req.headers.get("Origin")
+    origin = req.headers.get("Origin") or req.headers.get("origin")
     if not is_allowed_origin(origin, allow_missing=True):
         return _chat_error(req, "Forbidden", 403)
 
