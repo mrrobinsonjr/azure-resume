@@ -30,7 +30,7 @@ dist/
 build/
 
 # Editor/IDE
-.vscode/
+
 .idea/
 *.swp
 *.swo
