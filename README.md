@@ -150,11 +150,14 @@ Build-time RAG notes:
 - Frontend app location: `frontend`
 - Functions API location: `api`
 - Frontend uses `/api` in production, which is routed by Static Web Apps to the Functions backend.
+- This workflow still represents the live v1 production path today.
 
 ### Deploying site-v2
 
-- GitHub Actions workflow: `.github/workflows/swa-site-v2.yml`
-- Required repository secret: `AZURE_STATIC_WEB_APPS_API_TOKEN_SITE_V2`
+- Promotion readiness doc: `docs/site-v2-promotion.md`
+- Preview workflow: `.github/workflows/swa-site-v2.yml`
+- Preview deploy secret: `AZURE_STATIC_WEB_APPS_API_TOKEN_SITE_V2`
+- This ticket does **not** switch production traffic to `site-v2`
 
 ## Notes
 
