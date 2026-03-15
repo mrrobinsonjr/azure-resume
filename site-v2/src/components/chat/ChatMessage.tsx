@@ -8,10 +8,10 @@ type ChatMessageProps = {
   role: "assistant" | "user";
   content: string;
   citations?: Citation[];
-  mock?: boolean;
+  mode?: "mock" | "fallback" | "azure_openai_rag";
 };
 
-function ChatMessage({ role, content, citations = [], mock = false }: ChatMessageProps) {
+function ChatMessage({ role, content, citations = [], mode = "azure_openai_rag" }: ChatMessageProps) {
   const isAssistant = role === "assistant";
 
   return (
@@ -26,8 +26,12 @@ function ChatMessage({ role, content, citations = [], mock = false }: ChatMessag
         <p className="whitespace-pre-wrap">{content}</p>
       </div>
 
-      {isAssistant && mock && (
+      {isAssistant && mode === "mock" && (
         <p className="mt-2 text-xs text-amber-300">Mock response: Azure OpenAI env vars are not configured.</p>
+      )}
+
+      {isAssistant && mode === "fallback" && (
+        <p className="mt-2 text-xs text-amber-300">Fallback response: embeddings retrieval was unavailable for this request.</p>
       )}
 
       {isAssistant && citations.length > 0 && (
@@ -47,4 +51,3 @@ function ChatMessage({ role, content, citations = [], mock = false }: ChatMessag
 }
 
 export default ChatMessage;
-

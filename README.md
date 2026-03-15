@@ -55,6 +55,7 @@ Role content pipeline:
 ```bash
 cd site-v2
 npm run build:content
+npm run build:rag
 ```
 
 Build check:
@@ -116,16 +117,25 @@ curl -X POST http://localhost:7071/api/chat \
   -d '{"question":"What Azure Government experience does Michael have?"}'
 ```
 
-### Phase 3A Chat Env Vars
+### Phase 3 Chat Env Vars
 
 For Azure OpenAI-backed chat, set these in your local Functions environment:
 
 - `AZURE_OPENAI_ENDPOINT`
 - `AZURE_OPENAI_API_KEY`
-- `AZURE_OPENAI_DEPLOYMENT`
+- `AZURE_OPENAI_CHAT_DEPLOYMENT`
+- `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`
 - `AZURE_OPENAI_API_VERSION`
 
-If these values are not set, `POST /api/chat` returns a deterministic grounded mock response so the `site-v2` UI still works locally.
+Backward compatibility note:
+
+- `AZURE_OPENAI_DEPLOYMENT` is still accepted as the chat deployment name if `AZURE_OPENAI_CHAT_DEPLOYMENT` is not set.
+
+Build-time RAG notes:
+
+- `npm run build:rag` always writes `api/data/rag_chunks.json`
+- it writes `api/data/rag_embeddings.json` only when the embedding env vars are configured
+- if Azure OpenAI values are not set, `POST /api/chat` returns deterministic mock/fallback responses so the `site-v2` UI still works locally
 
 ## Deployment (Azure Static Web Apps)
 
