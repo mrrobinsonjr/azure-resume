@@ -262,8 +262,21 @@ async function main() {
   console.log(`Built ${chunks.length} RAG chunks -> ${path.relative(REPO_ROOT, CHUNKS_PATH)}`);
 
   if (!embeddingEnvPresent()) {
-    await fs.rm(EMBEDDINGS_PATH, { force: true });
-    console.log("Skipped embeddings generation: Azure OpenAI embedding env vars are not configured.");
+    let existingArtifact = false;
+    try {
+      await fs.access(EMBEDDINGS_PATH);
+      existingArtifact = true;
+    } catch {
+      existingArtifact = false;
+    }
+
+    if (existingArtifact) {
+      console.log(
+        `Skipped embeddings generation: Azure OpenAI embedding env vars are not configured. Keeping existing artifact at ${path.relative(REPO_ROOT, EMBEDDINGS_PATH)}.`,
+      );
+    } else {
+      console.log("Skipped embeddings generation: Azure OpenAI embedding env vars are not configured.");
+    }
     return;
   }
 
