@@ -23,9 +23,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          app_location: frontend
+          app_location: site-v2
           api_location: api
-          output_location: ""
+          output_location: dist
 
   pr_build:
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
