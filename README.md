@@ -1,169 +1,181 @@
 # Azure Cloud Resume Challenge
 
-Minimal starter scaffold for a Cloud Resume Challenge implementation using:
-- Plain HTML/CSS frontend in `frontend/`
-- Python Azure Functions API in `api/`
+A cloud résumé for Michael Robinson, deployed on Azure Static Web Apps.
+
+**Production:** https://www.blackstatic.cloud (also https://www.blackstatic.cloud/resume)
+
+The live site is the **v2** app: a React + Vite + Tailwind single-page résumé with a
+retrieval-grounded (RAG) recruiter chat backed by Azure OpenAI, plus a visitor counter
+persisted in Azure Table Storage.
 
 ## Architecture
 
-- Frontend (`frontend/`)
-  - Static site assets (`index.html`, `styles.css`, `app.js`)
-  - Single-page, responsive, accessible resume with sections for Summary, Skills, Experience, Certifications, Education, and Projects
-  - Uses `app.js` to fetch visitor count JSON from `/api/counter` and render it in `#visitor-count`
+- **`site-v2/`** — production front end (React + Vite + Tailwind SPA)
+  - Hero, an expandable reverse-chronological experience timeline, contact actions,
+    a secondary "Ask about my experience" RAG chat panel, and a footer visitor counter.
+  - Role content is authored as Markdown-with-frontmatter in `site-v2/content/roles/`
+    and compiled by a build step (see [Content pipeline](#content-pipeline)).
+  - `site-v2/public/staticwebapp.config.json` provides SPA `navigationFallback` so
+    client paths such as `/resume` serve the app.
 
-- API (`api/`)
-  - Azure Functions (Python, HTTP-trigger)
-  - `function_app.py` defines `GET /api/counter` and `POST /api/counter/increment`
-  - `host.json` and `requirements.txt` provide Functions runtime config
+- **`api/`** — Azure Functions (Python, HTTP-triggered)
+  - `GET /api/counter` and `POST /api/counter/increment` — visitor counter in Azure Table Storage.
+  - `POST /api/chat` — RAG recruiter chat over the résumé content (Azure OpenAI).
+  - `lib/` holds the retrieval, prompt, OpenAI client, origin, and rate-limit helpers.
 
-## Project Structure
+- **`frontend/`** — the original v1 static site (plain HTML/CSS/JS). **Legacy**, retained
+  only as a rollback target; not deployed.
+
+- **`content/`, `src/`** — earlier content experiments; the authoritative content the live
+  site builds from lives under `site-v2/content/`.
+
+### Project structure
 
 ```text
 .
-├── agents.md
 ├── README.md
-├── .gitignore
-├── frontend/
-│   ├── index.html
-│   ├── styles.css
-│   └── app.js
-└── api/
-    ├── .funcignore
-    ├── function_app.py
-    ├── host.json
-    ├── local.settings.json
-    ├── local.settings.json.example
-    └── requirements.txt
+├── site-v2/                     # production front end (React + Vite + Tailwind)
+│   ├── content/                 # authoritative résumé content
+│   │   ├── roles/*.md           # one file per role (frontmatter + body)
+│   │   └── resume/summary.md
+│   ├── public/
+│   │   ├── downloads/           # resume.pdf, resume.docx
+│   │   └── staticwebapp.config.json
+│   ├── scripts/                 # build-content.mjs, build-rag.mjs
+│   └── src/                     # React app (data/profile.ts, pages, components)
+├── api/                         # Azure Functions (Python)
+│   ├── function_app.py          # counter + chat routes
+│   ├── data/                    # rag_chunks.json, rag_embeddings.json (build artifacts)
+│   └── lib/                     # retrieval, prompt, openai_client, origin, rate_limit
+├── frontend/                    # legacy v1 static site (rollback only)
+├── docs/site-v2-promotion.md    # promotion + rollback runbook
+└── .github/workflows/
+    └── azure-static-web-apps.yml
 ```
 
-## Local Development
-
-- Start Functions: cd api && func start
-- Start frontend: python -m http.server 8080 --directory frontend
-- The code uses localhost:7071 only when running locally; production uses /api
-
-### Resume Site v2 (React + Vite + Tailwind)
-
-```bash
-cd site-v2
-npm ci
-npm run dev
-```
-
-Role content pipeline:
-
-```bash
-cd site-v2
-npm run build:content
-npm run build:rag
-```
-
-Build check:
-
-```bash
-cd site-v2
-npm ci
-npm run build
-```
+## Local development
 
 ### Prerequisites
 
+- Node.js 20+
 - Python 3.10+
-- Azure Functions Core Tools (v4)
+- Azure Functions Core Tools v4
 
-### Frontend
+### Front end (site-v2)
 
-Open `frontend/index.html` directly in a browser during initial development.
+```bash
+cd site-v2
+npm ci
+npm run dev            # Vite dev server on http://localhost:5173
+```
 
-### API
+`npm run dev` first runs the content pipeline (below), then starts Vite. When talking to a
+local API, the app calls `http://localhost:7071/api`; in production it calls `/api`.
 
-1. Create and activate a virtual environment:
+### API (Azure Functions)
 
 ```bash
 cd api
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-2. Install dependencies:
-
-```bash
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+cp local.settings.json.example local.settings.json    # then fill in values
+func start                                             # http://localhost:7071
 ```
 
-3. Ensure local settings file exists:
-
-```bash
-cp local.settings.json.example local.settings.json
-```
-
-4. Start the Functions host:
-
-```bash
-func start
-```
-
-Local API routes:
-- `GET http://localhost:7071/api/counter`
-- `POST http://localhost:7071/api/counter/increment`
-
-Quick endpoint checks:
+Quick checks:
 
 ```bash
 curl http://localhost:7071/api/counter
-curl -X POST http://localhost:7071/api/counter/increment
+curl -X POST http://localhost:7071/api/counter/increment -H "Origin: http://localhost:5173"
 curl -X POST http://localhost:7071/api/chat \
   -H "Content-Type: application/json" \
-  -d '{"question":"What Azure Government experience does Michael have?"}'
-./scripts/smoke-chat.sh
+  -d '{"question":"What is Michael'\''s current role?"}'
 ```
 
-### Phase 3 Chat Env Vars
+Without Azure OpenAI configured, `POST /api/chat` returns deterministic **mock/fallback**
+responses so the UI still works locally.
 
-For Azure OpenAI-backed chat, set these in your local Functions environment:
+## Content pipeline
 
-- `ALLOWED_ORIGINS`
-- `CHAT_RATE_LIMIT_WINDOW_SECONDS`
-- `CHAT_RATE_LIMIT_MAX_REQUESTS`
-- `AZURE_OPENAI_ENDPOINT`
-- `AZURE_OPENAI_API_KEY`
-- `AZURE_OPENAI_CHAT_DEPLOYMENT`
-- `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`
-- `AZURE_OPENAI_API_VERSION`
+Roles and summary under `site-v2/content/` are compiled into the data the app and the chat use:
 
-Backward compatibility note:
+```bash
+cd site-v2
+npm run build:content   # content/roles/*.md  -> src/data/roles.json (sorted newest-first)
+npm run build:rag       # content -> api/data/rag_chunks.json (+ rag_embeddings.json)
+```
 
-- `AZURE_OPENAI_DEPLOYMENT` is still accepted as the chat deployment name if `AZURE_OPENAI_CHAT_DEPLOYMENT` is not set.
-- `ALLOWED_ORIGINS` accepts a comma-separated list of exact origins for browser chat requests.
-- Missing `Origin` is allowed for local/manual testing, but browser requests must match the allowlist.
-- The chat rate limiter is in-memory only and defaults to `20` requests per `600` seconds per IP.
+- `build:rag` always writes `api/data/rag_chunks.json`.
+- It writes `api/data/rag_embeddings.json` **only** when the Azure OpenAI embedding env vars
+  are configured; otherwise it keeps the committed artifact. The committed embeddings artifact
+  is what ships to production, so regenerate and commit it after changing role content.
 
-Build-time RAG notes:
+To add a role: create `site-v2/content/roles/<slug>.md` with frontmatter
+(`id, company, title, location, start, end, clearance, il_levels, tags, tech, highlights`)
+and a Markdown body, then re-run the pipeline.
 
-- `npm run build:rag` always writes `api/data/rag_chunks.json`
-- it writes `api/data/rag_embeddings.json` only when the embedding env vars are configured
-- if Azure OpenAI values are not set, `POST /api/chat` returns deterministic mock/fallback responses so the `site-v2` UI still works locally
+## Chat: configuration and abuse controls
+
+### Environment variables
+
+Runtime settings live on the Static Web App (and in `api/local.settings.json` for local dev):
+
+| Variable | Purpose |
+|---|---|
+| `AZURE_OPENAI_ENDPOINT` / `AZURE_OPENAI_API_KEY` / `AZURE_OPENAI_API_VERSION` | Azure OpenAI access |
+| `AZURE_OPENAI_CHAT_DEPLOYMENT` | chat model deployment (`AZURE_OPENAI_DEPLOYMENT` accepted for back-compat) |
+| `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | embedding model deployment |
+| `AZURE_STORAGE_CONNECTION_STRING` | Table Storage for the counter **and** durable rate limiting |
+| `ALLOWED_ORIGINS` | comma-separated exact origins allowed to call chat/counter |
+| `CHAT_RATE_LIMIT_WINDOW_SECONDS` | rate-limit window (default `600`) |
+| `CHAT_RATE_LIMIT_MAX_REQUESTS` | max chat requests per IP per window (default `20`) |
+| `CHAT_DEBUG` | when truthy, includes diagnostic fields in error responses (**off** in production) |
+
+### Abuse / safety controls on `POST /api/chat`
+
+- **Origin allowlist** — non-allowlisted browser origins get `403`. A missing `Origin` is
+  permitted for manual/CLI testing.
+- **Rate limiting** — per-IP, two layers: a fast in-memory limiter plus a **durable**
+  Table Storage–backed limiter (`ChatRateLimit` table) that holds across cold starts and
+  multiple instances. Over budget returns `429`. Fails open on storage errors.
+- **Input caps** — request bodies over 16 KB return `413`; questions over 2000 characters
+  return `400`.
+- **Output cap** — responses are bounded (`max_tokens`, low temperature, request timeout).
+- **Prompt-injection hardening** — the system prompt answers only from retrieved context and
+  treats source content as data, ignoring instructions embedded in it.
+- **No information disclosure** — errors return generic messages; internal exception text and
+  the origin allowlist are never returned unless `CHAT_DEBUG` is enabled.
 
 ## Deployment (Azure Static Web Apps)
 
-- GitHub Actions workflow: `.github/workflows/azure-static-web-apps.yml`
-- Frontend app location: `frontend`
-- Functions API location: `api`
-- Frontend uses `/api` in production, which is routed by Static Web Apps to the Functions backend.
-- This workflow still represents the live v1 production path today.
+Production deploys from **`main`** via `.github/workflows/azure-static-web-apps.yml`:
 
-### Deploying site-v2
+- `app_location: site-v2`
+- `api_location: api`
+- `output_location: dist`
 
-- Promotion readiness doc: `docs/site-v2-promotion.md`
-- Preview workflow: `.github/workflows/swa-site-v2.yml`
-- Preview deploy secret: `AZURE_STATIC_WEB_APPS_API_TOKEN_SITE_V2`
-- This ticket does **not** switch production traffic to `site-v2`
+Pushing to `main` builds `site-v2` (which runs the content pipeline) and deploys it plus the
+`api` Functions to the production Static Web App, served at `www.blackstatic.cloud`.
+
+Runtime application settings (Azure OpenAI, `ALLOWED_ORIGINS`, rate-limit vars,
+`AZURE_STORAGE_CONNECTION_STRING`) are configured on the Static Web App resource, not in the repo.
+
+### Custom domains
+
+- `www.blackstatic.cloud` — CNAME to the Static Web App (primary).
+- `blackstatic.cloud` (apex) — A record + TXT validation (see `docs/site-v2-promotion.md`).
+
+### Promotion & rollback
+
+The v1 → v2 cutover history, and the rollback procedure (revert the workflow change so
+production serves `frontend/` again), are documented in
+[`docs/site-v2-promotion.md`](docs/site-v2-promotion.md).
 
 ## Notes
 
 - `local.settings.json` is intentionally excluded from git.
-- API persists counter state in Azure Table Storage and returns JSON `{ "count": <int> }`.
-- Frontend reads `GET /api/counter` and increments once per tab session via `POST /api/counter/increment`.
-- CORS allows `http://localhost:8080` and `https://www.blackstatic.cloud`.
-- GET http://localhost:7071/api/counter works in browser
-- POST http://localhost:7071/api/counter/increment must be called with curl/Postman (browser will 404)
+- The counter persists in Azure Table Storage and returns `{ "count": <int> }`. The front end
+  reads `GET /api/counter` and increments once per browser session via
+  `POST /api/counter/increment`.
+- `POST /api/counter/increment` requires an allowed `Origin`; call it with curl/Postman using
+  `-H "Origin: <allowed-origin>"`.

@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import random
 import time
@@ -15,7 +16,7 @@ from azure.data.tables import TableServiceClient, UpdateMode
 from lib.openai_client import chat_completion, chat_configured
 from lib.origin import allowed_origins, is_allowed_origin, normalize_origin
 from lib.prompt import build_chat_messages, build_fallback_answer, build_mock_answer
-from lib.rate_limit import is_rate_limited
+from lib.rate_limit import durable_is_rate_limited, is_rate_limited
 from lib.retrieval import preview_context, retrieve_context
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
@@ -26,6 +27,14 @@ ROW_KEY = "visitors"
 COUNT_FIELD = "count"
 RATE_LIMIT_SECONDS = 15
 _ip_last_increment = {}
+
+# Input caps for the chat endpoint (abuse / cost protection).
+MAX_QUESTION_CHARS = 2000
+MAX_BODY_BYTES = 16 * 1024
+
+
+def _debug_enabled() -> bool:
+    return os.getenv("CHAT_DEBUG", "").strip().lower() in ("1", "true", "yes", "on")
 
 
 def _cors_headers(req: func.HttpRequest) -> dict:
@@ -59,7 +68,7 @@ def _chat_error(req: func.HttpRequest, message: str, status_code: int) -> func.H
         "mode": "error",
     }
 
-    if status_code == 403:
+    if status_code == 403 and _debug_enabled():
         payload.update(
             {
                 "debug_origin_received": normalize_origin(req.headers.get("Origin") or req.headers.get("origin")),
@@ -72,7 +81,7 @@ def _chat_error(req: func.HttpRequest, message: str, status_code: int) -> func.H
 
 
 def _with_debug(payload: dict, debug: dict | None) -> dict:
-    if not debug:
+    if not debug or not _debug_enabled():
         return payload
     enriched = dict(payload)
     enriched.update(debug)
@@ -190,8 +199,9 @@ def counter_get(req: func.HttpRequest) -> func.HttpResponse:
         entity = _get_or_create_counter_entity(client)
         count = int(entity.get(COUNT_FIELD, 0))
         return _json_response(req, {"count": count})
-    except Exception as exc:
-        return _json_response(req, {"error": str(exc)}, status_code=500)
+    except Exception:
+        logging.exception("counter request failed")
+        return _json_response(req, {"error": "Counter is temporarily unavailable"}, status_code=500)
 
 
 @app.route(route="counter/increment", methods=["POST", "OPTIONS"])
@@ -215,8 +225,9 @@ def counter_increment(req: func.HttpRequest) -> func.HttpResponse:
         client = _table_client()
         count = _increment_counter_with_retry(client)
         return _json_response(req, {"count": count})
-    except Exception as exc:
-        return _json_response(req, {"error": str(exc)}, status_code=500)
+    except Exception:
+        logging.exception("counter request failed")
+        return _json_response(req, {"error": "Counter is temporarily unavailable"}, status_code=500)
 
 
 @app.route(route="chat", methods=["POST", "OPTIONS"])
@@ -228,14 +239,21 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     if not is_allowed_origin(origin, allow_missing=True):
         return _chat_error(req, "Forbidden", 403)
 
+    raw_body = req.get_body() or b""
+    if len(raw_body) > MAX_BODY_BYTES:
+        return _chat_error(req, "Request body too large", 413)
+
     client_ip = _client_ip(req)
-    if is_rate_limited(client_ip):
+    # In-memory (fast, per-instance) then durable (cross-instance) rate limits.
+    if is_rate_limited(client_ip) or durable_is_rate_limited(client_ip):
         return _chat_error(req, "Too many chat requests", 429)
 
     body = _parse_json_body(req)
     question = (body.get("question") or "").strip()
     if not question:
         return _chat_error(req, "Question is required", 400)
+    if len(question) > MAX_QUESTION_CHARS:
+        return _chat_error(req, "Question is too long", 400)
 
     if not chat_configured():
         contexts = preview_context(question)
@@ -285,5 +303,6 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
                 "mode": "azure_openai_rag",
             },
         )
-    except Exception as exc:
-        return _chat_error(req, str(exc), 500)
+    except Exception:
+        logging.exception("chat request failed")
+        return _chat_error(req, "Chat is temporarily unavailable", 500)
