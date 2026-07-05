@@ -1,0 +1,26 @@
+Innovations Engineer, Cloud & Modernization
+SAIC – USCENTCOM J6 Technology Innovation Branch
+MacDill AFB, Tampa, FL
+2020–2022
+
+Role Summary:
+Served as a modernization advisor to CENTCOM J6, evaluating emerging technologies and ensuring secure, interoperable adoption across cyber, network, cloud, and partner-nation environments.
+
+Responsibilities:
+- Conducted research and evaluation of emerging cyber, cloud, and network technologies.
+- Developed modernization strategies aligned with J6 long-term objectives.
+- Ensured new technologies adhered to SRG, RMF, and SCCA requirements.
+- Participated in IL5/IL6 cloud deployments and ATO support activities.
+- Supported enterprise architecture alignment across HQ and deployed networks.
+- Provided white papers, technical analyses, and briefings to senior leadership.
+- Collaborated within a matrixed engineering structure across multiple specialties.
+- Advised mission planners on technology feasibility and operational benefits.
+
+Achievements:
+- Influenced modernization decisions impacting HQ and theater operations.
+- Accelerated secure cloud adoption by aligning engineering to DoD governance.
+- Improved enterprise interoperability for partner-nation and coalition networks.
+- Delivered technical analyses shaping CENTCOM’s digital modernization roadmap.
+
+Technologies:
+Azure Gov, AWS (evaluation), RMF, SRG, SCCA, STIGs, Terraform, cloud planning, enterprise architecture, DoD network environments.

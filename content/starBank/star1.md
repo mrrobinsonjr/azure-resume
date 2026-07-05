@@ -1,0 +1,28 @@
+Senior Cloud Cyber Security Engineer – Lead
+SAIC – Cloud One Program
+Remote (Alabama, US)
+2023–Present
+
+Role Summary:
+Serve as the senior cybersecurity engineer supporting the Cloud One Common Computing Environment—a globally distributed hybrid DoD cloud hosting mission-critical USAF and Army applications. Lead vulnerability management, RMF compliance, continuous monitoring, ATO sustainment, and DevSecOps security integration for multi-cloud IL4/IL5/IL6 systems.
+
+Responsibilities:
+- Perform vulnerability identification, triage, and remediation planning across virtualized, containerized, and cloud-native workloads.
+- Develop SAP, SAR, and POA&M documentation supporting A&A processes.
+- Document inheritable cloud and platform security controls per DoD 8500.01, 8510.01, NIST 800-53, SRGs, and STIGs.
+- Conduct security testing, configuration assessments, and gap analysis.
+- Ensure logging, auditing, PKI enforcement, and CSSP integration across applications.
+- Implement RMF controls and continuous monitoring artifacts.
+- Integrate security automation into CI/CD pipelines (Jenkins, GitHub, Azure DevOps).
+- Provide expert remediation recommendations for audit findings.
+- Guide system owners through RMF steps 1–6 and ongoing authorization.
+- Present security findings and recommendations to leadership.
+
+Achievements:
+- Strengthened cybersecurity posture of Cloud One across hybrid environments.
+- Improved audit readiness and reduced ATO friction through high-quality documentation.
+- Enhanced vulnerability response processes and security automation.
+- Established reusable inheritance documentation for cloud control families.
+
+Technologies:
+ACAS, HBSS, eMASS, Nessus, RMF, NIST 800-53, SRG/STIG, CIS Benchmarks, Azure, AWS, OCI, Terraform, Jenkins, GitHub, Python, Bash, PowerShell.

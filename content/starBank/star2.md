@@ -1,0 +1,26 @@
+Cloud Architect
+SAIC – USCENTCOM J6
+MacDill AFB, Tampa, FL
+2022–2023
+
+Role Summary:
+Lead Cloud Architect responsible for USCENTCOM’s initial adoption of Azure Government IL5/IL6 environments. Directed modernization architecture, secure cloud design, DevSecOps platforms, and data analytics solutions aligned to DoD governance and RMF requirements.
+
+Responsibilities:
+- Designed secure enterprise cloud architectures aligned with SRG, RMF, and SCCA.
+- Led USCENTCOM’s first transition into Azure Gov IL5/IL6.
+- Architected DevSecOps ecosystems using GitHub and Azure DevOps.
+- Designed Data Lakehouse solutions using Azure Synapse and medallion architecture.
+- Built Terraform/ARM IaC modules for standardized IL5/IL6 deployments.
+- Designed identity, networking, segmentation, and cloud boundary configurations.
+- Produced engineering analyses, trade studies, and modernization recommendations.
+- Supported ATO artifacts and secure workload migration processes.
+
+Achievements:
+- Delivered USCENTCOM’s first cloud-native IL5/IL6 deployments.
+- Established DevSecOps culture and automated pipelines across teams.
+- Created reusable IaC frameworks reducing provisioning time and drift.
+- Enabled new data analytics capabilities through lakehouse architecture.
+
+Technologies:
+Azure Government IL5/IL6, Terraform, ARM, GitHub, Azure DevOps, Azure Synapse, VNet design, identity integrations, RMF, SRG/SCCA governance.

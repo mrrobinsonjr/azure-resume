@@ -1,0 +1,25 @@
+Senior Cyber Infrastructure Analyst
+SAIC – USCENTCOM
+MacDill AFB, Tampa, FL
+2017–2020
+
+Role Summary:
+Senior engineer designing, deploying, and maintaining cybersecurity boundary infrastructure for USCENTCOM HQ and theater networks. Provided CND support, JRSS migration engineering, and cyber range development.
+
+Responsibilities:
+- Built and maintained enterprise boundary security systems (firewalls, IDS/IPS, filtering).
+- Conducted threat analysis, vulnerability evaluation, and defensive architecture tuning.
+- Led planning for CND tool migration to JRSS.
+- Designed an automated cyber test range in Azure Gov IL2.
+- Provided Tier 2/3 troubleshooting for WAN, data center, and security systems.
+- Enforced DoD cyber orders, STIGs, and CENTCOM governance.
+- Generated leadership briefings on boundary posture and modernization impacts.
+
+Achievements:
+- Strengthened defensive posture across HQ and operational theaters.
+- Developed IL2 cyber range enabling rapid testing and experimentation.
+- Reduced operational downtime through expert troubleshooting.
+- Improved compliance with DoD cyber mandates.
+
+Technologies:
+Firewalls, IDS/IPS, Nexus switches, ASA firewalls, Azure Gov, IaC provisioning, JRSS, STIGs, DoD cyber orders.

@@ -1,0 +1,26 @@
+Network Operations SME, Senior
+CACI / L3 NSS – USAF Southwest Asia AOR
+Shaw AFB, Sumter, SC
+2011–2017
+
+Role Summary:
+Lead network engineer supporting 17 Air Force bases across the AOR, delivering Tier 2/3 troubleshooting, routing/switching engineering, identity services, firewall operations, and data center support for 10,000+ users.
+
+Responsibilities:
+- Provided Tier 2/3 support for WAN, data center, and VoIP infrastructure.
+- Engineered BGP, OSPF, EIGRP, and MPLS-VPN routing topologies.
+- Managed Cisco 7600, 3900, 2900, and Catalyst 6500 switches.
+- Administered Cisco ACS for RADIUS/TACACS+ and AD integration.
+- Supported Nexus switches, ASA firewalls, UCS servers, and SAN systems.
+- Maintained McAfee Enterprise Firewall clusters and DNS services.
+- Designed IP schemas, VLAN layouts, STP configurations, and network security.
+- Ensured cybersecurity compliance for routers, switches, and Windows systems.
+
+Achievements:
+- Sustained high availability across 17 bases with rapid outage resolution.
+- Enhanced routing performance and backbone reliability.
+- Improved authentication and access control posture with ACS and AD integration.
+- Strengthened firewall resilience and data center security.
+
+Technologies:
+Cisco 7600/6500/3900/2900, Nexus, ASA, UCS, SAN, ACS, MPLS, BGP/OSPF/EIGRP, AD, DNS, firewall clusters.

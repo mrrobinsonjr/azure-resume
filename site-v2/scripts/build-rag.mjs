@@ -6,6 +6,9 @@ const SITE_ROOT = process.cwd();
 const REPO_ROOT = path.resolve(SITE_ROOT, "..");
 const ROLES_DIR = path.join(SITE_ROOT, "content", "roles");
 const SUMMARY_PATH = path.join(SITE_ROOT, "content", "resume", "summary.md");
+// Additional per-position detail, ingested into the chat knowledge base only
+// (not rendered on the site). Associated to a role by matching company + title.
+const STARBANK_DIR = path.join(REPO_ROOT, "content", "starBank");
 const API_DATA_DIR = path.join(REPO_ROOT, "api", "data");
 const CHUNKS_PATH = path.join(API_DATA_DIR, "rag_chunks.json");
 const EMBEDDINGS_PATH = path.join(API_DATA_DIR, "rag_embeddings.json");
@@ -197,6 +200,108 @@ async function buildRoleChunks() {
   return chunks;
 }
 
+function normKey(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+// Parse a STAR-bank file: a 4-line header (title, company, location, dates)
+// followed by "Label:" sections (Role Summary, Responsibilities, ...).
+function parseStarBank(raw) {
+  const lines = raw.replace(/\r/g, "").split("\n");
+  const header = [];
+  const sections = [];
+  let current = null;
+  let sawSection = false;
+  const labelRe = /^([A-Z][A-Za-z /&]+):\s*(.*)$/;
+
+  for (const line of lines) {
+    const match = line.match(labelRe);
+    if (match && match[1].trim().split(/\s+/).length <= 4) {
+      if (current) sections.push(current);
+      current = { heading: match[1].trim(), lines: [] };
+      if (match[2].trim()) current.lines.push(match[2].trim());
+      sawSection = true;
+      continue;
+    }
+    if (!sawSection) {
+      if (line.trim()) header.push(line.trim());
+    } else if (current) {
+      current.lines.push(line);
+    }
+  }
+  if (current) sections.push(current);
+
+  return {
+    title: header[0] || "",
+    company: header[1] || "",
+    sections: sections
+      .map((section) => ({ heading: section.heading, text: stripMarkdown(section.lines.join("\n").trim()) }))
+      .filter((section) => section.text),
+  };
+}
+
+async function buildDetailChunks() {
+  let starFiles;
+  try {
+    starFiles = (await fs.readdir(STARBANK_DIR)).filter((name) => name.endsWith(".md")).sort();
+  } catch {
+    return []; // no STAR bank directory present
+  }
+
+  const roleFiles = (await fs.readdir(ROLES_DIR)).filter((name) => name.endsWith(".md"));
+  const lookup = new Map();
+  for (const file of roleFiles) {
+    const { data } = matter(await fs.readFile(path.join(ROLES_DIR, file), "utf8"));
+    lookup.set(`${normKey(data.company)}||${normKey(data.title)}`, {
+      id: data.id,
+      title: data.title,
+      company: data.company,
+    });
+  }
+
+  const chunks = [];
+  const unmatched = [];
+  let matchedFiles = 0;
+
+  for (const file of starFiles) {
+    const parsed = parseStarBank(await fs.readFile(path.join(STARBANK_DIR, file), "utf8"));
+    const role = lookup.get(`${normKey(parsed.company)}||${normKey(parsed.title)}`);
+    if (!role) {
+      unmatched.push(file);
+      continue;
+    }
+    matchedFiles += 1;
+    const base = {
+      id: role.id,
+      source_type: "role_detail",
+      role_id: role.id,
+      title: role.title,
+      company: role.company,
+    };
+    parsed.sections
+      .map((section) => ({ heading: `Detail: ${section.heading}`, text: section.text }))
+      .flatMap(splitOversizedSection)
+      .forEach((section, index) => {
+        chunks.push(createChunk(base, section, index));
+      });
+  }
+
+  if (unmatched.length) {
+    console.warn(
+      `STAR bank files not matched to a role (skipped): ${unmatched.join(", ")}`,
+    );
+  }
+  console.log(
+    `Built ${chunks.length} detail chunks from ${matchedFiles}/${starFiles.length} STAR bank files`,
+  );
+  return chunks;
+}
+
 function embeddingEnvPresent() {
   return Boolean(
     process.env.AZURE_OPENAI_ENDPOINT &&
@@ -243,7 +348,11 @@ async function generateEmbeddings(chunks) {
 }
 
 async function main() {
-  const chunks = [...(await buildSummaryChunks()), ...(await buildRoleChunks())];
+  const chunks = [
+    ...(await buildSummaryChunks()),
+    ...(await buildRoleChunks()),
+    ...(await buildDetailChunks()),
+  ];
 
   await fs.mkdir(API_DATA_DIR, { recursive: true });
   await fs.writeFile(
