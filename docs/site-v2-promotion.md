@@ -22,9 +22,13 @@ Verified live: page/design, grounded chat (`azure_openai_rag`), visitor counter,
 
 Revert the workflow commit on `main` and push. Production returns to `app_location: frontend` / `output_location: ""`; the v1 assets remain in `frontend/`. Then re-run `./scripts/smoke-chat-hosted.sh https://www.blackstatic.cloud` and confirm the v1 resume and `/api/counter` behavior.
 
-### Open items
+### Apex domain
 
-- The bare apex `blackstatic.cloud` is **not** configured — only `www.blackstatic.cloud` resolves. Adding the apex requires a DNS custom-domain step.
+Both `www.blackstatic.cloud` (CNAME) and the bare apex `blackstatic.cloud` are configured and Ready:
+
+- Apex validated via a TXT token plus an `A` record to the Static Web App IP (DNS hosted at Squarespace).
+- `ALLOWED_ORIGINS` on the production SWA includes **both** `https://www.blackstatic.cloud` and `https://blackstatic.cloud`, so same-origin chat/counter-increment work from either form.
+- Note: the apex `A` record points at the SWA's serving IP; if Azure ever changes that IP, re-check the record (`www` uses a CNAME and is unaffected).
 
 ## Current Status (pre-cutover, for reference)
 
