@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-15T19:27:55.949Z",
-  "count": 29,
+  "generated_at": "2026-07-05T13:00:52.167Z",
+  "count": 33,
   "chunks": [
     {
       "id": "resume-summary-001",
@@ -12,13 +12,49 @@
       "text": "Cloud architect and cybersecurity engineer with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts."
     },
     {
+      "id": "position0-leidos-cloud-one-acss-highlights-001",
+      "source_type": "role",
+      "role_id": "position0-leidos-cloud-one-acss",
+      "title": "Azure Architecture and Engineering Manager",
+      "company": "Leidos - USAF Cloud One ACSS Program",
+      "section": "Highlights",
+      "text": "Azure Architecture and Engineering Manager at Leidos - USAF Cloud One ACSS Program. Location: Remote (US). Dates: 2026-03 to Present. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: Cloud Architecture, Engineering Leadership, DevSecOps, Zero Trust. Technologies: Azure, AWS, Terraform, Ansible, Jenkins, Kubernetes, Git. Highlights: Lead Azure architecture and engineering for the USAF Cloud One Architecture and Common Shared Services (ACSS) multi-cloud environment spanning Azure, AWS, Google, and Oracle. Manage and mentor a cloud engineering team delivering secure, cloud-native shared services across IL4/IL5/IL6 workloads. Drive DevSecOps, infrastructure as code, and zero-trust architecture to advance USAF system resiliency, security, and cost effectiveness."
+    },
+    {
+      "id": "position0-leidos-cloud-one-acss-role-summary-002",
+      "source_type": "role",
+      "role_id": "position0-leidos-cloud-one-acss",
+      "title": "Azure Architecture and Engineering Manager",
+      "company": "Leidos - USAF Cloud One ACSS Program",
+      "section": "Role Summary",
+      "text": "Lead the Azure architecture and engineering practice for the U.S. Air Force Cloud One Architecture and Common Shared Services (ACSS) program, a global-scale, multi-cloud modernization effort supporting mission-critical Department of the Air Force workloads. Combines hands-on cloud architecture with engineering management, coordinating Azure delivery alongside AWS, Google, and Oracle across the program."
+    },
+    {
+      "id": "position0-leidos-cloud-one-acss-responsibilities-003",
+      "source_type": "role",
+      "role_id": "position0-leidos-cloud-one-acss",
+      "title": "Azure Architecture and Engineering Manager",
+      "company": "Leidos - USAF Cloud One ACSS Program",
+      "section": "Responsibilities",
+      "text": "Design scalable, resilient, and secure Azure architectures and reference patterns for the Cloud One multi-cloud environment.\nManage, mentor, and supervise a team of cloud engineers, guiding cloud-native application design, deployment, and complex technical decisions.\nDrive adoption of DevSecOps practices, infrastructure as code, and automation using Terraform, Ansible, Jenkins, and Kubernetes.\nArchitect secure cloud solutions implementing zero-trust principles and defense-in-depth across IL4/IL5/IL6 boundaries.\nManage Azure networking, VPNs, IaaS, PaaS, identity (Azure AD/SAML), and data services supporting shared-services delivery.\nPartner with stakeholders to translate mission requirements into technical solutions and present architectural recommendations to program leadership."
+    },
+    {
+      "id": "position0-leidos-cloud-one-acss-impact-004",
+      "source_type": "role",
+      "role_id": "position0-leidos-cloud-one-acss",
+      "title": "Azure Architecture and Engineering Manager",
+      "company": "Leidos - USAF Cloud One ACSS Program",
+      "section": "Impact",
+      "text": "Advancing standardized, secure Azure reference architectures and DevSecOps automation across the Cloud One environment to strengthen USAF system resiliency, security, and cost effectiveness."
+    },
+    {
       "id": "position1-saic-cloud-one-highlights-001",
       "source_type": "role",
       "role_id": "position1-saic-cloud-one",
       "title": "Senior Cloud Cyber Security Engineer - Lead",
       "company": "SAIC - Cloud One Program",
       "section": "Highlights",
-      "text": "Senior Cloud Cyber Security Engineer - Lead at SAIC - Cloud One Program. Location: Remote (Alabama, US). Dates: 2023-01 to Present. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: RMF, ATO, DevSecOps. Technologies: Azure, AWS, OCI, Terraform, Jenkins, GitHub, Nessus. Highlights: Improved vulnerability response and automation across hybrid cloud workloads. Reduced ATO friction through reusable inheritance and control documentation. Strengthened audit readiness for mission-critical USAF and Army applications."
+      "text": "Senior Cloud Cyber Security Engineer - Lead at SAIC - Cloud One Program. Location: Remote (Alabama, US). Dates: 2023-01 to 2026-02. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: RMF, ATO, DevSecOps. Technologies: Azure, AWS, OCI, Terraform, Jenkins, GitHub, Nessus. Highlights: Improved vulnerability response and automation across hybrid cloud workloads. Reduced ATO friction through reusable inheritance and control documentation. Strengthened audit readiness for mission-critical USAF and Army applications."
     },
     {
       "id": "position1-saic-cloud-one-role-summary-002",
