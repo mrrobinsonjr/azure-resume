@@ -34,7 +34,7 @@ function ChatComposer({ disabled = false, initialValue = "", onSend }: ChatCompo
         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 disabled:cursor-not-allowed disabled:opacity-60"
       />
       <div className="flex items-center justify-between gap-3">
-        <p className="text-xs text-slate-400">Answers draw only from this site's résumé content.</p>
+        <p className="text-xs text-slate-400">Answers draw only from this site's resume content.</p>
         <button
           type="submit"
           disabled={disabled || !value.trim()}

@@ -72,7 +72,7 @@ function Home() {
               href={contacts.resumePdf}
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
             >
-              <DownloadIcon /> Résumé
+              <DownloadIcon /> Resume
             </a>
           </div>
         </header>
@@ -107,7 +107,7 @@ function Home() {
               Email
             </a>
             <a href={contacts.resumePdf} className="font-medium text-brand-600 hover:text-brand-700">
-              Résumé (PDF)
+              Resume (PDF)
             </a>
             <a href={contacts.resumeDocx} className="font-medium text-brand-600 hover:text-brand-700">
               DOCX

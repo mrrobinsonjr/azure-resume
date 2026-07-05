@@ -40,7 +40,7 @@ function ChatPanel() {
       id: "intro",
       role: "assistant",
       content:
-        "Ask a question about Michael Robinson's experience. Answers come only from this site's résumé content, with citations to the relevant roles.",
+        "Ask a question about Michael Robinson's experience. Answers come only from this site's resume content, with citations to the relevant roles.",
     },
   ]);
   const [loading, setLoading] = useState(false);
