@@ -1,16 +1,29 @@
+type ChipTone = "accent" | "neutral";
+
 type ChipsProps = {
   items: string[];
-  label: string;
+  label?: string;
+  tone?: ChipTone;
 };
 
-function Chips({ items, label }: ChipsProps) {
+const toneClass: Record<ChipTone, string> = {
+  accent: "border-brand-100 bg-brand-50 text-brand-700",
+  neutral: "border-slate-200 bg-slate-50 text-slate-600",
+};
+
+function Chips({ items, label, tone = "neutral" }: ChipsProps) {
   if (items.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</span>
+    <div className="flex flex-wrap items-center gap-1.5">
+      {label && (
+        <span className="mr-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</span>
+      )}
       {items.map((item) => (
-        <span key={`${label}-${item}`} className="rounded-full border border-slate-700 bg-slate-800 px-2 py-1 text-xs text-slate-200">
+        <span
+          key={`${label ?? "chip"}-${item}`}
+          className={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${toneClass[tone]}`}
+        >
           {item}
         </span>
       ))}

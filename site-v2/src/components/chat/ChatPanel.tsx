@@ -17,11 +17,10 @@ type Message = {
 };
 
 const STARTER_PROMPTS = [
-  "What Azure Government experience does Michael have?",
-  "Which roles best match a cloud architect position?",
-  "What experience does he have with Terraform, Azure Policy, and automation?",
-  "What leadership and mentoring experience is reflected in these roles?",
+  "What is Michael's current role?",
+  "What Azure Government experience does he have?",
   "Which roles involved IL5 or IL6 environments?",
+  "What leadership and mentoring experience does he bring?",
 ];
 
 function getApiBase(): string {
@@ -41,7 +40,7 @@ function ChatPanel() {
       id: "intro",
       role: "assistant",
       content:
-        "Ask recruiter-style questions about Michael Robinson's resume. I'll answer only from the site context and cite the most relevant sections.",
+        "Ask a question about Michael Robinson's experience. Answers come only from this site's résumé content, with citations to the relevant roles.",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -83,7 +82,7 @@ function ChatPanel() {
       return true;
     } catch (error) {
       const detail = error instanceof Error ? error.message : "Unexpected error";
-      setErrorMessage(`The recruiter chat hit a temporary issue: ${detail}`);
+      setErrorMessage(`The assistant hit a temporary issue: ${detail}`);
       setRetryQuestion(question);
       setMessages((current) => current.filter((message) => message.id !== userMessage.id));
       return false;
@@ -93,24 +92,16 @@ function ChatPanel() {
   }
 
   return (
-    <section className="mb-10 rounded-xl border border-slate-800 bg-slate-900/70 p-6">
-      <div className="flex flex-col gap-2 border-b border-slate-800 pb-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">Recruiter Chat</p>
-        <h2 className="text-2xl font-semibold">Ask about role fit, cloud depth, or mission context</h2>
-        <p className="text-sm text-slate-300">
-          Answers are based only on resume-site content and cite the most relevant supporting sections.
-        </p>
-      </div>
-
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       {canShowPrompts && (
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           {STARTER_PROMPTS.map((prompt) => (
             <button
               key={prompt}
               type="button"
               onClick={() => void sendQuestion(prompt)}
               disabled={loading}
-              className="rounded-full border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-slate-200 transition hover:border-brand-500 hover:text-brand-300 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {prompt}
             </button>
@@ -118,13 +109,7 @@ function ChatPanel() {
         </div>
       )}
 
-      {messages.length === 1 && !loading && (
-        <div className="mt-4 rounded-2xl border border-dashed border-slate-700 bg-slate-950/40 px-4 py-3 text-sm text-slate-300">
-          Start with a recruiter-style question about architecture leadership, IL5/IL6, automation, or mission fit.
-        </div>
-      )}
-
-      <div className="mt-6 flex max-h-[28rem] flex-col gap-4 overflow-y-auto pr-1">
+      <div className="mt-5 flex max-h-[26rem] flex-col gap-4 overflow-y-auto pr-1">
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
@@ -137,13 +122,13 @@ function ChatPanel() {
       </div>
 
       {errorMessage && (
-        <div className="mt-4 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
           <p>{errorMessage}</p>
           {retryQuestion && (
             <button
               type="button"
               onClick={() => void sendQuestion(retryQuestion)}
-              className="mt-3 rounded-full border border-amber-300/50 px-3 py-1 text-xs font-semibold text-amber-100 hover:bg-amber-300/10"
+              className="mt-2.5 rounded-full border border-amber-300 px-3 py-1 text-xs font-semibold text-amber-800 transition hover:bg-amber-100"
             >
               Retry last question
             </button>
@@ -152,7 +137,7 @@ function ChatPanel() {
       )}
 
       <ChatComposer disabled={loading} initialValue={draft} onSend={sendQuestion} />
-    </section>
+    </div>
   );
 }
 
