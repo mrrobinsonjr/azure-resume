@@ -1,14 +1,36 @@
 # Resume Site v2 Promotion Readiness
 
-This document prepares `site-v2` for hosted Azure Static Web Apps promotion. It does **not** switch production traffic by itself.
+This document prepared `site-v2` for hosted Azure Static Web Apps promotion. The cutover has since been performed — see below.
 
-## Current Status
+## ✅ Cutover Completed — 2026-07-05
 
-- Current production workflow: `.github/workflows/azure-static-web-apps.yml`
-- Current production static app path: `frontend`
-- Current production API path: `api`
-- Current production output path: `""` (plain static assets)
-- Current repo topology keeps v1 live. `site-v2` is not promoted by this ticket.
+`site-v2` is now the production site served at **https://www.blackstatic.cloud**.
+
+Strategy used: **A — swap content, keep the domain** (no DNS changes).
+
+What was done:
+
+1. Copied the Azure OpenAI settings and set `ALLOWED_ORIGINS` (including `https://www.blackstatic.cloud`) on the production SWA `mrr-azureresume-swa`.
+2. Repointed `.github/workflows/azure-static-web-apps.yml` to build the v2 app: `app_location: site-v2`, `api_location: api`, `output_location: dist`.
+3. Merged `site-v2-phase3b-rag` → `main`; the push triggered the production deploy.
+4. Added `site-v2/public/staticwebapp.config.json` (SPA `navigationFallback`) so client-side paths such as `/resume` serve the app.
+5. Retired the redundant preview resource: deleted the `mrr-azureresumev2-swa` Static Web App and removed its `azure-static-web-apps-zealous-plant-0e47dbd0f.yml` workflow.
+
+Verified live: page/design, grounded chat (`azure_openai_rag`), visitor counter, and origin enforcement (allowed → 200, disallowed → 403).
+
+### Rollback
+
+Revert the workflow commit on `main` and push. Production returns to `app_location: frontend` / `output_location: ""`; the v1 assets remain in `frontend/`. Then re-run `./scripts/smoke-chat-hosted.sh https://www.blackstatic.cloud` and confirm the v1 resume and `/api/counter` behavior.
+
+### Open items
+
+- The bare apex `blackstatic.cloud` is **not** configured — only `www.blackstatic.cloud` resolves. Adding the apex requires a DNS custom-domain step.
+
+## Current Status (pre-cutover, for reference)
+
+- Former production static app path: `frontend`
+- Production API path: `api`
+- Before cutover, repo topology kept v1 live and `site-v2` unpromoted.
 
 ## Chosen Strategy
 
