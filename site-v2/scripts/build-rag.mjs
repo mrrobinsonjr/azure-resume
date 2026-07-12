@@ -203,7 +203,6 @@ async function buildRoleChunks() {
       `${data.title} at ${data.company}.`,
       data.location ? `Location: ${data.location}.` : "",
       data.start ? `Dates: ${data.start} to ${data.end || "Present"}.` : "",
-      data.clearance ? `Clearance: ${data.clearance}.` : "",
       normalizeArray(data.il_levels).length ? `IL levels: ${normalizeArray(data.il_levels).join(", ")}.` : "",
       normalizeArray(data.tags).length ? `Tags: ${normalizeArray(data.tags).join(", ")}.` : "",
       normalizeArray(data.tech).length ? `Technologies: ${normalizeArray(data.tech).join(", ")}.` : "",

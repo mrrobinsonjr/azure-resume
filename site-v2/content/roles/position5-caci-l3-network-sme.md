@@ -5,7 +5,6 @@ title: Network Operations SME, Senior
 location: Shaw AFB, Sumter, SC
 start: 2011-01
 end: 2017-12
-clearance: Secret
 il_levels:
   - NIPR
   - SIPR

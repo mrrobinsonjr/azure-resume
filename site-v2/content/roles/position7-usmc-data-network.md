@@ -5,7 +5,6 @@ title: 0651 Data Network Specialist
 location: Kaneohe Bay, HI
 start: 2000-01
 end: 2004-12
-clearance: Secret
 il_levels:
   - NIPR
   - SIPR

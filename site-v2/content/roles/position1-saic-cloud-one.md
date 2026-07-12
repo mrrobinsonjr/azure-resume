@@ -5,7 +5,6 @@ title: Senior Cloud Cyber Security Engineer - Lead
 location: Remote (Alabama, US)
 start: 2023-01
 end: 2026-02
-clearance: Secret
 il_levels:
   - IL4
   - IL5

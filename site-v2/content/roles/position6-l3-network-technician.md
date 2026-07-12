@@ -5,7 +5,6 @@ title: Network Operations Technician
 location: Shaw AFB, Sumter, SC
 start: 2010-01
 end: 2011-12
-clearance: Secret
 il_levels:
   - NIPR
   - SIPR

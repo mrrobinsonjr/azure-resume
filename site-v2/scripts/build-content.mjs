@@ -37,7 +37,6 @@ async function build() {
       location: data.location,
       start: data.start,
       end: data.end,
-      clearance: data.clearance || "",
       il_levels: normalizeArray(data.il_levels),
       tags: normalizeArray(data.tags),
       tech: normalizeArray(data.tech),

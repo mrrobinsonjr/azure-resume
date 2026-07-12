@@ -7,7 +7,6 @@ export type Role = {
   location: string;
   start: string;
   end: string;
-  clearance: string;
   il_levels: string[];
   tags: string[];
   tech: string[];
@@ -20,7 +19,6 @@ export type FilterState = {
   tech: Set<string>;
   tags: Set<string>;
   il: Set<string>;
-  clr: Set<string>;
   sort: SortKey;
 };
 

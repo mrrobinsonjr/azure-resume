@@ -5,7 +5,6 @@ title: Senior Cyber Infrastructure Analyst
 location: MacDill AFB, Tampa, FL
 start: 2017-01
 end: 2020-12
-clearance: Secret
 il_levels:
   - IL2
 tags:

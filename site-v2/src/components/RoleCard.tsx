@@ -80,11 +80,6 @@ function RoleCard({ role, isCurrent = false, observed = false, index = 0 }: Role
 
         {/* Chips */}
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          {role.clearance && (
-            <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
-              {role.clearance}
-            </span>
-          )}
           <Chips items={role.il_levels} tone="accent" />
           <Chips items={role.tech.slice(0, 6)} tone="neutral" />
         </div>

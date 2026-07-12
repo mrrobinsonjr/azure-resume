@@ -5,7 +5,6 @@ title: Azure Architecture and Engineering Manager
 location: Remote (US)
 start: 2026-03
 end: Present
-clearance: Secret
 il_levels:
   - IL4
   - IL5

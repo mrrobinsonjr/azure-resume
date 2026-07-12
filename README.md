@@ -111,7 +111,7 @@ npm run build:rag       # content -> api/data/rag_chunks.json (+ rag_embeddings.
   is what ships to production, so regenerate and commit it after changing role content.
 
 To add a role: create `site-v2/content/roles/<slug>.md` with frontmatter
-(`id, company, title, location, start, end, clearance, il_levels, tags, tech, highlights`)
+(`id, company, title, location, start, end, il_levels, tags, tech, highlights`)
 and a Markdown body, then re-run the pipeline.
 
 ## Chat: configuration and abuse controls

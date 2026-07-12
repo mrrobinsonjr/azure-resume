@@ -5,7 +5,6 @@ title: Cloud Architect
 location: MacDill AFB, Tampa, FL
 start: 2022-01
 end: 2023-12
-clearance: Secret
 il_levels:
   - IL5
   - IL6

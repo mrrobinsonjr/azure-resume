@@ -27,7 +27,7 @@
       "title": "Azure Architecture and Engineering Manager",
       "company": "Leidos - USAF Cloud One ACSS Program",
       "section": "Highlights",
-      "text": "Azure Architecture and Engineering Manager at Leidos - USAF Cloud One ACSS Program. Location: Remote (US). Dates: 2026-03 to Present. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: Cloud Architecture, Engineering Leadership, DevSecOps, Zero Trust. Technologies: Azure, AWS, Terraform, Ansible, Jenkins, Kubernetes, Git. Highlights: Lead Azure architecture and engineering for the USAF Cloud One Architecture and Common Shared Services (ACSS) multi-cloud environment spanning Azure, AWS, Google, and Oracle. Manage and mentor a cloud engineering team delivering secure, cloud-native shared services across IL4/IL5/IL6 workloads. Drive DevSecOps, infrastructure as code, and zero-trust architecture to advance USAF system resiliency, security, and cost effectiveness."
+      "text": "Azure Architecture and Engineering Manager at Leidos - USAF Cloud One ACSS Program. Location: Remote (US). Dates: 2026-03 to Present.  IL levels: IL4, IL5, IL6. Tags: Cloud Architecture, Engineering Leadership, DevSecOps, Zero Trust. Technologies: Azure, AWS, Terraform, Ansible, Jenkins, Kubernetes, Git. Highlights: Lead Azure architecture and engineering for the USAF Cloud One Architecture and Common Shared Services (ACSS) multi-cloud environment spanning Azure, AWS, Google, and Oracle. Manage and mentor a cloud engineering team delivering secure, cloud-native shared services across IL4/IL5/IL6 workloads. Drive DevSecOps, infrastructure as code, and zero-trust architecture to advance USAF system resiliency, security, and cost effectiveness."
     },
     {
       "id": "position0-leidos-cloud-one-acss-role-summary-002",
@@ -63,7 +63,7 @@
       "title": "Senior Cloud Cyber Security Engineer - Lead",
       "company": "SAIC - Cloud One Program",
       "section": "Highlights",
-      "text": "Senior Cloud Cyber Security Engineer - Lead at SAIC - Cloud One Program. Location: Remote (Alabama, US). Dates: 2023-01 to 2026-02. Clearance: Secret. IL levels: IL4, IL5, IL6. Tags: RMF, ATO, DevSecOps. Technologies: Azure, AWS, OCI, Terraform, Jenkins, GitHub, Nessus. Highlights: Improved vulnerability response and automation across hybrid cloud workloads. Reduced ATO friction through reusable inheritance and control documentation. Strengthened audit readiness for mission-critical USAF and Army applications."
+      "text": "Senior Cloud Cyber Security Engineer - Lead at SAIC - Cloud One Program. Location: Remote (Alabama, US). Dates: 2023-01 to 2026-02.  IL levels: IL4, IL5, IL6. Tags: RMF, ATO, DevSecOps. Technologies: Azure, AWS, OCI, Terraform, Jenkins, GitHub, Nessus. Highlights: Improved vulnerability response and automation across hybrid cloud workloads. Reduced ATO friction through reusable inheritance and control documentation. Strengthened audit readiness for mission-critical USAF and Army applications."
     },
     {
       "id": "position1-saic-cloud-one-role-summary-002",
@@ -99,7 +99,7 @@
       "title": "Cloud Architect",
       "company": "SAIC - USCENTCOM J6",
       "section": "Highlights",
-      "text": "Cloud Architect at SAIC - USCENTCOM J6. Location: MacDill AFB, Tampa, FL. Dates: 2022-01 to 2023-12. Clearance: Secret. IL levels: IL5, IL6. Tags: Cloud Architecture, IaC, DevSecOps. Technologies: Azure Government, Terraform, ARM, Azure DevOps, GitHub, Synapse. Highlights: Delivered USCENTCOM's first cloud-native IL5/IL6 deployments. Created reusable IaC frameworks to reduce provisioning time and drift. Established secure DevSecOps pipeline patterns across teams."
+      "text": "Cloud Architect at SAIC - USCENTCOM J6. Location: MacDill AFB, Tampa, FL. Dates: 2022-01 to 2023-12.  IL levels: IL5, IL6. Tags: Cloud Architecture, IaC, DevSecOps. Technologies: Azure Government, Terraform, ARM, Azure DevOps, GitHub, Synapse. Highlights: Delivered USCENTCOM's first cloud-native IL5/IL6 deployments. Created reusable IaC frameworks to reduce provisioning time and drift. Established secure DevSecOps pipeline patterns across teams."
     },
     {
       "id": "position2-saic-centcom-cloud-architect-role-summary-002",
@@ -135,7 +135,7 @@
       "title": "Innovations Engineer, Cloud and Modernization",
       "company": "SAIC - USCENTCOM J6 Technology Innovation Branch",
       "section": "Highlights",
-      "text": "Innovations Engineer, Cloud and Modernization at SAIC - USCENTCOM J6 Technology Innovation Branch. Location: MacDill AFB, Tampa, FL. Dates: 2020-01 to 2022-12. Clearance: Secret. IL levels: IL5, IL6. Tags: Modernization, Enterprise Architecture, Technical Analysis. Technologies: Azure Gov, Terraform, RMF, SRG, SCCA. Highlights: Influenced modernization decisions across HQ and theater operations. Accelerated secure cloud adoption through governance-aligned engineering. Improved interoperability planning for coalition and partner networks."
+      "text": "Innovations Engineer, Cloud and Modernization at SAIC - USCENTCOM J6 Technology Innovation Branch. Location: MacDill AFB, Tampa, FL. Dates: 2020-01 to 2022-12.  IL levels: IL5, IL6. Tags: Modernization, Enterprise Architecture, Technical Analysis. Technologies: Azure Gov, Terraform, RMF, SRG, SCCA. Highlights: Influenced modernization decisions across HQ and theater operations. Accelerated secure cloud adoption through governance-aligned engineering. Improved interoperability planning for coalition and partner networks."
     },
     {
       "id": "position3-saic-centcom-innovations-role-summary-002",
@@ -171,7 +171,7 @@
       "title": "Senior Cyber Infrastructure Analyst",
       "company": "SAIC - USCENTCOM",
       "section": "Highlights",
-      "text": "Senior Cyber Infrastructure Analyst at SAIC - USCENTCOM. Location: MacDill AFB, Tampa, FL. Dates: 2017-01 to 2020-12. Clearance: Secret. IL levels: IL2. Tags: Cyber Defense, Boundary Security, Network Engineering. Technologies: Firewalls, IDS/IPS, Azure Gov, Nexus, ASA, JRSS. Highlights: Strengthened defensive posture across HQ and theater environments. Built an IL2 cyber test range for rapid engineering validation. Improved uptime through Tier 2/3 troubleshooting and architecture tuning."
+      "text": "Senior Cyber Infrastructure Analyst at SAIC - USCENTCOM. Location: MacDill AFB, Tampa, FL. Dates: 2017-01 to 2020-12.  IL levels: IL2. Tags: Cyber Defense, Boundary Security, Network Engineering. Technologies: Firewalls, IDS/IPS, Azure Gov, Nexus, ASA, JRSS. Highlights: Strengthened defensive posture across HQ and theater environments. Built an IL2 cyber test range for rapid engineering validation. Improved uptime through Tier 2/3 troubleshooting and architecture tuning."
     },
     {
       "id": "position4-saic-cyber-infrastructure-role-summary-002",
@@ -207,7 +207,7 @@
       "title": "Network Operations SME, Senior",
       "company": "CACI / L3 NSS - USAF Southwest Asia AOR",
       "section": "Highlights",
-      "text": "Network Operations SME, Senior at CACI / L3 NSS - USAF Southwest Asia AOR. Location: Shaw AFB, Sumter, SC. Dates: 2011-01 to 2017-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Network Operations, Routing, Data Center. Technologies: Cisco 7600, Catalyst 6500, Nexus, ASA, MPLS, BGP, OSPF. Highlights: Sustained high availability across 17 bases supporting 10,000+ users. Improved backbone performance and routing reliability. Strengthened AAA and firewall resilience across the enterprise."
+      "text": "Network Operations SME, Senior at CACI / L3 NSS - USAF Southwest Asia AOR. Location: Shaw AFB, Sumter, SC. Dates: 2011-01 to 2017-12.  IL levels: NIPR, SIPR. Tags: Network Operations, Routing, Data Center. Technologies: Cisco 7600, Catalyst 6500, Nexus, ASA, MPLS, BGP, OSPF. Highlights: Sustained high availability across 17 bases supporting 10,000+ users. Improved backbone performance and routing reliability. Strengthened AAA and firewall resilience across the enterprise."
     },
     {
       "id": "position5-caci-l3-network-sme-role-summary-002",
@@ -243,7 +243,7 @@
       "title": "Network Operations Technician",
       "company": "L3 NSS - USAF Enterprise Network",
       "section": "Highlights",
-      "text": "Network Operations Technician at L3 NSS - USAF Enterprise Network. Location: Shaw AFB, Sumter, SC. Dates: 2010-01 to 2011-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Operations, DNS, Systems Hardening. Technologies: Cisco IOS, DNS/BIND, Active Directory, Windows Server. Highlights: Reduced downtime with rapid routing and firewall issue resolution. Improved AD and DNS service reliability across supported bases. Enforced secure baseline configurations for enterprise systems."
+      "text": "Network Operations Technician at L3 NSS - USAF Enterprise Network. Location: Shaw AFB, Sumter, SC. Dates: 2010-01 to 2011-12.  IL levels: NIPR, SIPR. Tags: Operations, DNS, Systems Hardening. Technologies: Cisco IOS, DNS/BIND, Active Directory, Windows Server. Highlights: Reduced downtime with rapid routing and firewall issue resolution. Improved AD and DNS service reliability across supported bases. Enforced secure baseline configurations for enterprise systems."
     },
     {
       "id": "position6-l3-network-technician-role-summary-002",
@@ -279,7 +279,7 @@
       "title": "0651 Data Network Specialist",
       "company": "United States Marine Corps, 3rd Marine Division",
       "section": "Highlights",
-      "text": "0651 Data Network Specialist at United States Marine Corps, 3rd Marine Division. Location: Kaneohe Bay, HI. Dates: 2000-01 to 2004-12. Clearance: Secret. IL levels: NIPR, SIPR. Tags: Military Communications, Network Support, Operations. Technologies: Cisco Networking, Windows, UNIX, Tactical Communications. Highlights: Supported classified/unclassified operations for 3,000+ users. Improved readiness through reliable SIPR/NIPR network support. Strengthened INFOSEC and OPSEC compliance practices."
+      "text": "0651 Data Network Specialist at United States Marine Corps, 3rd Marine Division. Location: Kaneohe Bay, HI. Dates: 2000-01 to 2004-12.  IL levels: NIPR, SIPR. Tags: Military Communications, Network Support, Operations. Technologies: Cisco Networking, Windows, UNIX, Tactical Communications. Highlights: Supported classified/unclassified operations for 3,000+ users. Improved readiness through reliable SIPR/NIPR network support. Strengthened INFOSEC and OPSEC compliance practices."
     },
     {
       "id": "position7-usmc-data-network-role-summary-002",

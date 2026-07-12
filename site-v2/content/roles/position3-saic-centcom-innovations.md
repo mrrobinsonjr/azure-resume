@@ -5,7 +5,6 @@ title: Innovations Engineer, Cloud and Modernization
 location: MacDill AFB, Tampa, FL
 start: 2020-01
 end: 2022-12
-clearance: Secret
 il_levels:
   - IL5
   - IL6
