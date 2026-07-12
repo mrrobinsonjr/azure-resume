@@ -131,10 +131,10 @@ function Home() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
       {/* Two-column layout */}
-      <div className="mx-auto grid max-w-[96rem] grid-cols-1 lg:grid-cols-[280px_1fr] gap-0">
+      <div className="mx-auto grid max-w-[96rem] grid-cols-[340px_1fr] gap-x-8">
 
         {/* ---- Sticky profile sidebar (hidden on mobile, visible on lg+) ---- */}
-        <aside className="relative hidden lg:flex lg:flex-col lg:w-[320px] xl:w-[360px] bg-gradient-to-b from-slate-900 via-brand-950 to-slate-900 text-white">
+        <aside className="relative hidden lg:flex lg:flex-col lg:w-72 bg-gradient-to-b from-slate-900 via-brand-950 to-slate-900 text-white">
           {/* Ambient glow at top */}
           <div className="absolute inset-x-0 -top-32 h-80 bg-brand-500/10 blur-[100px]" aria-hidden="true" />
 

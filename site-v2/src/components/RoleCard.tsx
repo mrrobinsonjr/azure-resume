@@ -31,31 +31,34 @@ function RoleCard({ role, isCurrent = false, observed = false, index = 0 }: Role
   return (
     <article
       data-role-card={role.id}
-      className={`group relative pl-8 ${observed ? "role-card-revealed" : ""}`}
+      className={`group flex gap-x-4 pl-8 ${observed ? "role-card-revealed" : ""}`}
       style={observed ? { "--stagger-delay": `${index * STAGGER_DELAY_MS}ms` } as React.CSSProperties : undefined}
     >
-      {/* Timeline rail with gradient for current role */}
-      <span
-        className={`absolute left-0 top-1.5 h-full w-px transition-all duration-700 ${
-          isCurrent
-            ? "bg-gradient-to-b from-brand-400 via-brand-500 to-slate-300"
-            : "bg-slate-200 group-hover:bg-brand-300/60"
-        }`}
-        aria-hidden="true"
-      />
+      {/* Timeline column — dot at top, rail extends below via flex-grow */}
+      <div className="flex shrink-0 flex-col items-center pt-[6px] w-[18px] gap-4">
+        {/* Node dot */}
+        <span
+          className={`relative z-10 flex h-[18px] w-[18px] items-center justify-center rounded-full ring-4 transition-all duration-700 ${
+            isCurrent
+              ? "bg-brand-500 ring-brand-200/60 shadow-lg shadow-brand-500/30"
+              : "bg-slate-300 group-hover:bg-brand-400 ring-white"
+          }`}
+          aria-hidden="true"
+        />
 
-      {/* Node dot */}
-      <span
-        className={`absolute left-[-4px] top-1.5 h-[18px] w-[18px] rounded-full ring-4 transition-all duration-700 ${
-          isCurrent
-            ? "bg-brand-500 ring-brand-200/60 shadow-lg shadow-brand-500/30"
-            : "bg-slate-300 group-hover:bg-brand-400 ring-white"
-        }`}
-        aria-hidden="true"
-      />
+        {/* Rail with gradient for current role */}
+        <span
+          className={`grow w-[3px] rounded-full transition-all duration-700 ${
+            isCurrent
+              ? "bg-gradient-to-b from-brand-400 via-brand-500 to-slate-300"
+              : "bg-slate-200 group-hover:bg-brand-300/60"
+          }`}
+          aria-hidden="true"
+        />
+      </div>
 
       {/* Card body */}
-      <div className={`relative -ml-[1px] rounded-xl border bg-white p-5 transition-all duration-300 ${
+      <div className={`min-w-0 flex-1 rounded-xl border bg-white p-5 transition-all duration-300 ${
           isCurrent
             ? "border-brand-200/70 shadow-md shadow-brand-100/40"
             : "border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-[1px] hover:border-slate-300"
