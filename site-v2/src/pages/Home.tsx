@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import RoleCard from "../components/RoleCard";
 import VisitorCounter from "../components/VisitorCounter";
 import ChatPanel from "../components/chat/ChatPanel";
@@ -6,6 +7,14 @@ import { profile } from "../data/profile";
 import type { Role } from "../types/roles";
 
 const roleData = roles as Role[];
+
+// Anchor links that appear in the sidebar nav. Add a new entry here when a
+// section is added to the page — no layout changes required beyond an id on
+// the <section>.
+const NAV_LINKS: Array<{ href: string; label: string }> = [
+  { href: "#experience", label: "Experience" },
+  { href: "#chat", label: "Ask about my experience" },
+];
 
 function LinkedInIcon() {
   return (
@@ -41,6 +50,77 @@ const CONTACTS = [
 
 function Home() {
   const { name, headline, subhead, summary, location, currentRole } = profile;
+
+  // Which section is currently in view → highlights matching sidebar link.
+  const [activeSection, setActiveSection] = useState("experience");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const sections = document.querySelectorAll<HTMLElement>("#experience, #chat");
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            setActiveSection(entry.target.id);
+            return;
+          }
+        }
+      },
+      // Bias detection toward when the top of a section has scrolled past so
+      // we don't flip to "chat" while only its heading is peeking in.
+      { root: null, threshold: [0.2, 0.4, 0.6], rootMargin: "-120px 0px -40% 0px" },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  // Which RoleCards have entered the viewport → trigger staggered reveal.
+  const [observedCards, setObservedCards] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const container = document.getElementById("experience");
+    if (!container) return;
+
+    const cards: HTMLElement[] = Array.from(container.querySelectorAll("[data-role-card]"));
+    if (!cards.length) return;
+
+    let fired = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          const key = el.dataset.roleCard;
+          if (!key || observedCards.has(key)) continue; // avoid double-fire
+
+          setObservedCards((prev) => {
+            const next = new Set(prev);
+            next.add(key);
+            return next;
+          });
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    // Safety net: if some cards never enter viewport (e.g. user scrolls past),
+    // disconnect after a generous window so we don't leak listeners forever.
+    if (!fired) {
+      fired = true;
+      const timeoutId = setTimeout(() => observer.disconnect(), 30_000);
+      return () => clearTimeout(timeoutId);
+    }
+    return () => observer.disconnect();
+  }, [observedCards]);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800">
@@ -93,6 +173,24 @@ function Home() {
               ))}
             </nav>
 
+            {/* Section navigation */}
+            <nav aria-label="Section links" className="flex flex-col gap-1 border-t border-white/10 pt-4">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
+                    activeSection === link.href.slice(1)
+                      ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                      : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                  }`}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-current opacity-60" aria-hidden="true" />
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
             {/* Spacer — pushes chat section toward the bottom of the sidebar on scroll */}
             <div className="mt-auto flex flex-col gap-4 border-t border-white/10 pt-6">
               <VisitorCounter />
@@ -131,15 +229,21 @@ function Home() {
           </header>
 
           {/* Experience section */}
-          <section className="reveal-on-scroll">
+          <section id="experience" className="reveal-on-scroll">
             <h2 className="mb-8 text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Experience</h2>
-            {roleData.map((role) => (
-              <RoleCard key={role.id} role={role} isCurrent={role.end === "Present"} />
+            {roleData.map((role, idx) => (
+              <RoleCard
+                key={role.id}
+                role={role}
+                isCurrent={role.end === "Present"}
+                observed={observedCards.has(role.id)}
+                index={idx}
+              />
             ))}
           </section>
 
           {/* AI assistant section */}
-          <section className="reveal-on-scroll mt-14">
+          <section id="chat" className="reveal-on-scroll mt-14">
             <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white/60 p-8 shadow-lg backdrop-blur-xl">
               {/* Subtle background accent */}
               <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full bg-brand-100 blur-3xl" aria-hidden="true" />

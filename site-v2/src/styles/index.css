@@ -17,7 +17,7 @@ body {
   scroll-behavior: smooth;
 }
 
-/* ---- Scroll-triggered reveal animation ---- */
+/* ---- Scroll-triggered reveal animation (section-level) ---- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -36,6 +36,19 @@ body {
 /* Staggered children (set --stagger-index on each child for cascading delay) */
 .reveal-on-scroll > * + * {
   animation-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+/* ---- RoleCard staggered reveal (JS-triggered via IntersectionObserver in Home.tsx) ---- */
+@keyframes role-card-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.role-card-revealed {
+  animation: role-card-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* --stagger-delay is set inline per card (index * 80ms). Defaults to 0ms so the
+     existing .reveal-on-scroll class on #experience still works without JS. */
+  animation-delay: var(--stagger-delay, 0ms);
 }
 
 /* ---- Chat message fade-in ---- */

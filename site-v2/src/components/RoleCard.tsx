@@ -7,6 +7,9 @@ const MONTHS = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
 
+/** Milliseconds to delay each card in the cascade (set by Home.tsx via --stagger-delay). */
+const STAGGER_DELAY_MS = 80;
+
 function formatDate(value: string): string {
   if (!value || value === "Present") return "Present";
   const [year, month] = value.split("-");
@@ -17,14 +20,20 @@ function formatDate(value: string): string {
 type RoleCardProps = {
   role: Role;
   isCurrent?: boolean;
+  observed?: boolean;
+  index?: number;
 };
 
-function RoleCard({ role, isCurrent = false }: RoleCardProps) {
+function RoleCard({ role, isCurrent = false, observed = false, index = 0 }: RoleCardProps) {
   const [expanded, setExpanded] = useState(false);
   const period = `${formatDate(role.start)} – ${formatDate(role.end)}`;
 
   return (
-    <article className="group relative pl-8">
+    <article
+      data-role-card={role.id}
+      className={`group relative pl-8 ${observed ? "role-card-revealed" : ""}`}
+      style={observed ? { "--stagger-delay": `${index * STAGGER_DELAY_MS}ms` } as React.CSSProperties : undefined}
+    >
       {/* Timeline rail with gradient for current role */}
       <span
         className={`absolute left-0 top-1.5 h-full w-px transition-all duration-700 ${
