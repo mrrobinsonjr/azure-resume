@@ -47,14 +47,20 @@ def build_mock_answer(question: str, contexts: list[dict]) -> str:
 
 
 def build_fallback_answer(reason: str, contexts: list[dict]) -> str:
-    if contexts:
-        sources = ", ".join(item["title"] for item in contexts[:3])
+    if not contexts:
         return (
-            "I could not run full embeddings-based retrieval for this question, so I am not generating an LLM answer. "
-            f"The closest grounded source sections currently available are from {sources}. Reason: {reason}."
+            "I couldn't run the full retrieval system right now — try asking about Azure Government architecture, "
+            "cloud modernization, or DevSecOps experience instead. For specific resume details, download my PDF."
         )
 
+    # Build a short answer from whatever keyword-matched chunks were found so
+    # users get actual content rather than just source titles.
+    parts = []
+    for item in contexts[:3]:
+        text = item.get("text", "")
+        if len(text) > 140:
+            text = f"{text[:137]}..."
+        parts.append(f"- {item['title']}: {text}")
     return (
-        "I could not run embeddings-based retrieval for this question, and no grounded context was available. "
-        f"Reason: {reason}."
+        "Retrieval is running in keyword-only mode for this session. Here's what matched:\n\n" + "\n".join(parts)
     )

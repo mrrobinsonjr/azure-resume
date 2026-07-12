@@ -13,7 +13,7 @@ type ChatMessageProps = {
 
 const MODE_BADGES: Record<string, { label: string; className: string }> = {
   mock: { label: "Mock", className: "border-amber-200 bg-white/80 text-amber-600" },
-  fallback: { label: "Fallback", className: "border-amber-200 bg-white/80 text-amber-600" },
+  fallback: { label: "Partial", className: "border-slate-300 bg-white/80 text-slate-500" },
   azure_openai_rag: { label: "Grounded", className: "border-emerald-200 bg-emerald-50/80 text-emerald-700" },
 };
 
@@ -48,7 +48,7 @@ function ChatMessage({ role, content, citations = [], mode = "azure_openai_rag" 
           <p className="mt-1.5 text-xs italic text-amber-600/80">Mock response — Azure OpenAI not configured.</p>
         )}
         {isAssistant && mode === "fallback" && (
-          <p className="mt-1.5 text-xs italic text-amber-600/80">Fallback response — retrieval unavailable for this request.</p>
+          <p className="mt-1.5 text-xs italic text-slate-400">Retrieval running without embeddings — answers are keyword-matched, not semantically scored.</p>
         )}
 
         {/* Citations */}

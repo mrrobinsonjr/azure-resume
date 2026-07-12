@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-12T00:35:39.753Z",
-  "count": 61,
+  "generated_at": "2026-07-12T03:50:12.018Z",
+  "count": 62,
   "chunks": [
     {
       "id": "resume-summary-001",
@@ -10,6 +10,15 @@
       "company": "",
       "section": "Summary",
       "text": "Cloud architect and cybersecurity leader with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts."
+    },
+    {
+      "id": "resume-education-001",
+      "source_type": "resume_education",
+      "role_id": null,
+      "title": "Education",
+      "company": "",
+      "section": "Education",
+      "text": "Middle Tennessee State University (MTSU) — Murfreesboro, TN. Bachelor of Science degree in Computer Engineering & Technology with a minor in Computer Science. Studied embedded systems programming, digital logic design, and software development at the college level; foundation for later cloud and cybersecurity career work across DoD mission environments."
     },
     {
       "id": "position0-leidos-cloud-one-acss-highlights-001",

@@ -55,7 +55,8 @@ def _keyword_preview(question: str, chunks: list[dict], limit: int = 3) -> list[
         score = len(query_tokens.intersection(_tokenize(chunk.get("text", ""))))
         scored.append({**chunk, "score": float(score)})
     scored.sort(key=lambda item: item["score"], reverse=True)
-    return [item for item in scored if item["score"] > 0][:limit] or scored[:limit]
+    matched = [item for item in scored if item["score"] > 0]
+    return matched[:limit] if matched else []
 
 
 def _cosine_similarity(left: list[float], right: list[float]) -> float:

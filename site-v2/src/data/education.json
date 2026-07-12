@@ -1,0 +1,10 @@
+[
+  {
+    "id": "education-mtsu",
+    "school": "Middle Tennessee State University",
+    "location": "Murfreesboro, TN",
+    "degree": { "level": "Bachelor of Science", "field": "Computer Engineering & Technology" },
+    "minor": "Computer Science",
+    "honors": []
+  }
+]

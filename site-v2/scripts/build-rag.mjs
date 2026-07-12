@@ -6,6 +6,8 @@ const SITE_ROOT = process.cwd();
 const REPO_ROOT = path.resolve(SITE_ROOT, "..");
 const ROLES_DIR = path.join(SITE_ROOT, "content", "roles");
 const SUMMARY_PATH = path.join(SITE_ROOT, "content", "resume", "summary.md");
+// Education section — rendered on the site and indexed into the RAG knowledge base.
+const EDUCATION_PATH = path.join(SITE_ROOT, "content", "resume", "education.md");
 // Additional per-position detail, ingested into the chat knowledge base only
 // (not rendered on the site). Associated to a role by matching company + title.
 const STARBANK_DIR = path.join(REPO_ROOT, "content", "starBank");
@@ -151,6 +153,30 @@ async function buildSummaryChunks() {
       company: "",
       section: "Summary",
       text: summary,
+    },
+  ];
+}
+
+async function buildEducationChunks() {
+  let raw;
+  try {
+    raw = await fs.readFile(EDUCATION_PATH, "utf8");
+  } catch {
+    return []; // education file not yet added — skip silently
+  }
+  const sections = parseSections(raw);
+  if (!sections.length) return [];
+
+  const text = sections[0].text.trim();
+  return [
+    {
+      id: "resume-education-001",
+      source_type: "resume_education",
+      role_id: null,
+      title: "Education",
+      company: "",
+      section: "Education",
+      text,
     },
   ];
 }
@@ -350,6 +376,7 @@ async function generateEmbeddings(chunks) {
 async function main() {
   const chunks = [
     ...(await buildSummaryChunks()),
+    ...(await buildEducationChunks()),
     ...(await buildRoleChunks()),
     ...(await buildDetailChunks()),
   ];

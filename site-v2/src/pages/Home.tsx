@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
 import EmblemStrip from "../components/EmblemStrip";
+import EducationCard from "../components/EducationCard";
 import RoleCard from "../components/RoleCard";
 import VisitorCounter from "../components/VisitorCounter";
 import ChatPanel from "../components/chat/ChatPanel";
 import roles from "../data/roles.json";
+import educationData from "../data/education.json";
 import { profile } from "../data/profile";
 import type { Role } from "../types/roles";
+import type { Education } from "../types/education";
 
 const roleData = roles as Role[];
+const educationList = educationData as Education[];
 
 // Anchor links that appear in the sidebar nav. Add a new entry here when a
 // section is added to the page — no layout changes required beyond an id on
 // the <section>.
 const NAV_LINKS: Array<{ href: string; label: string }> = [
+  { href: "#education", label: "Education" },
   { href: "#experience", label: "Experience" },
   { href: "#chat", label: "Ask about my experience" },
 ];
@@ -58,7 +63,7 @@ function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const sections = document.querySelectorAll<HTMLElement>("#experience, #chat");
+    const sections = document.querySelectorAll<HTMLElement>("#education, #experience, #chat");
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -229,10 +234,20 @@ function Home() {
             </div>
           </header>
 
-          {/* Emblem strip — above Experience timeline, desktop only (MobileHeader is lg:hidden) */}
+          {/* Emblem strip — above Education & Experience timeline, desktop only (MobileHeader is lg:hidden) */}
           <div className="mb-10 flex justify-center">
             <EmblemStrip />
           </div>
+
+          {/* Education section */}
+          {educationList.length > 0 && (
+            <section id="education" className="reveal-on-scroll">
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Education</h2>
+              {educationList.map((edu, idx) => (
+                <EducationCard key={edu.id} education={edu} index={idx} />
+              ))}
+            </section>
+          )}
 
           {/* Experience section */}
           <section id="experience" className="reveal-on-scroll">
