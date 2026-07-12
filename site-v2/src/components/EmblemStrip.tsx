@@ -24,16 +24,16 @@ const EMBLEMS: Emblem[] = [
 
 function EmblemStrip({ emblems = EMBLEMS }: { emblems?: Emblem[] }) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+    <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
       {emblems.map((emblem) => (
-        <figure key={emblem.label} className="flex flex-col items-center gap-1.5" title={emblem.alt}>
+        <figure key={emblem.label} className="flex flex-col items-center gap-2" title={emblem.alt}>
           <img
             src={`/${emblem.src}`}
             alt={emblem.alt}
-            className="h-7 w-auto opacity-85 transition-opacity hover:opacity-100"
+            className="h-[96px] w-auto opacity-85 transition-opacity hover:opacity-100"
             loading="lazy"
           />
-          <figcaption className="text-[11px] font-medium uppercase tracking-wider text-slate-400">
+          <figcaption className="text-xs font-semibold uppercase tracking-widest text-slate-500">
             {emblem.label}
           </figcaption>
         </figure>
