@@ -22,7 +22,7 @@ const EMBLEMS: Emblem[] = [
   { label: "Cloud One",alt: "DoD Cloud One Program logo",                        src: "emblems/c1-logo-tagline-multi-dark-hd.2ebae3ae34bf536790a1.png" },
 ];
 
-function EmblemStrip({ emblems = EMBLEMS }: { emblems?: Emblem[] }) {
+function EmblemStrip({ emblems = [...EMBLEMS].reverse() }: { emblems?: Emblem[] }) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
       {emblems.map((emblem) => (
