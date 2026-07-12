@@ -10,7 +10,7 @@ export type ContactLink = {
 
 export const profile = {
   name: "Michael Robinson",
-  headline: "Azure Architecture & Engineering Manager",
+  headline: "",
   subhead: "Cloud Architecture · Cybersecurity · DevSecOps — 20+ years across DoD & enterprise",
   summary:
     "Cloud architect and cybersecurity leader with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts.",

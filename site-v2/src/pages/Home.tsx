@@ -144,7 +144,6 @@ function Home() {
               <p className="text-xs font-medium uppercase tracking-widest text-slate-500">{location}</p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight leading-[1.1]">{name}</h1>
               <img src={pictureUrl} alt="Profile" className="h-24 w-24 rounded-full object-cover ring-2 ring-white/15 mb-4 mt-6 mx-auto" />
-              <p className="mt-2 text-sm font-semibold text-brand-300">{headline}</p>
             </div>
 
             {/* Subhead */}
@@ -215,7 +214,6 @@ function Home() {
             <div className="flex justify-center my-6">
               <img src={pictureUrl} alt="Profile" className="h-32 w-32 rounded-full object-cover ring-2 ring-brand-200" />
             </div>
-            <p className="mt-2 text-lg font-semibold text-brand-700">{headline}</p>
             <p className="mt-1 text-sm text-slate-500">{subhead}</p>
             <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{summary}</p>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-600 shadow-sm">
