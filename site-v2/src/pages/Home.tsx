@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import EmblemStrip from "../components/EmblemStrip";
 import RoleCard from "../components/RoleCard";
 import VisitorCounter from "../components/VisitorCounter";
 import ChatPanel from "../components/chat/ChatPanel";
@@ -227,6 +228,11 @@ function Home() {
               ))}
             </div>
           </header>
+
+          {/* Emblem strip — above Experience timeline, desktop only (MobileHeader is lg:hidden) */}
+          <div className="mb-10 flex justify-center">
+            <EmblemStrip />
+          </div>
 
           {/* Experience section */}
           <section id="experience" className="reveal-on-scroll">
