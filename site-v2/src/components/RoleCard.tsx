@@ -24,58 +24,91 @@ function RoleCard({ role, isCurrent = false }: RoleCardProps) {
   const period = `${formatDate(role.start)} – ${formatDate(role.end)}`;
 
   return (
-    <article className="relative pl-8">
-      {/* Timeline rail + node */}
+    <article className="group relative pl-8">
+      {/* Timeline rail with gradient for current role */}
       <span
-        className="absolute left-0 top-1.5 h-full w-px bg-slate-200"
-        aria-hidden="true"
-      />
-      <span
-        className={`absolute left-[-4px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-white ${
-          isCurrent ? "bg-brand-500" : "bg-slate-300"
+        className={`absolute left-0 top-1.5 h-full w-px transition-all duration-700 ${
+          isCurrent
+            ? "bg-gradient-to-b from-brand-400 via-brand-500 to-slate-300"
+            : "bg-slate-200 group-hover:bg-brand-300/60"
         }`}
         aria-hidden="true"
       />
 
-      <div className="pb-9">
-        <div className="flex flex-col gap-0.5">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-            <h3 className="text-base font-semibold text-slate-900">{role.title}</h3>
-            <span className="text-sm font-medium text-slate-500">{period}</span>
-          </div>
-          <p className="text-sm font-medium text-brand-700">{role.company}</p>
-          <p className="text-sm text-slate-500">{role.location}</p>
+      {/* Node dot */}
+      <span
+        className={`absolute left-[-4px] top-1.5 h-[18px] w-[18px] rounded-full ring-4 transition-all duration-700 ${
+          isCurrent
+            ? "bg-brand-500 ring-brand-200/60 shadow-lg shadow-brand-500/30"
+            : "bg-slate-300 group-hover:bg-brand-400 ring-white"
+        }`}
+        aria-hidden="true"
+      />
+
+      {/* Card body */}
+      <div className={`relative -ml-[1px] rounded-xl border bg-white p-5 transition-all duration-300 ${
+          isCurrent
+            ? "border-brand-200/70 shadow-md shadow-brand-100/40"
+            : "border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-[1px] hover:border-slate-300"
+        }`}>
+
+        {/* Title row */}
+        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+          <h3 className={`text-base font-semibold tracking-tight ${isCurrent ? "text-brand-700" : "text-slate-900 group-hover:text-brand-800"} transition-colors`}>
+            {role.title}
+          </h3>
+          <time className="text-xs font-medium tabular-nums text-slate-500">{period}</time>
         </div>
 
+        {/* Company + location */}
+        <p className={`mt-0.5 text-sm font-semibold ${isCurrent ? "text-brand-600" : "text-brand-700 group-hover:text-brand-800"} transition-colors`}>
+          {role.company}
+        </p>
+        <p className="text-xs text-slate-500">{role.location}</p>
+
+        {/* Chips */}
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
-          <Chips items={role.clearance ? [role.clearance] : []} tone="accent" />
+          {role.clearance && (
+            <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
+              {role.clearance}
+            </span>
+          )}
           <Chips items={role.il_levels} tone="accent" />
           <Chips items={role.tech.slice(0, 6)} tone="neutral" />
         </div>
 
+        {/* Highlights */}
         {role.highlights.length > 0 && (
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700 marker:text-slate-300">
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-700 marker:text-brand-300">
             {role.highlights.slice(0, 3).map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         )}
 
+        {/* Expand / collapse toggle */}
         <button
           type="button"
           onClick={() => setExpanded((value) => !value)}
-          className="mt-3 text-sm font-semibold text-brand-600 transition hover:text-brand-700"
+          className={`mt-3 text-sm font-semibold transition-colors ${
+            isCurrent ? "text-brand-600 hover:text-brand-700" : "text-brand-600 group-hover:text-brand-700"
+          }`}
           aria-expanded={expanded}
         >
           {expanded ? "Hide details" : "Show details"}
         </button>
 
-        {expanded && (
+        {/* Expanded body with smooth reveal */}
+        <div
+          className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            expanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
           <div
-            className="prose-scope mt-3 border-t border-slate-100 pt-3 text-sm"
+            className="prose-scope mt-4 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-700"
             dangerouslySetInnerHTML={{ __html: role.bodyHtml }}
           />
-        )}
+        </div>
       </div>
     </article>
   );

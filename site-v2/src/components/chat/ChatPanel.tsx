@@ -92,16 +92,17 @@ function ChatPanel() {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col">
+      {/* Starter prompts */}
       {canShowPrompts && (
-        <div className="flex flex-wrap gap-2">
+        <div className="mb-4 flex flex-wrap gap-2">
           {STARTER_PROMPTS.map((prompt) => (
             <button
               key={prompt}
               type="button"
               onClick={() => void sendQuestion(prompt)}
               disabled={loading}
-              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-full border border-slate-200/80 bg-white/60 px-3.5 py-1.5 text-[13px] font-medium text-slate-600 backdrop-blur-sm transition-all duration-200 hover:border-brand-300 hover:bg-brand-50/60 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {prompt}
             </button>
@@ -109,7 +110,8 @@ function ChatPanel() {
         </div>
       )}
 
-      <div className="mt-5 flex max-h-[26rem] flex-col gap-4 overflow-y-auto pr-1">
+      {/* Messages */}
+      <div className="flex flex-col gap-4 overflow-y-auto py-2">
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
@@ -121,15 +123,20 @@ function ChatPanel() {
         ))}
       </div>
 
+      {/* Error message */}
       {errorMessage && (
-        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        <div className="mt-4 rounded-xl border border-amber-200/70 bg-white/60 px-4 py-3 text-sm text-amber-800 backdrop-blur-sm">
           <p>{errorMessage}</p>
           {retryQuestion && (
             <button
               type="button"
               onClick={() => void sendQuestion(retryQuestion)}
-              className="mt-2.5 rounded-full border border-amber-300 px-3 py-1 text-xs font-semibold text-amber-800 transition hover:bg-amber-100"
+              className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-amber-300 px-3 py-1 text-xs font-semibold text-amber-800 transition-all duration-200 hover:bg-amber-100/60 active:scale-[0.98]"
             >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M1 4v6h6" />
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+              </svg>
               Retry last question
             </button>
           )}
