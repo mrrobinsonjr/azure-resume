@@ -38,11 +38,17 @@ def build_mock_answer(question: str, contexts: list[dict]) -> str:
             "Try asking about Azure Government, IL5/IL6 work, Terraform, or cloud architecture roles."
         )
 
-    titles = ", ".join(item["title"] for item in contexts[:3])
+    # Build a content-rich answer from matched chunks so users see actual details,
+    # not just source titles (fixes education/certification display issue).
+    parts = []
+    for item in contexts[:3]:
+        text = item.get("text", "")
+        if len(text) > 180:
+            text = f"{text[:177]}..."
+        parts.append(f"- {item['title']}: {text}")
+
     return (
-        "Mock recruiter summary: based on the locally indexed resume content, the most relevant material for "
-        f"'{question}' appears in {titles}. This response is deterministic fallback behavior for environments "
-        "where Azure OpenAI is not configured."
+        "Based on the locally indexed resume content, here's what matched for your question:\n\n" + "\n".join(parts)
     )
 
 
