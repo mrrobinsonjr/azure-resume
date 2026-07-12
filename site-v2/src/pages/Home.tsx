@@ -17,8 +17,8 @@ const educationList = educationData as Education[];
 // section is added to the page — no layout changes required beyond an id on
 // the <section>.
 const NAV_LINKS: Array<{ href: string; label: string }> = [
-  { href: "#education", label: "Education" },
   { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
   { href: "#chat", label: "Ask about my experience" },
 ];
 
@@ -234,20 +234,10 @@ function Home() {
             </div>
           </header>
 
-          {/* Emblem strip — above Education & Experience timeline, desktop only (MobileHeader is lg:hidden) */}
+          {/* Emblem strip — above Experience & Education timeline, desktop only (MobileHeader is lg:hidden) */}
           <div className="mb-10 flex justify-center">
             <EmblemStrip />
           </div>
-
-          {/* Education section */}
-          {educationList.length > 0 && (
-            <section id="education" className="reveal-on-scroll">
-              <h2 className="mb-8 text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Education</h2>
-              {educationList.map((edu, idx) => (
-                <EducationCard key={edu.id} education={edu} index={idx} />
-              ))}
-            </section>
-          )}
 
           {/* Experience section */}
           <section id="experience" className="reveal-on-scroll">
@@ -262,6 +252,16 @@ function Home() {
               />
             ))}
           </section>
+
+          {/* Education section */}
+          {educationList.length > 0 && (
+            <section id="education" className="reveal-on-scroll">
+              <h2 className="mb-8 text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">Education</h2>
+              {educationList.map((edu, idx) => (
+                <EducationCard key={edu.id} education={edu} index={idx} />
+              ))}
+            </section>
+          )}
 
           {/* AI assistant section */}
           <section id="chat" className="reveal-on-scroll mt-14">
