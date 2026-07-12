@@ -55,7 +55,7 @@ const CONTACTS = [
 ];
 
 function Home() {
-  const { name, headline, subhead, summary, location, currentRole } = profile;
+  const { name, headline, subhead, summary, location, pictureUrl, currentRole } = profile;
 
   // Which section is currently in view → highlights matching sidebar link.
   const [activeSection, setActiveSection] = useState("experience");
@@ -143,6 +143,7 @@ function Home() {
             <div>
               <p className="text-xs font-medium uppercase tracking-widest text-slate-500">{location}</p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight leading-[1.1]">{name}</h1>
+              <img src={pictureUrl} alt="Profile" className="h-24 w-24 rounded-full object-cover ring-2 ring-white/15 mb-4 mt-6 mx-auto" />
               <p className="mt-2 text-sm font-semibold text-brand-300">{headline}</p>
             </div>
 
@@ -211,6 +212,9 @@ function Home() {
           <header className="lg:hidden mb-10">
             <p className="text-xs font-medium uppercase tracking-widest text-slate-500">{location}</p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{name}</h1>
+            <div className="flex justify-center my-6">
+              <img src={pictureUrl} alt="Profile" className="h-32 w-32 rounded-full object-cover ring-2 ring-brand-200" />
+            </div>
             <p className="mt-2 text-lg font-semibold text-brand-700">{headline}</p>
             <p className="mt-1 text-sm text-slate-500">{subhead}</p>
             <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{summary}</p>
