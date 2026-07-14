@@ -10,6 +10,8 @@ const SUMMARY_PATH = path.join(SITE_ROOT, "content", "resume", "summary.md");
 const EDUCATION_PATH = path.join(SITE_ROOT, "content", "resume", "education.md");
 // Certifications section — indexed into the RAG knowledge base.
 const CERTIFICATIONS_PATH = path.join(SITE_ROOT, "content", "resume", "certifications.md");
+// Architecture page — explains the Azure infrastructure decisions behind this site.
+const ARCHITECTURE_PATH = path.join(SITE_ROOT, "content", "resume", "architecture.md");
 // Additional per-position detail, ingested into the chat knowledge base only
 // (not rendered on the site). Associated to a role by matching company + title.
 const STARBANK_DIR = path.join(REPO_ROOT, "content", "starBank");
@@ -216,6 +218,28 @@ async function buildCertificationsChunks() {
   return [primary, ...aliases.map(alias => ({ ...primary, id: alias.id, title: alias.title }))];
 }
 
+async function buildArchitectureChunks() {
+  let raw;
+  try {
+    raw = await fs.readFile(ARCHITECTURE_PATH, "utf8");
+  } catch {
+    return []; // architecture file not yet added — skip silently
+  }
+  const sections = parseSections(raw);
+  if (!sections.length) return [];
+
+  // Each ## section becomes its own RAG chunk for better granularity.
+  return sections.map((section, index) => ({
+    id: `resume-architecture-${String(index + 1).padStart(3, "0")}`,
+    source_type: "resume_architecture",
+    role_id: null,
+    title: "Infrastructure Architecture",
+    company: "",
+    section: section.heading,
+    text: section.text,
+  }));
+}
+
 async function buildRoleChunks() {
   const files = (await fs.readdir(ROLES_DIR))
     .filter((name) => name.endsWith(".md"))
@@ -410,6 +434,7 @@ async function generateEmbeddings(chunks) {
 async function main() {
   const chunks = [
     ...(await buildSummaryChunks()),
+    ...(await buildArchitectureChunks()),
     ...(await buildEducationChunks()),
     ...(await buildCertificationsChunks()),
     ...(await buildRoleChunks()),

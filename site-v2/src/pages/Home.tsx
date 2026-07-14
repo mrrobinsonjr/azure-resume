@@ -3,7 +3,9 @@ import EmblemStrip from "../components/EmblemStrip";
 import EducationCard from "../components/EducationCard";
 import RoleCard from "../components/RoleCard";
 import VisitorCounter from "../components/VisitorCounter";
+import ContentPage from "../components/ContentPage";
 import ChatPanel from "../components/chat/ChatPanel";
+import architectureData from "../data/architecture.js";
 import roles from "../data/roles.json";
 import educationData from "../data/education.json";
 import { profile } from "../data/profile";
@@ -19,6 +21,7 @@ const educationList = educationData as Education[];
 const NAV_LINKS: Array<{ href: string; label: string }> = [
   { href: "#experience", label: "Experience" },
   { href: "#education", label: "Education" },
+  { href: "#architecture", label: "Infrastructure Architecture" },
   { href: "#chat", label: "Ask about my experience" },
 ];
 
@@ -63,7 +66,7 @@ function Home() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const sections = document.querySelectorAll<HTMLElement>("#education, #experience, #chat");
+    const sections = document.querySelectorAll<HTMLElement>("#education, #experience, #architecture, #chat");
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -264,6 +267,17 @@ function Home() {
               ))}
             </section>
           )}
+
+          {/* Infrastructure architecture section */}
+          <section id="architecture" className="reveal-on-scroll mt-14">
+            <ContentPage
+              title="Infrastructure Architecture"
+              description={
+                "A serverless Microsoft cloud stack — Azure SWA, Functions, Table Storage, and OpenAI RAG — chosen for enterprise-grade reliability and demonstrated breadth across four categories of cloud engineering."
+              }
+              contentHtml={architectureData.html}
+            />
+          </section>
 
           {/* AI assistant section */}
           <section id="chat" className="reveal-on-scroll mt-14">
