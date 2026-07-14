@@ -218,6 +218,37 @@ async function buildCertificationsChunks() {
   return [primary, ...aliases.map(alias => ({ ...primary, id: alias.id, title: alias.title }))];
 }
 
+async function buildQuotaChunks() {
+  const chunks = [
+    {
+      id: "resume-architecture-015",
+      source_type: "resume_architecture",
+      role_id: null,
+      title: "Infrastructure Architecture",
+      company: "",
+      section: "Rate Limiting & Quota Management",
+      text: stripMarkdown(`\
+The chat assistant enforces per-IP rate limiting at two layers to protect the OpenAI backend from accidental abuse during heavy recruiter traffic. The first layer is in-memory, tracked per request timestamp with a 10-minute sliding window (configurable via CHAT_RATE_LIMIT_WINDOW_SECONDS and CHAT_RATE_LIMIT_MAX_REQUESTS environment variables — defaults are 600 seconds and 20 requests respectively). When that limit is hit the API returns HTTP 429.
+
+The second layer is durable across Function instances, backed by Azure Table Storage using a fixed-window counter partitioned by sanitized IP hash. It handles cold starts and concurrent workers where in-memory state would otherwise diverge. Both layers fail open on storage errors so chat remains available during outages — availability takes precedence over strict quota enforcement for a public-facing recruiter tool.
+
+Azure OpenAI itself applies its own RPM/TPM limits per deployment, managed via the Azure Portal or ARM templates. The site's Functions API consumes those quotas through managed identity, not shared secrets.`),
+    },
+  ];
+
+  // Alias variants so queries about "rate limit", "quota", "API cap" still match.
+  const aliases = [
+    { id: "resume-architecture-015-alias-rate", section: "Rate Limiting Strategy" },
+    { id: "resume-architecture-015-alias-quota", section: "OpenAI Quota Handling" },
+    { id: "resume-architecture-015-alias-durable", section: "Durable Rate Limiting" },
+  ];
+  for (const a of aliases) {
+    chunks.push({ ...chunks[0], id: a.id, section: a.section });
+  }
+
+  return chunks;
+}
+
 async function buildArchitectureChunks() {
   let raw;
   try {
@@ -434,9 +465,10 @@ async function generateEmbeddings(chunks) {
 async function main() {
   const chunks = [
     ...(await buildSummaryChunks()),
-    ...(await buildArchitectureChunks()),
     ...(await buildEducationChunks()),
     ...(await buildCertificationsChunks()),
+    ...(await buildQuotaChunks()),
+    ...(await buildArchitectureChunks()),
     ...(await buildRoleChunks()),
     ...(await buildDetailChunks()),
   ];

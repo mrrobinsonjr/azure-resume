@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T11:36:48.571Z",
-  "count": 74,
+  "generated_at": "2026-07-14T12:31:06.053Z",
+  "count": 78,
   "chunks": [
     {
       "id": "resume-summary-001",
@@ -10,6 +10,87 @@
       "company": "",
       "section": "Summary",
       "text": "Cloud architect and cybersecurity leader with 20+ years across DoD and enterprise environments. I design secure cloud platforms, build DevSecOps pipelines, and lead modernization efforts for mission-critical systems in regulated IL4/IL5/IL6 contexts."
+    },
+    {
+      "id": "resume-education-001",
+      "source_type": "resume_education",
+      "role_id": null,
+      "title": "Education",
+      "company": "",
+      "section": "Education",
+      "text": "Bachelor of Science in Computer Engineering & Technology from Middle Tennessee State University (MTSU), Murfreesboro, TN, with a minor in Computer Science. Coursework covered embedded systems programming, digital logic design, and software development — the education that preceded cloud architecture and cybersecurity work across DoD mission environments."
+    },
+    {
+      "id": "resume-certifications-001",
+      "source_type": "resume_certification",
+      "role_id": null,
+      "title": "Certifications & Credentials",
+      "company": "",
+      "section": "Certifications",
+      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
+    },
+    {
+      "id": "resume-certifications-alias-certs",
+      "source_type": "resume_certification",
+      "role_id": null,
+      "title": "Certificates & Credentials",
+      "company": "",
+      "section": "Certifications",
+      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
+    },
+    {
+      "id": "resume-certifications-alias-cloud",
+      "source_type": "resume_certification",
+      "role_id": null,
+      "title": "Cloud Platform Certifications",
+      "company": "",
+      "section": "Certifications",
+      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
+    },
+    {
+      "id": "resume-certifications-alias-security",
+      "source_type": "resume_certification",
+      "role_id": null,
+      "title": "Security & Compliance Certifications",
+      "company": "",
+      "section": "Certifications",
+      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
+    },
+    {
+      "id": "resume-architecture-015",
+      "source_type": "resume_architecture",
+      "role_id": null,
+      "title": "Infrastructure Architecture",
+      "company": "",
+      "section": "Rate Limiting & Quota Management",
+      "text": "The chat assistant enforces per-IP rate limiting at two layers to protect the OpenAI backend from accidental abuse during heavy recruiter traffic. The first layer is in-memory, tracked per request timestamp with a 10-minute sliding window (configurable via CHATRATELIMITWINDOWSECONDS and CHATRATELIMITMAXREQUESTS environment variables — defaults are 600 seconds and 20 requests respectively). When that limit is hit the API returns HTTP 429.\n\nThe second layer is durable across Function instances, backed by Azure Table Storage using a fixed-window counter partitioned by sanitized IP hash. It handles cold starts and concurrent workers where in-memory state would otherwise diverge. Both layers fail open on storage errors so chat remains available during outages — availability takes precedence over strict quota enforcement for a public-facing recruiter tool.\n\nAzure OpenAI itself applies its own RPM/TPM limits per deployment, managed via the Azure Portal or ARM templates. The site's Functions API consumes those quotas through managed identity, not shared secrets."
+    },
+    {
+      "id": "resume-architecture-015-alias-rate",
+      "source_type": "resume_architecture",
+      "role_id": null,
+      "title": "Infrastructure Architecture",
+      "company": "",
+      "section": "Rate Limiting Strategy",
+      "text": "The chat assistant enforces per-IP rate limiting at two layers to protect the OpenAI backend from accidental abuse during heavy recruiter traffic. The first layer is in-memory, tracked per request timestamp with a 10-minute sliding window (configurable via CHATRATELIMITWINDOWSECONDS and CHATRATELIMITMAXREQUESTS environment variables — defaults are 600 seconds and 20 requests respectively). When that limit is hit the API returns HTTP 429.\n\nThe second layer is durable across Function instances, backed by Azure Table Storage using a fixed-window counter partitioned by sanitized IP hash. It handles cold starts and concurrent workers where in-memory state would otherwise diverge. Both layers fail open on storage errors so chat remains available during outages — availability takes precedence over strict quota enforcement for a public-facing recruiter tool.\n\nAzure OpenAI itself applies its own RPM/TPM limits per deployment, managed via the Azure Portal or ARM templates. The site's Functions API consumes those quotas through managed identity, not shared secrets."
+    },
+    {
+      "id": "resume-architecture-015-alias-quota",
+      "source_type": "resume_architecture",
+      "role_id": null,
+      "title": "Infrastructure Architecture",
+      "company": "",
+      "section": "OpenAI Quota Handling",
+      "text": "The chat assistant enforces per-IP rate limiting at two layers to protect the OpenAI backend from accidental abuse during heavy recruiter traffic. The first layer is in-memory, tracked per request timestamp with a 10-minute sliding window (configurable via CHATRATELIMITWINDOWSECONDS and CHATRATELIMITMAXREQUESTS environment variables — defaults are 600 seconds and 20 requests respectively). When that limit is hit the API returns HTTP 429.\n\nThe second layer is durable across Function instances, backed by Azure Table Storage using a fixed-window counter partitioned by sanitized IP hash. It handles cold starts and concurrent workers where in-memory state would otherwise diverge. Both layers fail open on storage errors so chat remains available during outages — availability takes precedence over strict quota enforcement for a public-facing recruiter tool.\n\nAzure OpenAI itself applies its own RPM/TPM limits per deployment, managed via the Azure Portal or ARM templates. The site's Functions API consumes those quotas through managed identity, not shared secrets."
+    },
+    {
+      "id": "resume-architecture-015-alias-durable",
+      "source_type": "resume_architecture",
+      "role_id": null,
+      "title": "Infrastructure Architecture",
+      "company": "",
+      "section": "Durable Rate Limiting",
+      "text": "The chat assistant enforces per-IP rate limiting at two layers to protect the OpenAI backend from accidental abuse during heavy recruiter traffic. The first layer is in-memory, tracked per request timestamp with a 10-minute sliding window (configurable via CHATRATELIMITWINDOWSECONDS and CHATRATELIMITMAXREQUESTS environment variables — defaults are 600 seconds and 20 requests respectively). When that limit is hit the API returns HTTP 429.\n\nThe second layer is durable across Function instances, backed by Azure Table Storage using a fixed-window counter partitioned by sanitized IP hash. It handles cold starts and concurrent workers where in-memory state would otherwise diverge. Both layers fail open on storage errors so chat remains available during outages — availability takes precedence over strict quota enforcement for a public-facing recruiter tool.\n\nAzure OpenAI itself applies its own RPM/TPM limits per deployment, managed via the Azure Portal or ARM templates. The site's Functions API consumes those quotas through managed identity, not shared secrets."
     },
     {
       "id": "resume-architecture-001",
@@ -82,51 +163,6 @@
       "company": "",
       "section": "Why This Matters for Enterprise Recruiters",
       "text": "This stack demonstrates breadth across four categories of cloud engineering: infrastructure (SWA + Functions), data storage (Table Storage), AI/ML integration (OpenAI embeddings + RAG), and security/compliance (managed identity, private endpoints). Each choice was made with an understanding of trade-offs — cost vs. features, latency vs. complexity, security vs. convenience — which is exactly the decision-making that senior cloud architects perform daily in regulated enterprise environments."
-    },
-    {
-      "id": "resume-education-001",
-      "source_type": "resume_education",
-      "role_id": null,
-      "title": "Education",
-      "company": "",
-      "section": "Education",
-      "text": "Bachelor of Science in Computer Engineering & Technology from Middle Tennessee State University (MTSU), Murfreesboro, TN, with a minor in Computer Science. Coursework covered embedded systems programming, digital logic design, and software development — the education that preceded cloud architecture and cybersecurity work across DoD mission environments."
-    },
-    {
-      "id": "resume-certifications-001",
-      "source_type": "resume_certification",
-      "role_id": null,
-      "title": "Certifications & Credentials",
-      "company": "",
-      "section": "Certifications",
-      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
-    },
-    {
-      "id": "resume-certifications-alias-certs",
-      "source_type": "resume_certification",
-      "role_id": null,
-      "title": "Certificates & Credentials",
-      "company": "",
-      "section": "Certifications",
-      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
-    },
-    {
-      "id": "resume-certifications-alias-cloud",
-      "source_type": "resume_certification",
-      "role_id": null,
-      "title": "Cloud Platform Certifications",
-      "company": "",
-      "section": "Certifications",
-      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
-    },
-    {
-      "id": "resume-certifications-alias-security",
-      "source_type": "resume_certification",
-      "role_id": null,
-      "title": "Security & Compliance Certifications",
-      "company": "",
-      "section": "Certifications",
-      "text": "Microsoft Certified: Azure Solutions Architect Expert, Azure AI Engineer Associate. ISC²: Certified Cloud Security Professional (CCSP) – In Progress. Amazon: AWS Certified Solutions Architect – Associate. Security: CompTIA Security+. Networking: Cisco CCNP / CCNA Security / CCNA Data Center. ITIL: ITIL v3 Foundation.\n\nMichael holds multiple cloud and security certifications including Azure Solutions Architect Expert, AWS Certified Solutions Architect Associate, CCSP (in progress), CompTIA Security+, Cisco CCNP/CCNA Security/Data Center networking certs, and ITIL v3 Foundation. These certificates and credentials validate his expertise across Azure, AWS, OCI/GCP multi-cloud platforms, zero-trust architecture, DevSecOps, and DoD IL5/IL6 security compliance.\n\nAzure Solutions Architect Expert and AWS Certified Solutions Architect Associate certifications demonstrate hands-on mastery of Azure Government cloud architectures at IL5/IL6 levels alongside AWS GovCloud. Additional cloud credentials include Azure AI Engineer Associate covering AI/ML workloads in secure environments.\n\nISC² Certified Cloud Security Professional (CCSP) in progress, CompTIA Security+ validation of security fundamentals. These complement his practical experience securing DoD mission systems at IL4/IL5/IL6 levels with zero-trust architecture and defense-in-depth principles."
     },
     {
       "id": "position0-leidos-cloud-one-acss-highlights-001",
