@@ -8,6 +8,8 @@ const ROLES_DIR = path.join(SITE_ROOT, "content", "roles");
 const SUMMARY_PATH = path.join(SITE_ROOT, "content", "resume", "summary.md");
 // Education section — rendered on the site and indexed into the RAG knowledge base.
 const EDUCATION_PATH = path.join(SITE_ROOT, "content", "resume", "education.md");
+// Certifications section — indexed into the RAG knowledge base.
+const CERTIFICATIONS_PATH = path.join(SITE_ROOT, "content", "resume", "certifications.md");
 // Additional per-position detail, ingested into the chat knowledge base only
 // (not rendered on the site). Associated to a role by matching company + title.
 const STARBANK_DIR = path.join(REPO_ROOT, "content", "starBank");
@@ -179,6 +181,39 @@ async function buildEducationChunks() {
       text,
     },
   ];
+}
+
+async function buildCertificationsChunks() {
+  let raw;
+  try {
+    raw = await fs.readFile(CERTIFICATIONS_PATH, "utf8");
+  } catch {
+    return []; // certifications file not yet added — skip silently
+  }
+  const sections = parseSections(raw);
+  if (!sections.length) return [];
+
+  const text = sections[0].text.trim();
+
+  // Primary chunk with full title
+  const primary = {
+    id: "resume-certifications-001",
+    source_type: "resume_certification",
+    role_id: null,
+    title: "Certifications & Credentials",
+    company: "",
+    section: "Certifications",
+    text,
+  };
+
+  // Alias variants for different query patterns (certificates/credentials/cloud/security)
+  const aliases = [
+    { id: "resume-certifications-alias-certs", title: "Certificates & Credentials" },
+    { id: "resume-certifications-alias-cloud", title: "Cloud Platform Certifications" },
+    { id: "resume-certifications-alias-security", title: "Security & Compliance Certifications" },
+  ];
+
+  return [primary, ...aliases.map(alias => ({ ...primary, id: alias.id, title: alias.title }))];
 }
 
 async function buildRoleChunks() {
@@ -376,6 +411,7 @@ async function main() {
   const chunks = [
     ...(await buildSummaryChunks()),
     ...(await buildEducationChunks()),
+    ...(await buildCertificationsChunks()),
     ...(await buildRoleChunks()),
     ...(await buildDetailChunks()),
   ];
